@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "490407747291",
+    "project_id": "dental-qmgmt-system",
+    "storage_bucket": "dental-qmgmt-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490407747291:android:aebad7c2141185865e36fe",
+        "android_client_info": {
+          "package_name": "com.example.dentalqmgmtsys"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490407747291-0bs7j41lued1m9n5pn1ddu69mogndij0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dentalqmgmtsys",
+            "certificate_hash": "467e17288aea09690f4cbf916783e9c648bbeffe"
+          }
+        },
+        {
+          "client_id": "490407747291-tcrvfpls2ps7grs8b6rrblgsmaur6itt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3LQAguRrgNmAjuf6tLfArCoO0-do7qao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490407747291-tcrvfpls2ps7grs8b6rrblgsmaur6itt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

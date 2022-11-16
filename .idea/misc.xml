@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/drawable/appointment_editbox.xml" value="0.3675" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/drawable/profilecard_background.xml" value="0.3335" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_about_us.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_contact_us.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_landing.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_main.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_referral.xml" value="0.2969298245614035" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_splash.xml" value="0.28125" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_terms_conditions.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/appointments_list.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_appointment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_home.xml" value="0.3043859649122807" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_queue.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3335" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
