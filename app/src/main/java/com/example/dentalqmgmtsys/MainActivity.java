@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     //Viewbinding
     private ActivityMainBinding binding;
 
+    //Firebase Auth
     private FirebaseAuth firebaseAuth;
 
     @Override
