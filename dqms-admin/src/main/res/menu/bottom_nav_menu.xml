@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Dashboard"
+        android:id="@+id/dashboard"
+        android:icon="@drawable/ic_baseline_dashboard_24"/>
+    <item android:title="Appointments"
+        android:id="@+id/appointments"
+        android:icon="@drawable/ic_baseline_calendar_today_24"/>
+    <item android:title="Queues"
+        android:id="@+id/queue"
+        android:icon="@drawable/ic_baseline_access_time_24"/>
+    <item android:title="Doctors"
+        android:id="@+id/doctor"
+        android:icon="@drawable/ic_doctors"/>
+    <item android:title="Services"
+        android:id="@+id/service"
+        android:icon="@drawable/ic_baseline_medical_services_24"/>
+</menu>

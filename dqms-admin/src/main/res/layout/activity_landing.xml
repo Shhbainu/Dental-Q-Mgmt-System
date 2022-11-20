@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    tools:context=".LandingActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="186dp"
+        android:layout_height="199dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="-1dp"
+        app:srcCompat="@drawable/ico_shape_admin" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:src="@drawable/ico_doctors" />
+
+    <!--Book Appointment-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Dental Q-Mgmt System [Admin]"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="100dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:layout_marginEnd="100dp"-->
+    <!--        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.-->
+    <!--        Interdum dictum tempus, interdum at dignissim metus. Ultricies sed nunc."-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+    <!--        android:textSize="16sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginNowBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/registerNowBtn"
+        android:background="@drawable/shape_button01"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Login"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/mint" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registerNowBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_button02"
+        android:text="Register Now"
+        android:textColor="@color/mint" />
+
+</RelativeLayout>
