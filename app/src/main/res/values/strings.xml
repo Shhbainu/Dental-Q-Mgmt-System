@@ -23,4 +23,17 @@
     <string name="dental_procedure">Dental procedure:</string>
     <string name="cd_previous">Previous</string>
     <string name="cd_next">Next</string>
+    <string name="rule">Quiz Rules</string>
+    <string name="rules1_description">
+        The dental quiz game will contain 10 questions.
+    </string>
+    <string name="rules2_description">
+        Every correct answer scores you 10 points.
+    </string>
+    <string name="rules3_description">
+        A failing score is 60 or below.
+    </string>
+    <string name="rules4_description">
+        Your results and wrong answers can be viewed after taking the quiz.
+    </string>
 </resources>
