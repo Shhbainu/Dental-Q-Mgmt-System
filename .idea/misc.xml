@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/drawable/button_background.xml" value="0.252" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/drawable/ic_calendar.xml" value="0.3175" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/activity_about_us.xml" value="0.3625" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/activity_add_appointment.xml" value="0.18" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_add_appointment_step1.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_add_appointment_step2.xml" value="0.2965811965811966" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_add_appointment_step3.xml" value="0.3625" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_add_appointment_step4.xml" value="0.2965811965811966" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/layout_services.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/layout_time_slot.xml" value="0.33" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/drawable/appointment_editbox.xml" value="0.3675" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/drawable/profilecard_background.xml" value="0.3335" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_about_us.xml" value="0.3087719298245614" />

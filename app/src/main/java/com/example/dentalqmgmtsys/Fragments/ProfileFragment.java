@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dentalqmgmtsys.AboutUsActivity;
+import com.example.dentalqmgmtsys.Common.Common;
 import com.example.dentalqmgmtsys.ContactUsActivity;
 import com.example.dentalqmgmtsys.LandingActivity;
 import com.example.dentalqmgmtsys.MyApplication;
@@ -120,16 +121,16 @@ public class ProfileFragment extends Fragment {
                         String uid = ""+snapshot.child("uid").getValue();
                         String userType = ""+snapshot.child("userType").getValue();
                         String address = ""+snapshot.child("address").getValue();
-                        String phone = ""+snapshot.child("phone").getValue();
+                        Common.currentPhone= ""+snapshot.child("phone").getValue();
                         String age = ""+snapshot.child("age").getValue();
-                        String fullName = fName+" "+lName;
+                        Common.currentUser = fName+" "+lName;
 
                         //format date dd/MM/yyyy
                         String formattedDate = MyApplication.formatTimestamp(Long.parseLong(timestamp));
 
                         //set data
                         binding.fnameTV.setText(fName);
-                        binding.fullnameTV.setText(fullName);
+                        binding.fullnameTV.setText(Common.currentUser);
                         binding.emailTV.setText(email);
                         binding.memberDateTV.setText(formattedDate);
                         binding.addressTV.setText(address);

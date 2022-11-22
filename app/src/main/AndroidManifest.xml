@@ -33,6 +33,9 @@
             android:exported="false" />
         <activity
             android:name=".QuizGameActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".AddAppointmentActivity"
             android:exported="false" />
         <activity
             android:name=".ReferralActivity"
