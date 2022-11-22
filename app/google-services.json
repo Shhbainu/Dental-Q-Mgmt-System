@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "490407747291",
+    "firebase_url": "https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "dental-qmgmt-system",
     "storage_bucket": "dental-qmgmt-system.appspot.com"
   },
@@ -21,6 +22,35 @@
             "certificate_hash": "467e17288aea09690f4cbf916783e9c648bbeffe"
           }
         },
+        {
+          "client_id": "490407747291-tcrvfpls2ps7grs8b6rrblgsmaur6itt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3LQAguRrgNmAjuf6tLfArCoO0-do7qao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490407747291-tcrvfpls2ps7grs8b6rrblgsmaur6itt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490407747291:android:3513a2f9aedc72a35e36fe",
+        "android_client_info": {
+          "package_name": "com.example.dqms_admin"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "490407747291-tcrvfpls2ps7grs8b6rrblgsmaur6itt.apps.googleusercontent.com",
           "client_type": 3

@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -46,6 +47,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:21.2.0'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-database:20.1.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.3.2'
+
+    //spring dots
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+    implementation 'com.tbuonomo:dotsindicator:4.2'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

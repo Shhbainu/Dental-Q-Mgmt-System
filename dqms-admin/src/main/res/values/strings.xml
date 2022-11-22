@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">DQMS-Admin</string>
+    <string name="create_account">Don\'t have an Account? <b>Sign Up</b> </string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="generate_referral"><b>>  </b>Generate Referral Coupon</string>
+    <string name="terms_condition"><b>>  </b>Terms and Conditions</string>
+    <string name="about_us"><b>>  </b>About Us</string>
+    <string name="contact_us"><b>>  </b>Contact Us</string>
+    <string name="ico_quiz_logo">Dental Quiz Logo</string>
+    <string name="appointment_schedule_title">APPOINTMENT SCHEDULE</string>
+    <string name="name">Name</string>
+    <string name="select_doctor">Select Doctor</string>
+    <string name="select_services">Select Services</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="enter_date">Enter date</string>
+    <string name="enter_time">Enter Time</string>
+    <string name="enter_code">Enter Code</string>
+    <string name="add_appointment">Add Appointment</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="procedure">Procedure</string>
+    <string name="dental_procedure">Dental procedure:</string>
+    <string name="cd_previous">Previous</string>
+    <string name="cd_next">Next</string>
+</resources>
