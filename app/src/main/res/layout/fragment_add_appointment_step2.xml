@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/step2Information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doctor and Services"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:layout_margin="20dp"
+        android:id="@+id/doctorSpinner"
+        android:layout_below="@+id/step2Information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/doctorSpinner"
+        android:id="@+id/serviceRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"/>
+
+
+</RelativeLayout>

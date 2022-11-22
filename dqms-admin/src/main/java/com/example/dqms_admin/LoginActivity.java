@@ -1,4 +1,4 @@
-package com.example.dentalqmgmtsys;
+package com.example.dqms_admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.dentalqmgmtsys.databinding.ActivityLoginBinding;
+import com.example.dqms_admin.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     //Firebase auth
     private FirebaseAuth firebaseAuth;
 
-    //Progress dialog
     private ProgressDialog progressDialog;
 
     @Override
@@ -72,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                 validateData();
             }
         });
-
     }
 
     private String email = "", password = "";
@@ -108,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         // Login Success, check if user's usertype (admin, user)
-                        checkUser();    
+                        checkUser();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -121,11 +119,12 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+
     private void checkUser() {
         /* Check the userType */
         progressDialog.setMessage("Checking user...");
         progressDialog.show();
-        
+
         // Get current user
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
@@ -141,8 +140,9 @@ public class LoginActivity extends AppCompatActivity {
                         // Check user type
                         if (userType.equals("user")){
                             // users proceed to user home page
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, LandingActivity.class));
                             finish();
+                            Toast.makeText(LoginActivity.this, "You shouldn't be here", Toast.LENGTH_SHORT).show();
                         }
                         else if (userType.equals("admin")){
                             // admin proceed to admin page?? nope, go to user homepage

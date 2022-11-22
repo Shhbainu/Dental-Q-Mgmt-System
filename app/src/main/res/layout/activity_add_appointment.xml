@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddAppointmentActivity">
+        <!--Top Design-->
+
+            <!--<ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ico_shape" />
+
+            &lt;!&ndash;Back Button&ndash;&gt;
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ico_back" />-->
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/stepView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:sv_animationType="None"
+        app:sv_stepPadding="12dp"
+        app:sv_selectedCircleColor="@color/turquoise"
+        app:sv_selectedStepNumberColor="@color/white"
+        app:sv_doneCircleColor="@color/turquoise"
+        app:sv_doneStepLineColor="@color/turquoise"
+        app:sv_doneTextColor="@color/turquoise"
+        app:sv_doneStepMarkColor="@color/white"
+        />
+
+    <com.example.dentalqmgmtsys.Common.NonSwipeViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/stepView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="10dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        >
+        
+        <Button
+            android:id="@+id/prevBtn"
+            android:enabled="false"
+            android:text="Previous"
+            android:drawableLeft="@drawable/ic_left"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:enabled="false"
+            android:text="Next"
+            android:drawableRight="@drawable/ic_right"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content"/>
+
+        
+    </LinearLayout>
+
+</RelativeLayout>

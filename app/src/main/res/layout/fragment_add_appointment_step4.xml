@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/step4Information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Appointment"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/thankYouTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Thank you for booking with us!"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_medical_service"
+            android:layout_gravity="bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name : "
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+        <TextView
+            android:id="@+id/confirmNameTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_phone"
+            android:layout_gravity="bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone Number : "
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+        <TextView
+            android:id="@+id/confirmPhoneTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone"
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_calendar"
+            android:layout_gravity="bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Appointment Date : "
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+        <TextView
+            android:id="@+id/confirmDateTimeTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time and Date"
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_person_outline_24"
+            android:layout_gravity="bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doctor : "
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+        <TextView
+            android:id="@+id/confirmDoctorTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Doctor"
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_medical_service"
+            android:layout_gravity="bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Service : "
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+        <TextView
+            android:id="@+id/confirmServiceTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service"
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/finalConfirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONFIRM"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
+
+
+
+
+
+
+</LinearLayout>

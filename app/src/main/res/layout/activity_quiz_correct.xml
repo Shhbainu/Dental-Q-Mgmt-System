@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".QuizCorrectActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#a4dded">
+
+        <ImageView
+            style="@style/ImageStyle"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/ico_correct_answer"
+            >
+
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="22sp"
+            android:text="Your Score"
+            android:layout_marginTop="10dp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_score"
+            tools:text="100"
+            style="@style/ScoreStyle"
+            >
+
+        </TextView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_result_play_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="30dp"
+                android:padding="10dp"
+                android:text="Play Again"
+                android:background="@drawable/textfield_background"
+                android:layout_gravity="center_horizontal|bottom"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="65dp"
+                android:layout_marginEnd="30dp"
+                android:padding="10dp"
+                android:text="Back to Queue"
+                android:background="@drawable/textfield_background"
+                android:layout_gravity="center_horizontal|bottom"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:id="@+id/wrongMessage"
+            android:text="Your wrong answers:"
+            android:visibility="visible"
+            >
+        </TextView>
+
+        <ListView
+            android:id="@+id/list_wrong_answer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+
+</layout>
