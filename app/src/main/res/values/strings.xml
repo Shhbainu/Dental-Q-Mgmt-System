@@ -36,4 +36,5 @@
     <string name="rules4_description">
         Your results and wrong answers can be viewed after taking the quiz.
     </string>
+    <string name="back">Back</string>
 </resources>

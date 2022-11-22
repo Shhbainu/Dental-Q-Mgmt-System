@@ -1,57 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a4dded">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow"
+        tools:ignore="ContentDescription" />
 
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/titleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/back"
+        app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
+        app:layout_constraintTop_toTopOf="@+id/backBtn"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/Image"
+        style="@style/ImageStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#a4dded">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/ico_quiz_logo"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        tools:layout_editor_absoluteX="16dp">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ico_quiz_logo"
-            style="@style/ImageStyle"
+    </ImageView>
 
-            >
+    <TextView
+        android:id="@+id/textView1"
+        style="@style/BigTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:layout_weight="1"
+        android:text="\How much do you know about your teeth? Find out by taking this quiz!"
+        app:layout_constraintTop_toTopOf="@+id/Image"
+        tools:layout_editor_absoluteX="16dp" />
 
-        </ImageView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/play_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="580dp"
+        android:background="@drawable/textfield_background"
+        android:text="Play"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/BigTextStyle"
-            android:text="\n\nHow much do you know about your teeth? Find out by taking this quiz!"
-            android:layout_weight="1"
-            />
+    </androidx.appcompat.widget.AppCompatButton>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/play_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:text="Play"
-            android:background="@drawable/textfield_background"
-            android:layout_marginBottom="30dp"
-            >
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/rule_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/textfield_background"
+        android:text="Quiz Rules"
+        app:layout_constraintBottom_toBottomOf="@+id/play_btn"
+        app:layout_constraintStart_toEndOf="@+id/play_btn"
+        app:layout_constraintTop_toTopOf="@+id/backBtn"
+        app:layout_constraintVertical_bias="1.0">
 
-        </androidx.appcompat.widget.AppCompatButton>
+    </androidx.appcompat.widget.AppCompatButton>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/rule_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:text="Quiz Rules"
-            android:background="@drawable/textfield_background"
-            android:layout_marginBottom="50dp"
-            >
-
-        </androidx.appcompat.widget.AppCompatButton>
-
-    </LinearLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

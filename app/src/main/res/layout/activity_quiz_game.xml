@@ -14,6 +14,7 @@
             style="@style/ImageStyle"
             android:layout_width="match_parent"
             android:layout_height="245dp"
+            android:layout_marginTop="50dp"
             android:src="@drawable/ico_quiz_logo"
             android:text="@string/ico_quiz_logo"
             android:contentDescription="TODO">
