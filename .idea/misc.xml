@@ -36,11 +36,17 @@
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/button_background.xml" value="0.324" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/dotted_border.xml" value="0.324" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/ic_baseline_dashboard_24.xml" value="0.324" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/shape_button01.xml" value="0.332" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/shape_button02.xml" value="0.324" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_appointments.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_doctors.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_landing.xml" value="0.2969298245614035" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_login.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_main.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_main2.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_queues.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_register.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_services.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_splash.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/fragment_appointment.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/fragment_dashboard.xml" value="0.2969298245614035" />

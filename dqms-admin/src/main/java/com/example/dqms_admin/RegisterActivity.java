@@ -176,7 +176,7 @@ public class RegisterActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         Toast.makeText(RegisterActivity.this, "Admin Account Created", Toast.LENGTH_SHORT).show();
                         //will proceed to user homepage
-                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                        startActivity(new Intent(RegisterActivity.this, MainActivity2.class));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else if (userType.equals("admin")){
                             // admin proceed to admin page?? nope, go to user homepage
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, MainActivity2.class));
                             finish();
                         }
                     }

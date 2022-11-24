@@ -12,7 +12,7 @@
         android:layout_height="189dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ico_shape_admin" />
+        app:srcCompat="@drawable/corner_shape_admin" />
 
     <ImageView
         android:id="@+id/backBtn"
@@ -126,7 +126,7 @@
             android:paddingTop="20dp"
             android:text="Forgot Password?"
             android:textAlignment="center"
-            android:textColor="@color/mint"
+            android:textColor="@color/light_admin_gray"
             android:textSize="16sp" />
 
     </LinearLayout>
