@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.dentalqmgmtsys.databinding.ActivityTermsConditionsBinding;
 
@@ -17,11 +18,10 @@ public class TermsConditionsActivity extends AppCompatActivity {
         binding = ActivityTermsConditionsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        //handle back button, click
+        ImageView back= findViewById(R.id.backBtn);
+
+        //Event onClick for back button
+        back.setOnClickListener(v -> finish());
     }
 }
