@@ -64,9 +64,8 @@ public class AddAppointmentStep4Fragment extends Fragment {
 
         appointmentInformation.setDoctor(Common.currentDoctor);
         appointmentInformation.setService(Common.currentService.getName());
-        appointmentInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot) +
-                " at " +
-                simpleDateFormat.format(Common.currentDate.getTime())).toString());
+        appointmentInformation.setTime(Common.convertTimeSlotToString(Common.currentTimeSlot));
+        appointmentInformation.setDate(simpleDateFormat.format(Common.currentDate.getTime()).toString());
         appointmentInformation.setSlot((long) Common.currentTimeSlot);
         appointmentInformation.setPatientName(Common.currentUser);
         appointmentInformation.setPatientPhone(Common.currentPhone);
@@ -83,9 +82,9 @@ public class AddAppointmentStep4Fragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-
+                        saveToRTD();
                         resetStaticData();
-                        getActivity().finish();//Close activity
+                        getActivity().finish();
                         Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -95,6 +94,40 @@ public class AddAppointmentStep4Fragment extends Fragment {
                     }
                 });
     }
+
+    private void saveToRTD() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getUid();
+        AppointmentInformation appointmentInformation = new AppointmentInformation();
+
+        appointmentInformation.setDoctor(Common.currentDoctor);
+        appointmentInformation.setService(Common.currentService.getName());
+        appointmentInformation.setTime(Common.convertTimeSlotToString(Common.currentTimeSlot));
+        appointmentInformation.setDate(simpleDateFormat.format(Common.currentDate.getTime()).toString());
+        appointmentInformation.setSlot((long) Common.currentTimeSlot);
+        appointmentInformation.setPatientName(Common.currentUser);
+        appointmentInformation.setPatientPhone(Common.currentPhone);
+
+        databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("Users");
+        databaseReference.child(uid).child("appointments").child(Common.simpleFormatDate.format(Common.currentDate.getTime())).child((String.valueOf(Common.currentTimeSlot)))
+                .setValue(appointmentInformation)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+
+    }
+
 
     private void resetStaticData() {
         Common.step = 0;

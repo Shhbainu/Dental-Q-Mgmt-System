@@ -137,15 +137,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         progressDialog.dismiss();
-                        //Get name and phone of user
                         // Get user type
                         String userType = ""+snapshot.child("userType").getValue();
-                        String fName = ""+snapshot.child("fName").getValue();
-                        String lName = ""+snapshot.child("lName").getValue();
-                        String phone = ""+snapshot.child("phone").getValue();
-
-                        Common.currentUser = fName + lName;
-                        Common.currentPhone = phone;
 
                         // Check user type
                         if (userType.equals("user")){

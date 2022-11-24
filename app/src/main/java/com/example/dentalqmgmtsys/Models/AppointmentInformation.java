@@ -1,7 +1,7 @@
 package com.example.dentalqmgmtsys.Models;
 
 public class AppointmentInformation {
-    private String patientName, patientPhone, time, doctor, service;
+    private String patientName, patientPhone, time, doctor, service, date;
     private Long slot;
 
     public AppointmentInformation()
@@ -9,13 +9,14 @@ public class AppointmentInformation {
 
     }
 
-    public AppointmentInformation(String patientName, String patientPhone, String time, String doctor, String service, Long slot) {
+    public AppointmentInformation(String patientName, String patientPhone, String time, String doctor, String service, String date, Long slot) {
         this.patientName = patientName;
         this.patientPhone = patientPhone;
         this.time = time;
         this.doctor = doctor;
         this.service = service;
         this.slot = slot;
+        this.date = date;
     }
 
     public String getPatientName() {
@@ -64,5 +65,13 @@ public class AppointmentInformation {
 
     public void setSlot(Long slot) {
         this.slot = slot;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
     }
 }
