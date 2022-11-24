@@ -22,11 +22,15 @@ import com.example.dentalqmgmtsys.Models.AppointmentInformation;
 import com.example.dentalqmgmtsys.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +41,8 @@ public class AddAppointmentStep4Fragment extends Fragment {
 
     SimpleDateFormat simpleDateFormat;
     LocalBroadcastManager localBroadcastManager;
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
 
     @BindView(R.id.confirmNameTV)
     TextView confirmNameTV;
@@ -65,7 +71,7 @@ public class AddAppointmentStep4Fragment extends Fragment {
         appointmentInformation.setPatientName(Common.currentUser);
         appointmentInformation.setPatientPhone(Common.currentPhone);
 
-        //Submit
+        //Submit Firestore
         DocumentReference appointmentDate = FirebaseFirestore.getInstance()
                 .collection("AllDoctors")
                 .document(Common.currentDoctor)
@@ -77,6 +83,7 @@ public class AddAppointmentStep4Fragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+
                         resetStaticData();
                         getActivity().finish();//Close activity
                         Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();

@@ -57,6 +57,9 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
         holder.timeSlotTV.setText(new StringBuilder(Common.convertTimeSlotToString(i)));
         if(timeSlotList.size() == 0) //If all position is available, just show
         {
+            //If all time slot is empty, all card is enable
+            holder.timeSlotCard.setEnabled(true);
+
             holder.timeSlotDescriptionTV.setText("Available");
             holder.timeSlotDescriptionTV.setTextColor(context.getResources()
                     .getColor(android.R.color.black));
@@ -72,6 +75,7 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                 int slot = Integer.parseInt(slotValue.getSlot().toString());
                 if(slot == i)// If slot == position
                 {
+                    holder.timeSlotCard.setEnabled(false);
                     //Setting tag for all time slot when full
                     holder.timeSlotCard.setTag(Common.DISABLE_TAG);
                     holder.timeSlotCard.setCardBackgroundColor(context.getResources()

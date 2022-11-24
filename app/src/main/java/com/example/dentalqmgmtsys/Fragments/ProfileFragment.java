@@ -121,16 +121,16 @@ public class ProfileFragment extends Fragment {
                         String uid = ""+snapshot.child("uid").getValue();
                         String userType = ""+snapshot.child("userType").getValue();
                         String address = ""+snapshot.child("address").getValue();
-                        Common.currentPhone= ""+snapshot.child("phone").getValue();
+                        String phone = ""+snapshot.child("phone").getValue();
                         String age = ""+snapshot.child("age").getValue();
-                        Common.currentUser = fName+" "+lName;
+                        String fullName = fName+" "+lName;
 
                         //format date dd/MM/yyyy
                         String formattedDate = MyApplication.formatTimestamp(Long.parseLong(timestamp));
 
                         //set data
                         binding.fnameTV.setText(fName);
-                        binding.fullnameTV.setText(Common.currentUser);
+                        binding.fullnameTV.setText(fullName);
                         binding.emailTV.setText(email);
                         binding.memberDateTV.setText(formattedDate);
                         binding.addressTV.setText(address);

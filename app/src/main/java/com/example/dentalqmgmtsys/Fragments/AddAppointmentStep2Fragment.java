@@ -49,8 +49,6 @@ public class AddAppointmentStep2Fragment extends Fragment implements IAllDoctors
     @BindView(R.id.doctorSpinner)
     MaterialSpinner doctorSpinner;
 
-    List<String> doctors;
-
     //Spinner for services list
     @BindView(R.id.serviceRV)
     RecyclerView serviceRV;
@@ -71,8 +69,6 @@ public class AddAppointmentStep2Fragment extends Fragment implements IAllDoctors
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        doctors = new ArrayList<>();
 
         allDoctorsRef = FirebaseFirestore.getInstance().collection("AllDoctors");
         iAllDoctorsLoadListener = this;

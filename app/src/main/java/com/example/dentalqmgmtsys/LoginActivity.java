@@ -11,6 +11,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.dentalqmgmtsys.Common.Common;
 import com.example.dentalqmgmtsys.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -136,8 +137,16 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         progressDialog.dismiss();
+                        //Get name and phone of user
                         // Get user type
                         String userType = ""+snapshot.child("userType").getValue();
+                        String fName = ""+snapshot.child("fName").getValue();
+                        String lName = ""+snapshot.child("lName").getValue();
+                        String phone = ""+snapshot.child("phone").getValue();
+
+                        Common.currentUser = fName + lName;
+                        Common.currentPhone = phone;
+
                         // Check user type
                         if (userType.equals("user")){
                             // users proceed to user home page
