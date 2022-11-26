@@ -32,7 +32,7 @@ public class QueueFragment extends Fragment {
     private FragmentQueueBinding binding;
     //Variables
     private Long comTime;
-    private Long remainTime;
+    private Long remainTime;                            //There's a bug when pressing recent apps, the timer bugs out
     private Long timeLeft;
     private Long endTime;
 
@@ -50,12 +50,11 @@ public class QueueFragment extends Fragment {
         //appointment
         int endTime = stringToInt("10:48");
         //Clock
-        int startTime = stringToInt("10:18");
+        int startTime = stringToInt("10:47");
         //Computation of Time
         String subAns = String.valueOf(endTime - startTime);
         comTime = timeConversion(subAns);
         remainTime = comTime;
-
 
         // Inflate the layout for this fragment
         binding = FragmentQueueBinding.inflate(inflater, container, false);
@@ -117,6 +116,7 @@ public class QueueFragment extends Fragment {
 
             @Override
             public void onFinish() {
+                binding.queueTimeTV.setText("00:00:00");
                 Toast.makeText(getActivity(), "Finished", Toast.LENGTH_SHORT).show();
             }
         }.start();
