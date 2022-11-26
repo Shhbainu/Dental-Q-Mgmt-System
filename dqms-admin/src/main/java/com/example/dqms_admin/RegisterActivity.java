@@ -80,9 +80,9 @@ public class RegisterActivity extends AppCompatActivity {
         //Get input data
         fName = binding.fNameET.getText().toString().trim();
         lName = binding.lNameET.getText().toString().trim();
-        age = binding.ageET.getText().toString().trim();
-        address = binding.addressET.getText().toString().trim();
-        phone = binding.phoneET.getText().toString().trim();
+//        age = binding.ageET.getText().toString().trim();
+//        address = binding.addressET.getText().toString().trim();
+//        phone = binding.phoneET.getText().toString().trim();
         email = binding.emailET.getText().toString().trim();
         password = binding.passwordET.getText().toString().trim();
         String cPassword = binding.confirmPassET.getText().toString().trim();
@@ -106,15 +106,15 @@ public class RegisterActivity extends AppCompatActivity {
         else if (password.length() < 6){ //password is less than 6 characters
             Toast.makeText(this, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(age)){ //age is empty
-            Toast.makeText(this, "Enter your age", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(address)){ //address is empty
-            Toast.makeText(this, "Enter your address", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(phone)){ //phone is empty
-            Toast.makeText(this, "Enter your phone", Toast.LENGTH_SHORT).show();
-        }
+//        else if (TextUtils.isEmpty(age)){ //age is empty
+//            Toast.makeText(this, "Enter your age", Toast.LENGTH_SHORT).show();
+//        }
+//        else if (TextUtils.isEmpty(address)){ //address is empty
+//            Toast.makeText(this, "Enter your address", Toast.LENGTH_SHORT).show();
+//        }
+//        else if (TextUtils.isEmpty(phone)){ //phone is empty
+//            Toast.makeText(this, "Enter your phone", Toast.LENGTH_SHORT).show();
+//        }
         else {
             createUserAccount();
         }
@@ -131,6 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         //account create success, now add in firebase realtime database
+                        progressDialog.dismiss();
                         updateUserInfo();
                     }
                 })
@@ -157,10 +158,10 @@ public class RegisterActivity extends AppCompatActivity {
         hashMap.put("uid", uid);
         hashMap.put("fName", fName);
         hashMap.put("lName", lName);
-        hashMap.put("age", age);
-        hashMap.put("address", address);
+//        hashMap.put("age", age);
+//        hashMap.put("address", address);
         hashMap.put("email", email);
-        hashMap.put("phone", phone);
+//        hashMap.put("phone", phone);
         hashMap.put("userType", "admin");
         hashMap.put("timestamp", timestamp);
         //hashMap.put("profilePic", ""); //add empty, in case needed
@@ -177,6 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Admin Account Created", Toast.LENGTH_SHORT).show();
                         //will proceed to user homepage
                         startActivity(new Intent(RegisterActivity.this, MainActivity2.class));
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
