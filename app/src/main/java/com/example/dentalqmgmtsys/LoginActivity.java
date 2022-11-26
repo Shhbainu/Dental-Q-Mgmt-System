@@ -11,6 +11,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.dentalqmgmtsys.Common.Common;
 import com.example.dentalqmgmtsys.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -138,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         // Get user type
                         String userType = ""+snapshot.child("userType").getValue();
+
                         // Check user type
                         if (userType.equals("user")){
                             // users proceed to user home page
