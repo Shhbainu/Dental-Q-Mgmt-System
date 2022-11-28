@@ -1,7 +1,13 @@
 package com.example.dentalqmgmtsys.Fragments;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,26 +20,28 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dentalqmgmtsys.R;
 import com.example.dentalqmgmtsys.databinding.FragmentQueueBinding;
-import com.google.firebase.database.DatabaseReference;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Objects;
 
 public class QueueFragment extends Fragment {
+    //Notifications
+    NotificationManager notificationManager;
+    NotificationChannel notificationChannel;
+    Notification.Builder builder;
+    String channelID = "1234";
+    String description = "Test Notification";
     //Viewbinding
-    private FragmentQueueBinding binding;
+    private FragmentQueueBinding binding;               //Haven't added Notifs
     //Variables
     private Long comTime;
     private Long remainTime;                            //There's a bug when pressing recent apps, the timer bugs out
-    private Long timeLeft;
+    private Long timeLeft;                              //If encountered this bug, just close the app
     private Long endTime;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -104,7 +112,7 @@ public class QueueFragment extends Fragment {
         return Integer.parseInt(conTime);
     }
 
-    private void startTimer(){
+    private void startTimer(){                           //Concept: Activating the timer within 24hrs
         CountDownTimer countDownTimer = new CountDownTimer(remainTime, 1000) {
 
             @Override
@@ -112,14 +120,29 @@ public class QueueFragment extends Fragment {
                 remainTime = untilFinish;
                 timeLeft = untilFinish;
                 updateCountdown();
+
+                //30mins
+                if ((untilFinish <= 1801000) && (untilFinish >= 1800000)) createNotification30();
+                //5mins
+                if ((untilFinish <= 301000) && (untilFinish >= 300000)) createNotification5();
             }
 
             @Override
             public void onFinish() {
                 binding.queueTimeTV.setText("00:00:00");
+//<<<<<<< HEAD
+                createNotificationDone();
+//=======
+                binding.imInBtn.setVisibility(View.VISIBLE);
+                showButton();
+//>>>>>>> b6bb6c5f9f95bb2c4691019c41c89bbb41ff44d9
                 Toast.makeText(getActivity(), "Finished", Toast.LENGTH_SHORT).show();
             }
         }.start();
+    }
+
+    private void showButton() {
+
     }
 
     private void updateCountdown() {
@@ -128,6 +151,88 @@ public class QueueFragment extends Fragment {
         Long hours = ((remainTime / (1000 * 60 * 60)) % 24);
         String timeLeftFormatted = String.format(Locale.getDefault(),"%02d:%02d:%02d", hours, minutes, seconds);
         binding.queueTimeTV.setText(timeLeftFormatted);
+    }
+
+    private void createNotification30(){
+        notificationManager = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            notificationChannel = new NotificationChannel(channelID, description, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(notificationChannel);
+
+            builder = new Notification.Builder(getActivity(), channelID)
+                    .setContentTitle("Attention")
+                    .setContentText("30 minutes remaining!")
+                    .setSmallIcon(R.drawable.toothlogo)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.toothlogo))
+                    .setAutoCancel(true);
+
+        }else{
+            builder = new Notification.Builder(getActivity())
+                    .setContentTitle("Attention")
+                    .setContentText("30 minutes remaining!")
+                    .setSmallIcon(R.drawable.toothlogo)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.toothlogo))
+                    .setAutoCancel(true);
+        }
+        notificationManager.notify(1234, builder.build());
+    }
+
+    private void createNotification5(){
+        notificationManager = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            notificationChannel = new NotificationChannel(channelID, description, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(notificationChannel);
+
+            builder = new Notification.Builder(getActivity(), channelID)
+                    .setContentTitle("Attention")
+                    .setContentText("5 minutes remaining!")
+                    .setSmallIcon(R.drawable.toothlogo)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.toothlogo))
+                    .setAutoCancel(true);
+
+        }else{
+            builder = new Notification.Builder(getActivity())
+                    .setContentTitle("Attention")
+                    .setContentText("5 minutes remaining!")
+                    .setSmallIcon(R.drawable.toothlogo)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.toothlogo))
+                    .setAutoCancel(true);
+        }
+        notificationManager.notify(1234, builder.build());
+    }
+
+    private void createNotificationDone() {
+
+        Intent intent = new Intent(getActivity(), QueueFragment.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        notificationManager = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            notificationChannel = new NotificationChannel(channelID, description, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(notificationChannel);
+
+            builder = new Notification.Builder(getActivity(), channelID)
+                    .setContentTitle("Attention")
+                    .setContentText("It is your turn")
+                    .setSmallIcon(R.drawable.toothlogo)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.toothlogo))
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
+
+            //Not working
+//           getParentFragmentManager().beginTransaction().replace(R.id.frame_layout, new QueueFragment()).commit();
+        }else{
+            builder = new Notification.Builder(getActivity())
+                    .setContentTitle("Attention")
+                    .setContentText("It is your turn")
+                    .setSmallIcon(R.drawable.toothlogo)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.toothlogo))
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
+        }
+        notificationManager.notify(1234, builder.build());
     }
 
     @Override
