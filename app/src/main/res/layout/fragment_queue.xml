@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
@@ -136,6 +136,17 @@
 
         </androidx.cardview.widget.CardView>
 
+        <Button
+            android:id="@+id/imInBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Im in"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="340dp"
+            android:visibility="gone"
+            android:padding="10dp"
+            />
+
     </FrameLayout>
 
-</FrameLayout>
+</RelativeLayout>

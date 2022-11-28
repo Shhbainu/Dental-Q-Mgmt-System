@@ -1,5 +1,7 @@
 package com.example.dentalqmgmtsys.Models;
 
+import com.google.firebase.Timestamp;
+
 public class AppointmentInformation {
     private String patientName, patientPhone, time, doctor, service, date;
     private Long slot;
@@ -73,5 +75,11 @@ public class AppointmentInformation {
 
     public String getDate() {
         return date;
+    }
+
+    public void setDone(boolean done) {
+    }
+
+    public void seTimestamp(Timestamp timestamp) {
     }
 }

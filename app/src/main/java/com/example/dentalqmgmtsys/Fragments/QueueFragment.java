@@ -117,9 +117,15 @@ public class QueueFragment extends Fragment {
             @Override
             public void onFinish() {
                 binding.queueTimeTV.setText("00:00:00");
+                binding.imInBtn.setVisibility(View.VISIBLE);
+                showButton();
                 Toast.makeText(getActivity(), "Finished", Toast.LENGTH_SHORT).show();
             }
         }.start();
+    }
+
+    private void showButton() {
+
     }
 
     private void updateCountdown() {

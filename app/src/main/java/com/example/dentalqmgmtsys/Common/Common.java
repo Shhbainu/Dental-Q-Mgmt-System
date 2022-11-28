@@ -5,6 +5,7 @@ import com.example.dentalqmgmtsys.Models.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Common {
     public static final String KEY_ENABLE_BUTTON_NEXT = "ENABLE_BUTTON_NEXT";
@@ -23,8 +24,9 @@ public class Common {
 
     public static String currentDoctor;
     public static int currentTimeSlot = -1;
-    public static Calendar currentDate = Calendar.getInstance();
+    public static Calendar appointmentDate = Calendar.getInstance();
     public static SimpleDateFormat simpleFormatDate = new SimpleDateFormat("MM_dd_yyyy");
+    public static Date timeNow = Calendar.getInstance().getTime();
 
     public static String convertTimeSlotToString(int slot) {
         switch (slot) {
