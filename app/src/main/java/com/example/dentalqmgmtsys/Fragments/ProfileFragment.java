@@ -4,17 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.dentalqmgmtsys.AboutUsActivity;
-import com.example.dentalqmgmtsys.Common.Common;
 import com.example.dentalqmgmtsys.ContactUsActivity;
+import com.example.dentalqmgmtsys.EditProfileActivity;
 import com.example.dentalqmgmtsys.LandingActivity;
 import com.example.dentalqmgmtsys.MyApplication;
 import com.example.dentalqmgmtsys.R;
@@ -22,7 +21,6 @@ import com.example.dentalqmgmtsys.ReferralActivity;
 import com.example.dentalqmgmtsys.TermsConditionsActivity;
 import com.example.dentalqmgmtsys.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -99,6 +97,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //handle edit profile click
+        binding.editProfileTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), EditProfileActivity.class));
+            }
+        });
 
 
     }
@@ -123,6 +128,7 @@ public class ProfileFragment extends Fragment {
                         String address = ""+snapshot.child("address").getValue();
                         String phone = ""+snapshot.child("phone").getValue();
                         String age = ""+snapshot.child("age").getValue();
+                        String profileImage = ""+snapshot.child("profileImage").getValue();
                         String fullName = fName+" "+lName;
 
                         //format date dd/MM/yyyy
@@ -136,8 +142,11 @@ public class ProfileFragment extends Fragment {
                         binding.addressTV.setText(address);
                         //binding.phone.setText(phone);
                         //binding.age.setText(age);
-
-                        //set image??
+                        Glide.with(ProfileFragment.this)
+                                .load(profileImage)
+                                .placeholder(R.drawable.ico_no_pic)
+                                .error(R.drawable.ico_no_pic)
+                                .into(binding.profileTV);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

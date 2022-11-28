@@ -164,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
         hashMap.put("phone", phone);
         hashMap.put("userType", "user");
         hashMap.put("timestamp", timestamp);
-        //hashMap.put("profilePic", ""); //add empty, in case needed
+        hashMap.put("profileImage", ""); //add empty, in case needed
 
         //set data to db
         DatabaseReference ref = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users");
