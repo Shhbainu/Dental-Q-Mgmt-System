@@ -153,19 +153,19 @@ public class EditProfileActivity extends AppCompatActivity {
             //no name is entered
             Toast.makeText(this, "Enter first name...", Toast.LENGTH_SHORT).show();
         }
-        if(TextUtils.isEmpty(lName)){
+        else if(TextUtils.isEmpty(lName)){
             //no name is entered
             Toast.makeText(this, "Enter last name...", Toast.LENGTH_SHORT).show();
         }
-        if(TextUtils.isEmpty(address)){
+        else if(TextUtils.isEmpty(address)){
             //no name is entered
             Toast.makeText(this, "Enter address...", Toast.LENGTH_SHORT).show();
         }
-        if(TextUtils.isEmpty(phone)){
+        else if(TextUtils.isEmpty(phone)){
             //no name is entered
             Toast.makeText(this, "Enter phone number...", Toast.LENGTH_SHORT).show();
         }
-        if(TextUtils.isEmpty(email)){
+        else if(TextUtils.isEmpty(email)){
             //no name is entered
             Toast.makeText(this, "Enter email...", Toast.LENGTH_SHORT).show();
         }
