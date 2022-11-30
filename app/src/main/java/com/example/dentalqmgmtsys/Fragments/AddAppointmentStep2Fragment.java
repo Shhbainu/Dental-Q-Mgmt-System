@@ -225,9 +225,9 @@ public class AddAppointmentStep2Fragment extends Fragment implements ITimeSlotLo
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-                if(Common.currentDate.getTimeInMillis() != date.getTimeInMillis())
+                if(Common.appointmentDate.getTimeInMillis() != date.getTimeInMillis())
                 {
-                    Common.currentDate = date; // This will not load again if selected
+                    Common.appointmentDate = date; // This will not load again if selected
                     loadAvailableTimeSlotOfDentist(Common.currentDoctor,
                             simpleDateFormat.format(date.getTime()));
                 }

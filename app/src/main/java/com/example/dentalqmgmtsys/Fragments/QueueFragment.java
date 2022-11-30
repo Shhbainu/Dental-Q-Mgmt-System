@@ -130,12 +130,11 @@ public class QueueFragment extends Fragment {
             @Override
             public void onFinish() {
                 binding.queueTimeTV.setText("00:00:00");
-//<<<<<<< HEAD
                 createNotificationDone();
-//=======
                 binding.imInBtn.setVisibility(View.VISIBLE);
                 showButton();
-//>>>>>>> b6bb6c5f9f95bb2c4691019c41c89bbb41ff44d9
+                binding.imInBtn.setVisibility(View.VISIBLE);
+                showButton();
                 Toast.makeText(getActivity(), "Finished", Toast.LENGTH_SHORT).show();
             }
         }.start();

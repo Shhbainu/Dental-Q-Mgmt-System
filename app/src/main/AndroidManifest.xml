@@ -4,6 +4,12 @@
     package="com.example.dentalqmgmtsys">
     <!-- All required permission -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:name=".MyApplication"
@@ -17,8 +23,12 @@
         android:theme="@style/Theme.DentalQMgmtSys"
         tools:targetApi="31">
         <activity
-            android:name=".QuizRuleViewPagerActivity"
+            android:name=".EditProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".QuizRuleViewPagerActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".QuizRuleActivity"
             android:exported="false" />
@@ -33,7 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".QuizGameActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".AddAppointmentActivity"
             android:exported="false" />

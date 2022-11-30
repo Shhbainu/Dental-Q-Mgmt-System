@@ -1,5 +1,6 @@
 package com.example.dentalqmgmtsys.Fragments;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,9 +21,13 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.example.dentalqmgmtsys.Common.Common;
 import com.example.dentalqmgmtsys.Models.AppointmentInformation;
 import com.example.dentalqmgmtsys.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,11 +35,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import dmax.dialog.SpotsDialog;
 
 public class AddAppointmentStep3Fragment extends Fragment {
 
@@ -42,6 +49,7 @@ public class AddAppointmentStep3Fragment extends Fragment {
     LocalBroadcastManager localBroadcastManager;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+    AlertDialog dialog;
 
     @BindView(R.id.confirmNameTV)
     TextView confirmNameTV;
@@ -58,13 +66,33 @@ public class AddAppointmentStep3Fragment extends Fragment {
     @OnClick(R.id.finalConfirmButton)
     void confirmAppointment(){
 
+        dialog.show();
+
+/*        //Process Timestamp
+        //Timestamp to filer all appointments if date is greater today
+        //To only display all future appointments
+        String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
+        String [] startTimeConvert = startTime.split(":");
+        int startHourInt = Integer.parseInt(startTimeConvert[0].trim()); // We will get 8
+        int startMinInt = Integer.parseInt(startTimeConvert[1].trim()); // We will get 00
+
+        Calendar appointmentDateWithHour = Calendar.getInstance();
+        appointmentDateWithHour.setTimeInMillis(Common.appointmentDate.getTimeInMillis());
+        appointmentDateWithHour.set(Calendar.HOUR_OF_DAY, startHourInt);
+        appointmentDateWithHour.set(Calendar.MINUTE, startMinInt);
+
+        Timestamp timestamp = new Timestamp(appointmentDateWithHour.getTime());*/
+
+
         //Creating appointment information
         AppointmentInformation appointmentInformation = new AppointmentInformation();
 
+/*        appointmentInformation.seTimestamp(timestamp);
+        appointmentInformation.setDone(false); //False to filter for display in user*/
         appointmentInformation.setDoctor(Common.currentDoctor);
         appointmentInformation.setService(Common.currentService.getName());
         appointmentInformation.setTime(Common.convertTimeSlotToString(Common.currentTimeSlot));
-        appointmentInformation.setDate(simpleDateFormat.format(Common.currentDate.getTime()).toString());
+        appointmentInformation.setDate(simpleDateFormat.format(Common.appointmentDate.getTime()).toString());
         appointmentInformation.setSlot((long) Common.currentTimeSlot);
         appointmentInformation.setPatientName(Common.currentUser);
         appointmentInformation.setPatientPhone(Common.currentPhone);
@@ -73,7 +101,7 @@ public class AddAppointmentStep3Fragment extends Fragment {
         DocumentReference appointmentDate = FirebaseFirestore.getInstance()
                 .collection("AllDoctors")
                 .document(Common.currentDoctor)
-                .collection(Common.simpleFormatDate.format(Common.currentDate.getTime()))
+                .collection(Common.simpleFormatDate.format(Common.appointmentDate.getTime()))
                 .document(String.valueOf(Common.currentTimeSlot));
 
         //Write data
@@ -81,10 +109,16 @@ public class AddAppointmentStep3Fragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        if(dialog.isShowing())
+                            dialog.dismiss();
                         saveToRTD();
                         resetStaticData();
                         getActivity().finish();
                         Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+
+/*                        //Write function to check
+                        //If already exist an appointment, will prevent new appointment
+                        addToUserAppointment(appointmentInformation);*/
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -94,6 +128,52 @@ public class AddAppointmentStep3Fragment extends Fragment {
                 });
     }
 
+   /* private void addToUserAppointment(AppointmentInformation appointmentInformation) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        DatabaseReference userAppointment = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("Users").child(firebaseAuth.getUid()).child("ifAppointmentExist");
+
+        userAppointment.orderByValue().equalTo(false, "done") // If have any document wih field done = false
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.getResult().exists()){
+                            if(dialog.isShowing())
+                                dialog.dismiss();
+                            saveToRTD();
+                            resetStaticData();
+                            getActivity().finish();
+                            Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            //Set data
+                            userAppointment
+                                    .setValue(appointmentInformation)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            if(dialog.isShowing())
+                                                dialog.dismiss();
+                                            saveToRTD();
+                                            resetStaticData();
+                                            getActivity().finish();
+                                            Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            if(dialog.isShowing())
+                                                dialog.dismiss();
+                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+    }*/
+
     private void saveToRTD() {
         firebaseAuth = FirebaseAuth.getInstance();
         String uid = firebaseAuth.getUid();
@@ -102,14 +182,14 @@ public class AddAppointmentStep3Fragment extends Fragment {
         appointmentInformation.setDoctor(Common.currentDoctor);
         appointmentInformation.setService(Common.currentService.getName());
         appointmentInformation.setTime(Common.convertTimeSlotToString(Common.currentTimeSlot));
-        appointmentInformation.setDate(simpleDateFormat.format(Common.currentDate.getTime()).toString());
+        appointmentInformation.setDate(simpleDateFormat.format(Common.appointmentDate.getTime()).toString());
         appointmentInformation.setSlot((long) Common.currentTimeSlot);
         appointmentInformation.setPatientName(Common.currentUser);
         appointmentInformation.setPatientPhone(Common.currentPhone);
 
         databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Users");
-        databaseReference.child(uid).child("appointments").child(Common.simpleFormatDate.format(Common.currentDate.getTime())).child((String.valueOf(Common.currentTimeSlot)))
+        databaseReference.child(uid).child("appointments").child(Common.simpleFormatDate.format(Common.appointmentDate.getTime())).child((String.valueOf(Common.currentTimeSlot)))
                 .setValue(appointmentInformation)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -133,7 +213,7 @@ public class AddAppointmentStep3Fragment extends Fragment {
         Common.currentTimeSlot = -1;
         Common.currentService = null;
         Common.currentDoctor = null;
-        Common.currentDate.add(Calendar.DATE, 0); //Current Date
+        Common.appointmentDate.add(Calendar.DATE, 0); //Current Date
     }
 
     Unbinder unbinder;
@@ -153,7 +233,7 @@ public class AddAppointmentStep3Fragment extends Fragment {
         confirmServiceTV.setText(Common.currentService.getName());
         confirmDateTimeTV.setText(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
                 .append(" at ")
-                .append(simpleDateFormat.format(Common.currentDate.getTime())));
+                .append(simpleDateFormat.format(Common.appointmentDate.getTime())));
 
     }
 
@@ -176,7 +256,8 @@ public class AddAppointmentStep3Fragment extends Fragment {
 
         localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         localBroadcastManager.registerReceiver(confirmAppointingReceiver, new IntentFilter(Common.KEY_CONFIRM_APPOINTMENT));
-        
+
+        dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
     }
 
     @Override
