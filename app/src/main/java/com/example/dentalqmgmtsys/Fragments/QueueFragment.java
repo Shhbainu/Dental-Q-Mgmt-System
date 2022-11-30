@@ -37,8 +37,8 @@ public class QueueFragment extends Fragment {
     String channelID = "1234";
     String description = "Test Notification";
     //Viewbinding
-    private FragmentQueueBinding binding;               //Haven't added Notifs
-    //Variables
+    private FragmentQueueBinding binding;               //Haven't added Notifs - done
+    //Variables                                         //Next connecting database and finishing adding of time
     private Long comTime;
     private Long remainTime;                            //There's a bug when pressing recent apps, the timer bugs out
     private Long timeLeft;                              //If encountered this bug, just close the app
