@@ -56,9 +56,9 @@ public class QueueFragment extends Fragment {
         LocalTime parsedTime = LocalTime.parse(text);
         //Initialization of Time and Computation
         //appointment
-        int endTime = stringToInt("10:48");
+        int endTime = stringToInt("10:48"); //Time on Database
         //Clock
-        int startTime = stringToInt("10:47");
+        int startTime = stringToInt("10:47"); //parsedTime
         //Computation of Time
         String subAns = String.valueOf(endTime - startTime);
         comTime = timeConversion(subAns);
