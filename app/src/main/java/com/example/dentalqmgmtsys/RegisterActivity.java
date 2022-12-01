@@ -153,6 +153,9 @@ public class RegisterActivity extends AppCompatActivity {
         //get current user uid, since user is registered so we can get it now..
         String uid = firebaseAuth.getUid();
 
+        //make a refer code from user id
+        String referCode = uid.substring(0,7);
+
         //setup data to add in the realtime database
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("uid", uid);
@@ -165,6 +168,10 @@ public class RegisterActivity extends AppCompatActivity {
         hashMap.put("userType", "user");
         hashMap.put("timestamp", timestamp);
         hashMap.put("profileImage", ""); //add empty, in case needed
+        hashMap.put("credits", 100);
+        hashMap.put("referCode", referCode);
+        hashMap.put("redeemed", false);
+        //hashMap.put("profilePic", ""); //add empty, in case needed
 
         //set data to db
         DatabaseReference ref = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users");
@@ -178,6 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
                         //will proceed to user homepage
                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

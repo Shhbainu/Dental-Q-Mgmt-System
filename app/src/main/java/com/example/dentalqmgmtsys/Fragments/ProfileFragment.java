@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
 
     //firebase auth
-    private FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

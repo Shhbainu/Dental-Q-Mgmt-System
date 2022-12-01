@@ -13,6 +13,8 @@ public class SplashActivity extends AppCompatActivity {
 
     //firebase auth
     private FirebaseAuth firebaseAuth;
+    //firebase user
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void checkUser() {
         // Get current user, if logged in (Session)
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null){
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();

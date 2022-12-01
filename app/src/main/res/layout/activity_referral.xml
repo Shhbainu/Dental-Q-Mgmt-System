@@ -83,28 +83,47 @@
                 android:text="Share With Friends And Family"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/curpointET"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginTop="50dp"
-                android:hint="Your Credits: " />
+                android:layout_marginTop="20dp"
+                android:hint="Your Credits: "
+                android:textSize="18dp" />
 
             <TextView
-                android:id="@+id/referralTV"
-                android:layout_width="match_parent"
+                android:id="@+id/creditsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:hint="0"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/referCode"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
-                android:autoLink="web"
                 android:background="@drawable/dotted_border"
-                android:gravity="center"
-                android:text="https://short.refer.link"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:text="s4mPl3c0dE"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/copyTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:text="Tap to Copy" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -114,12 +133,27 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/teal_200"
+                android:elevation="10dp"
+                android:text="Share your Code"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/redeemBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="20dp"
                 android:background="@color/teal_200"
                 android:elevation="10dp"
-                android:text="Share your Referral link"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Redeem Code"
                 android:textColor="@color/white" />
 
             <TextView
