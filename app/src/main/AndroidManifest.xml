@@ -23,6 +23,12 @@
         android:theme="@style/Theme.DentalQMgmtSys"
         tools:targetApi="31">
         <activity
+            android:name=".ScoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
         <activity
@@ -34,15 +40,6 @@
             android:exported="false" />
         <activity
             android:name=".BackToQueueActivity"
-            android:exported="false" />
-        <activity
-            android:name=".QuizWrongActivity"
-            android:exported="false" />
-        <activity
-            android:name=".QuizCorrectActivity"
-            android:exported="false" />
-        <activity
-            android:name=".QuizGameActivity"
             android:exported="false" />
         <activity
             android:name=".AddAppointmentActivity"

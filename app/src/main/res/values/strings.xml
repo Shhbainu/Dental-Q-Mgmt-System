@@ -28,13 +28,13 @@
         The dental quiz game will contain 10 questions.
     </string>
     <string name="rules2_description">
-        Every correct answer scores you 10 points.
+        Every correct answer scores you 1 point.
     </string>
     <string name="rules3_description">
-        A failing score is 60 or below.
+        Once the time runs out, it will proceed to the next question.
     </string>
     <string name="rules4_description">
-        Your results and wrong answers can be viewed after taking the quiz.
+        Your quiz results can be viewed after taking the quiz.
     </string>
     <string name="back">back</string>
 </resources>

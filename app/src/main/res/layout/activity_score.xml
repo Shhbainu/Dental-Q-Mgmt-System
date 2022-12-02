@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="150dp"
             android:weightSum="2">
 
             <androidx.appcompat.widget.AppCompatButton
@@ -67,23 +68,6 @@
                 android:background="@drawable/textfield_background"
                 android:layout_gravity="center_horizontal|bottom"/>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            android:id="@+id/wrongMessage"
-            android:text="Your wrong answers:"
-            android:visibility="visible"
-            >
-        </TextView>
-
-        <ListView
-            android:id="@+id/list_wrong_answer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
 
     </LinearLayout>

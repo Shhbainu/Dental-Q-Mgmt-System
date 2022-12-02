@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a4dded"
+    tools:context=".QuestionActivity">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/quest_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1/10"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:paddingRight="8dp"
+            android:gravity="center"/>
+
+        <ImageView
+            style="@style/ImageStyle"
+            android:layout_width="match_parent"
+            android:layout_height="245dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ico_quiz_logo"
+            android:text="@string/ico_quiz_logo"
+            android:contentDescription="TODO">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MediumTextStyle"
+            tools:text="Ilan ang bagang ng mo?" />
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AnswerTextStyle"
+                android:id="@+id/option1"
+                tools:text="Option1"
+                android:backgroundTint="#FF018786"
+                android:text="Ans A"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AnswerTextStyle"
+                android:id="@+id/option2"
+                tools:text="Option2"
+                android:backgroundTint="#FF018786"
+                android:text="ans_B"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AnswerTextStyle"
+                android:id="@+id/option3"
+                tools:text="Option3"
+                android:backgroundTint="#FF018786"
+                android:text="ans_C"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AnswerTextStyle"
+                android:id="@+id/option4"
+                tools:text="Option4"
+                android:backgroundTint="#FF018786"
+                android:text="ans_D"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/countdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop= "10dp"
+            android:text="10"
+            android:textStyle="bold"
+            android:textSize="35sp"
+            android:gravity="center" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

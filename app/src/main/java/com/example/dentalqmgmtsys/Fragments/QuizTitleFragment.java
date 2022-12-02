@@ -9,10 +9,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 
-import com.example.dentalqmgmtsys.QuizGameActivity;
+import com.example.dentalqmgmtsys.QuestionActivity;
 import com.example.dentalqmgmtsys.QuizRuleActivity;
 import com.example.dentalqmgmtsys.R;
 import com.example.dentalqmgmtsys.databinding.FragmentQuizTitleBinding;
@@ -43,7 +41,7 @@ public class QuizTitleFragment extends Fragment {
         binding.playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), QuizGameActivity.class);
+                Intent intent = new Intent(getActivity(), QuestionActivity.class);
                 startActivity(intent);
             }
         });
