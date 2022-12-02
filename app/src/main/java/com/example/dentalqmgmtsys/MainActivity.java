@@ -25,8 +25,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
+public class MainActivity extends AppCompatActivity {
+    //DataBase
+    String key;
     //Viewbinding
     private ActivityMainBinding binding;
 
@@ -44,10 +53,26 @@ public class MainActivity extends AppCompatActivity {
 
         //Initial function call
         replaceFragment(new HomeFragment());
+        //Database
+        String uid = firebaseAuth.getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child(uid).child("appointments").child(Common.simpleFormatDate.format(Common.appointmentDate.getTime()));
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    key = dataSnapshot.child("date").getValue().toString();
+                }
+            }
 
-        //Date
-        String localDate = "12_02_2022";
-        String appointDate = "12_02_2022";
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //LocalDate
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+        String parsedDate = formatter.format(today);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
@@ -58,8 +83,9 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new AppointmentFragment());
                     break;
                 case R.id.queue:
-                    if(localDate != appointDate){
-                        System.out.println("not yet");
+                    if(!Objects.equals(key, parsedDate)){
+                        System.out.println(key);
+                        System.out.println(parsedDate);
                         replaceFragment(new QueueFragmentEmpty());
                     }else {
                         replaceFragment(new QueueFragment());

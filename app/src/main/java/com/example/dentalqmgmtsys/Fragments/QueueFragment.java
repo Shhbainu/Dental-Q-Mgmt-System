@@ -301,12 +301,7 @@ public class QueueFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        //LocalDate
-        LocalDate localDate = LocalDate.now();
-        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("MM_dd_yyyy");
-        String textDate = localDate.format(formatterDate);
-        LocalDate parsedDate = LocalDate.parse(textDate, formatterDate);
-        String parseDateString = parsedDate.toString();
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
