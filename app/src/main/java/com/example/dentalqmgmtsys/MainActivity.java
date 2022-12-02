@@ -15,6 +15,7 @@ import com.example.dentalqmgmtsys.Fragments.AppointmentFragment;
 import com.example.dentalqmgmtsys.Fragments.HomeFragment;
 import com.example.dentalqmgmtsys.Fragments.ProfileFragment;
 import com.example.dentalqmgmtsys.Fragments.QueueFragment;
+import com.example.dentalqmgmtsys.Fragments.QueueFragmentEmpty;
 import com.example.dentalqmgmtsys.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         //Initial function call
         replaceFragment(new HomeFragment());
 
+        //Date
+        String localDate = "12_02_2022";
+        String appointDate = "12_02_2022";
+
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.home:
@@ -53,7 +58,12 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new AppointmentFragment());
                     break;
                 case R.id.queue:
-                    replaceFragment(new QueueFragment());
+                    if(localDate != appointDate){
+                        System.out.println("not yet");
+                        replaceFragment(new QueueFragmentEmpty());
+                    }else {
+                        replaceFragment(new QueueFragment());
+                    }
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());

@@ -11,25 +11,43 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.dentalqmgmtsys.Common.Common;
+import com.example.dentalqmgmtsys.MainActivity;
 import com.example.dentalqmgmtsys.R;
 import com.example.dentalqmgmtsys.databinding.FragmentQueueBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Objects;
 
 public class QueueFragment extends Fragment {
+    //Database
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    String uid = firebaseAuth.getUid();
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child(uid).child("appointments").child(Common.simpleFormatDate.format(Common.appointmentDate.getTime()));
     //Notifications
     NotificationManager notificationManager;
     NotificationChannel notificationChannel;
@@ -37,33 +55,17 @@ public class QueueFragment extends Fragment {
     String channelID = "1234";
     String description = "Test Notification";
     //Viewbinding
-    private FragmentQueueBinding binding;               //Haven't added Notifs - done
-    //Variables                                         //Next connecting database and finishing adding of time
-    private Long comTime;                               //^ this should be account bound
-    private Long remainTime;                            //There's a bug when pressing recent apps, the timer bugs out
-    private Long timeLeft;                              //If encountered this bug, just close the app
-    private Long endTime;
+    private FragmentQueueBinding binding;
+    //Variables
+     Long comTime;
+     Long remainTime;
+     Long timeLeft;
+     Long endTime;
+     String timeSlot;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        //LocalTime to be read as 24hr format
-        LocalTime time = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        String text = time.format(formatter);
-        LocalTime parsedTime = LocalTime.parse(text);
-        //Initialization of Time and Computation
-        //appointment
-        int endTime = stringToInt("10:48"); //Time on Database
-        //Clock
-        int startTime = stringToInt("10:47"); //parsedTime
-        //Computation of Time
-        String subAns = String.valueOf(endTime - startTime);
-        comTime = timeConversion(subAns);
-        remainTime = comTime;
-
         // Inflate the layout for this fragment
         binding = FragmentQueueBinding.inflate(inflater, container, false);
         binding.quizGameBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +79,45 @@ public class QueueFragment extends Fragment {
             }
         });
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getTime();
+
+    }
+
+    private void getTime(){
+        //LocalTime to be read as 24hr format
+        LocalTime time = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        String text = time.format(formatter);
+        LocalTime parsedTime = LocalTime.parse(text);
+        //Database Calling
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    timeSlot = dataSnapshot.child("time").getValue().toString();
+                    System.out.println(timeSlot);
+                }
+                //Initialization of Time and Computation
+                //appointment
+                int appointTime = stringToInt(timeSlot); //Time on Database
+                //Clock
+                int clockTime = stringToInt("11:30"); //parsedTime
+                //Computation of Time
+                comTime = timeConversion(String.valueOf(appointTime)) - timeConversion(String.valueOf(clockTime));
+                remainTime = comTime;
+                System.out.println(comTime);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("Not yet");
+            }
+        });
     }
 
     private Long timeConversion(String time) {
@@ -237,34 +278,66 @@ public class QueueFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        SharedPreferences prefs = this.requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putLong("milliLeft", timeLeft);
-        editor.putLong("endTime", System.currentTimeMillis());
-        editor.apply();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(isAdded()) {
+                    SharedPreferences prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putLong("milliLeft", timeLeft);
+                    editor.putLong("endTime", System.currentTimeMillis());
+                    editor.apply();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("Not yet");
+            }
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        SharedPreferences prefs = this.requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        timeLeft = prefs.getLong("milliLeft", comTime);
-        endTime = prefs.getLong("endTime", 0);
-        if(endTime == 0L){
-            remainTime = timeLeft;
-        }else{
-            Long timeDiff = endTime - System.currentTimeMillis();
-            timeDiff = Math.abs(timeDiff);
-            Long timeDiffInSeconds = timeDiff / 1000 % 60;
-            Long timeDiffInMilli = timeDiffInSeconds * 1000;
-            remainTime = timeLeft - timeDiffInMilli;
-            Long timeDiffInMilliPlusTimerRemaining = remainTime;
-            if (timeDiffInMilliPlusTimerRemaining < 0) {
-                timeDiffInMilliPlusTimerRemaining = Math.abs(timeDiffInMilliPlusTimerRemaining);
-                remainTime = comTime - timeDiffInMilliPlusTimerRemaining;
+
+        //LocalDate
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("MM_dd_yyyy");
+        String textDate = localDate.format(formatterDate);
+        LocalDate parsedDate = LocalDate.parse(textDate, formatterDate);
+        String parseDateString = parsedDate.toString();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (isAdded()) {
+                    SharedPreferences prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                    timeLeft = prefs.getLong("milliLeft", comTime);
+                    Log.e("E", "Error" + comTime);
+                    endTime = prefs.getLong("endTime", 0);
+                    if (endTime == 0L) {
+                        remainTime = timeLeft;
+                    } else {
+                        Long timeDiff = endTime - System.currentTimeMillis();
+                        timeDiff = Math.abs(timeDiff);
+                        Long timeDiffInSeconds = timeDiff / 1000 % 60;
+                        Long timeDiffInMilli = timeDiffInSeconds * 1000;
+                        remainTime = timeLeft - timeDiffInMilli;
+                        Long timeDiffInMilliPlusTimerRemaining = remainTime;
+                        if (timeDiffInMilliPlusTimerRemaining < 0) {
+                            timeDiffInMilliPlusTimerRemaining = Math.abs(timeDiffInMilliPlusTimerRemaining);
+                            remainTime = comTime - timeDiffInMilliPlusTimerRemaining;
+                        }
+                    }
+                    updateCountdown();
+                    startTimer();
+                }
             }
-        }
-        updateCountdown();
-        startTimer();
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }

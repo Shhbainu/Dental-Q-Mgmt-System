@@ -41,15 +41,15 @@ public class Common {
             case 4:
                 return "12:00";
             case 5:
-                return "1:00";
+                return "13:00";
             case 6:
-                return "2:00";
+                return "14:00";
             case 7:
-                return "3:00";
+                return "15:00";
             case 8:
-                return "4:00";
+                return "16:00";
             case 9:
-                return "5:00";
+                return "17:00";
             default:
                 return "Closed";
         }
