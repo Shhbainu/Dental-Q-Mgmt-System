@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,8 +46,9 @@ public class EditProfileActivity extends AppCompatActivity {
     //view binding
     private ActivityEditProfileBinding binding;
 
-    //firebase auth, get/update user data using uid
-    private FirebaseAuth firebaseAuth;
+    //firebase currentUser
+    DatabaseReference databaseReference;
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     //progress dialog
     private ProgressDialog progressDialog;
@@ -72,16 +74,16 @@ public class EditProfileActivity extends AppCompatActivity {
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false); //don't dismiss while clicking outside
 
-
         //setup firebase auth
-        firebaseAuth = FirebaseAuth.getInstance();
         loadUserInfo();
 
         //handle back button, click
-        ImageView back = findViewById(R.id.backBtn);
-
-        //Event onClick for back button
-        back.setOnClickListener(v -> finish());
+        binding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         //handle click, pick image
         binding.profileTV.setOnClickListener(new View.OnClickListener() {
@@ -102,21 +104,17 @@ public class EditProfileActivity extends AppCompatActivity {
     private void loadUserInfo() {
         //Log.d(TAG, "loadUserInfo: Loading user info of user"+firebaseAuth.getUid());
 
-        DatabaseReference ref = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users");
-        ref.child(firebaseAuth.getUid())
-                .addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.child(currentUser.getUid())
+        .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //Get all info of user here from snapshot
                         String email = ""+snapshot.child("email").getValue();
                         String fName = ""+snapshot.child("fName").getValue();
                         String lName = ""+snapshot.child("lName").getValue();
-                        String timestamp = ""+snapshot.child("timestamp").getValue();
-                        String uid = ""+snapshot.child("uid").getValue();
-                        String userType = ""+snapshot.child("userType").getValue();
                         String address = ""+snapshot.child("address").getValue();
                         String phone = ""+snapshot.child("phone").getValue();
-                        String age = ""+snapshot.child("age").getValue();
                         String profileImage = ""+snapshot.child("profileImage").getValue();
                         String fullName = fName+" "+lName;
 
@@ -187,8 +185,8 @@ public class EditProfileActivity extends AppCompatActivity {
         progressDialog.setMessage("Updating profile image");
         progressDialog.show();
 
-        //image path and name, use uid to replace prev0ious
-        String filePathAndName = "ProfileImages/"+firebaseAuth.getUid();
+        //image path and name, use uid to replace previous
+        String filePathAndName = "ProfileImages/"+currentUser.getUid();
 
         //storage reference
         StorageReference reference = FirebaseStorage.getInstance().getReference(filePathAndName);
@@ -234,7 +232,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         //update data to db
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        databaseReference.child(firebaseAuth.getUid())
+        databaseReference.child(currentUser.getUid())
                 .updateChildren(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
