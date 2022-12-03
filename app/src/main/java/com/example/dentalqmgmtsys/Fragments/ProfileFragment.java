@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment {
 
     //Viewbinding
-    private FragmentProfileBinding binding;
+    FragmentProfileBinding binding;
 
     //firebase auth
     FirebaseAuth firebaseAuth;

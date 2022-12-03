@@ -80,7 +80,6 @@ public class AppointmentFragment extends Fragment {
 //                    String service = dataSnapshot.child("service").getValue().toString();
                     //Log.i("Firebase", "Reading from.."+ dataSnapshot.getKey()+", value="+dataSnapshot.getValue()+"UserAppointmentModel "+dataSnapshot.getValue(UserAppointmentModel.class));
 
-
                     //Log.i("Firebase", "Test Read"+doctor+" "+date+" "+time+" "+service+"");
                     UserAppointmentModel user = dataSnapshot.getValue(UserAppointmentModel.class);
 
