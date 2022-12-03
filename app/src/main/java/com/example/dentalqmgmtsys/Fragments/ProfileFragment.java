@@ -49,6 +49,7 @@ public class ProfileFragment extends Fragment {
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //Initial
         loadUserInfo();
 
         //checkUser();

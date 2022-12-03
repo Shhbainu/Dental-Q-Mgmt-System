@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
     app:cardCornerRadius="15dp"
     app:cardUseCompatPadding="true">
 
@@ -54,12 +55,12 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/procedureTV"
+            android:id="@+id/serviceTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/timeTV"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@+id/dentalProcedureTV"
-            android:layout_below="@id/timeTV"
             android:text="@string/procedure"
             android:textColor="@color/black"
             android:textSize="18sp" />
