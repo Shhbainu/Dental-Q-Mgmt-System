@@ -10,60 +10,97 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        >
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/doctorNameTV"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/dateTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/doctorNameTV"
-            android:textColor="@color/black"
-            android:text="@string/date"
-            android:textSize="20sp"
-            android:layout_marginTop="5dp"
-            app:drawableStartCompat="@drawable/ic_calendar" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/timeTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/dateTV"
-            android:textColor="@color/black"
-            android:text="@string/time"
-            android:textSize="20sp"
-            android:layout_marginTop="5dp"
-            app:drawableStartCompat="@drawable/ic_baseline_access_time_24" />
+                <TextView
+                    android:id="@+id/doctorInitialTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/drInit"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/dentalProcedureTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/timeTV"
-            android:text="@string/dental_procedure"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/doctorNameTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/title"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/serviceTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/timeTV"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/dentalProcedureTV"
-            android:text="@string/procedure"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/dateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/doctorNameTV"
+                android:textColor="@color/black"
+                android:text="@string/date"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                app:drawableStartCompat="@drawable/ic_calendar" />
+
+            <TextView
+                android:id="@+id/timeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateTV"
+                android:textColor="@color/black"
+                android:text="@string/time"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                app:drawableStartCompat="@drawable/ic_baseline_access_time_24" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dentalProcedureTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timeTV"
+                    android:text="@string/dental_procedure"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/serviceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timeTV"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/dentalProcedureTV"
+                    android:text="@string/procedure"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/cancelAppointmentBtn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="Cancel \nAppointment"-->
+<!--                android:textStyle="bold"/>-->
+
+        </LinearLayout>
 
     </RelativeLayout>
 

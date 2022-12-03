@@ -37,4 +37,5 @@
         Your quiz results can be viewed after taking the quiz.
     </string>
     <string name="back">back</string>
+    <string name="drInit">Dr.</string>
 </resources>

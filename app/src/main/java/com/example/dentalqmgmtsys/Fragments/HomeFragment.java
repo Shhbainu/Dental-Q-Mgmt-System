@@ -31,11 +31,6 @@ public class HomeFragment extends Fragment {
 
     DatabaseReference ref, reference;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -52,8 +47,8 @@ public class HomeFragment extends Fragment {
 
         //Init
         firebaseAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
 
         reference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users" + "/" + firebaseUser.getUid() + "/");
 
