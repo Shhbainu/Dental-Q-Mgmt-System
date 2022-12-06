@@ -1,8 +1,5 @@
 package com.example.dentalqmgmtsys;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -11,10 +8,12 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,8 +32,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private int questionNum;
     private CountDownTimer countDown;
     public int score;
-    private ArrayList<String> wrongAnswerList = new ArrayList<>();
-    private FirebaseFirestore firestore;
+    FirebaseFirestore db;
 
 
     @Override
@@ -56,7 +54,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         option3.setOnClickListener(this);
         option4.setOnClickListener(this);
 
-        firestore = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         getQuestionList();
         score = 0;
@@ -67,8 +65,9 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     {
         questionList = new ArrayList<>();
 
-        firestore.collection("QuizGame")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("QuizGame")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
@@ -115,7 +114,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void startTimer(){
-        countDown = new CountDownTimer(12000,1000) {
+        countDown = new CountDownTimer(11000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 if(millisUntilFinished < 10000)
@@ -169,7 +168,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         }
         else{
             //wrong
-            wrongAnswerList.add(QuestionAnswer.question[questionNum]+"\n"+"ANSWER: "+QuestionAnswer.correctAnswers[questionNum]);
 
             ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.RED));
 
@@ -195,7 +193,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             public void run() {
                 changeQuestion();
             }
-        },2000);
+        },1000);
     }
 
     private void changeQuestion(){
@@ -219,15 +217,13 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             //finish quiz
             Intent intent = new Intent(QuestionActivity.this, ScoreActivity.class);
             intent.putExtra("SCORE", String.valueOf(score)+ "/" + String.valueOf(questionList.size()));
-            intent.putExtra("stringArray", wrongAnswerList);
             startActivity(intent);
             QuestionActivity.this.finish();
         }
     }
 
     private void playAnim(View view, final int value, int viewNum){
-        view.animate().alpha(value).scaleX(value).scaleY(value).setDuration(500)
-                .setStartDelay(100).setInterpolator(new DecelerateInterpolator())
+        view.animate().alpha(value).scaleX(value).scaleY(value).setDuration(300)
                 .setListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animator) {

@@ -19,7 +19,6 @@
             android:id="@+id/quest_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1/10"
             android:textStyle="bold"
             android:textSize="25sp"
             android:paddingRight="8dp"
@@ -39,8 +38,7 @@
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/MediumTextStyle"
-            tools:text="Ilan ang bagang ng mo?" />
+            style="@style/MediumTextStyle" />
 
         <LinearLayout
             android:id="@+id/linearlayout"
@@ -53,7 +51,6 @@
                 android:layout_height="wrap_content"
                 style="@style/AnswerTextStyle"
                 android:id="@+id/option1"
-                tools:text="Option1"
                 android:backgroundTint="#FF018786"
                 android:text="Ans A"
                 />
@@ -63,7 +60,6 @@
                 android:layout_height="wrap_content"
                 style="@style/AnswerTextStyle"
                 android:id="@+id/option2"
-                tools:text="Option2"
                 android:backgroundTint="#FF018786"
                 android:text="ans_B"
                 />
@@ -73,7 +69,6 @@
                 android:layout_height="wrap_content"
                 style="@style/AnswerTextStyle"
                 android:id="@+id/option3"
-                tools:text="Option3"
                 android:backgroundTint="#FF018786"
                 android:text="ans_C"
                 />
@@ -85,7 +80,6 @@
                 android:id="@+id/option4"
                 tools:text="Option4"
                 android:backgroundTint="#FF018786"
-                android:text="ans_D"
                 />
 
         </LinearLayout>

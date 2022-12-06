@@ -1,11 +1,11 @@
 package com.example.dqms_admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dqms_admin.databinding.ActivityMain2Binding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +57,13 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity2.this, ServicesActivity.class));
+            }
+        });
+
+        binding.quizTile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity2.this, ShowQuestionActivity.class));
             }
         });
 

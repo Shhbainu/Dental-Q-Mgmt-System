@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DentalQMgmtSys">
         <activity
+            android:name=".ShowQuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateQuizActivity"
+            android:exported="false" />
+        <activity
             android:name=".ServicesActivity"
             android:exported="false" />
         <activity
