@@ -37,9 +37,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -56,7 +59,7 @@ public class QueueFragment extends Fragment {
     String description = "Test Notification";
     //Viewbinding
     private FragmentQueueBinding binding;
-    //Variables
+    //Variables                                         //If there's an error when switching fragments(in app) and the timer resets just close the app
      Long comTime;
      Long remainTime;
      Long timeLeft;
@@ -89,11 +92,10 @@ public class QueueFragment extends Fragment {
     }
 
     private void getTime(){
-        //LocalTime to be read as 24hr format
-        LocalTime time = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        String text = time.format(formatter);
-        LocalTime parsedTime = LocalTime.parse(text);
+        //LocalTime to be read as 24hr format  //("HH:mm");
+        Date clock = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        String parsedTime = formatter.format(clock);
         //Database Calling
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -106,7 +108,9 @@ public class QueueFragment extends Fragment {
                 //appointment
                 int appointTime = stringToInt(timeSlot); //Time on Database
                 //Clock
-                int clockTime = stringToInt("11:30"); //parsedTime
+                int clockTime = stringToInt(parsedTime); //parsedTime
+                Log.i("QueueFragment", "ClockTime: " + parsedTime);
+                Log.i("QueueFragment", "AppointmentTime: " + timeSlot);
                 //Computation of Time
                 comTime = timeConversion(String.valueOf(appointTime)) - timeConversion(String.valueOf(clockTime));
                 remainTime = comTime;

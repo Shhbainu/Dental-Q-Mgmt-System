@@ -84,9 +84,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.queue:
                     if(!Objects.equals(key, parsedDate)){
-                        System.out.println(key);
-                        System.out.println(parsedDate);
                         replaceFragment(new QueueFragmentEmpty());
+                        Toast.makeText(this, "Today is not yet your appointment date", Toast.LENGTH_SHORT).show();
                     }else {
                         replaceFragment(new QueueFragment());
                     }
