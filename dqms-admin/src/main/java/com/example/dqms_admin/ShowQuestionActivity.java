@@ -3,6 +3,7 @@ package com.example.dqms_admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class ShowQuestionActivity extends AppCompatActivity {
     private List<Quiz> list;
 
     FloatingActionButton addQuestionBtn;
+    Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class ShowQuestionActivity extends AppCompatActivity {
         adapter = new MyQuizAdapter(this, list);
         recyclerView.setAdapter(adapter);
         addQuestionBtn= findViewById(R.id.addQuestion);
+        backBtn = findViewById(R.id.backBtn);
 
         showData();
 
@@ -58,6 +61,14 @@ public class ShowQuestionActivity extends AppCompatActivity {
             }
         });
 
+        //handle back button, click
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ShowQuestionActivity.this, MainActivity2.class));
+                finish();
+            }
+        });
     }
 
     public void showData(){
