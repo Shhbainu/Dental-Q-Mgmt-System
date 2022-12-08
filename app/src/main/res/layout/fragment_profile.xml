@@ -149,14 +149,41 @@
                     android:background="@drawable/profilecard_background">
 
                     <!--Display Name-->
-                    <TextView
-                        android:id="@+id/fullnameTV"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sample Full Name"
-                        android:textSize="18sp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textColor="@color/black"/>
+                        android:gravity="center"
+                        android:layout_margin="2dp">
+                        <TextView
+                            android:id="@+id/first_nameTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="First Name"
+                            android:textSize="18sp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="_"
+                            android:visibility="invisible"
+                            android:textSize="18sp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@color/black"/>
+
+
+                        <TextView
+                            android:id="@+id/last_nameTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Last Name"
+                            android:textSize="18sp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
 
                     <!--Display Email-->
 
@@ -181,6 +208,18 @@
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="18sp"
                         android:textColor="@color/black"/>
+
+                    <!--Display phone-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/contactTV"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="3dp"-->
+<!--                        android:text="sample number"-->
+<!--                        android:fontFamily="sans-serif-condensed"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:textColor="@color/black"/>-->
 
                     <!--Display Address-->
                     <TextView
