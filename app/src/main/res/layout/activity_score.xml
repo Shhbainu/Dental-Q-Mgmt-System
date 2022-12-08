@@ -64,7 +64,7 @@
                 android:layout_marginStart="65dp"
                 android:layout_marginEnd="30dp"
                 android:padding="10dp"
-                android:text="Back to Queue"
+                android:text="back to queue"
                 android:background="@drawable/textfield_background"
                 android:layout_gravity="center_horizontal|bottom"/>
         </LinearLayout>

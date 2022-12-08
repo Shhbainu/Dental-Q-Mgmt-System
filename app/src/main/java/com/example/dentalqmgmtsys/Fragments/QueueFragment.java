@@ -10,24 +10,19 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-
-import androidx.fragment.app.FragmentTransaction;
-
 import android.os.CountDownTimer;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.dentalqmgmtsys.Common.Common;
-import com.example.dentalqmgmtsys.MainActivity;
+import com.example.dentalqmgmtsys.QuizTitleActivity;
 import com.example.dentalqmgmtsys.R;
 import com.example.dentalqmgmtsys.databinding.FragmentQueueBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,13 +33,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 public class QueueFragment extends Fragment {
     //Database
@@ -74,11 +65,8 @@ public class QueueFragment extends Fragment {
         binding.quizGameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment newFragment = new QuizTitleFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = new Intent(getActivity(), QuizTitleActivity.class);
+                startActivity(intent);
             }
         });
         return binding.getRoot();

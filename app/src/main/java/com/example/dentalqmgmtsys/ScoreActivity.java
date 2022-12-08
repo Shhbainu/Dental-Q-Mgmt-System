@@ -1,18 +1,12 @@
 package com.example.dentalqmgmtsys;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.dentalqmgmtsys.Fragments.QuizTitleFragment;
-
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ScoreActivity extends AppCompatActivity {
 
@@ -35,7 +29,6 @@ public class ScoreActivity extends AppCompatActivity {
         backQueue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ScoreActivity.this, BackToQueueActivity.class));
                 finish();
             }
         });

@@ -25,7 +25,7 @@
     <string name="cd_next">Next</string>
     <string name="rule">Quiz Rules</string>
     <string name="rules1_description">
-        The dental quiz game will contain 10 questions.
+        The dental quiz game will contain 10 or more questions.
     </string>
     <string name="rules2_description">
         Every correct answer scores you 1 point.
