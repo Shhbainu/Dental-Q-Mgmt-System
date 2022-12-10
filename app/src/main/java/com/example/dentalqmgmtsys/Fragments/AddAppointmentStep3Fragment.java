@@ -178,9 +178,7 @@ public class AddAppointmentStep3Fragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         String uid = firebaseAuth.getUid();
         AppointmentInformation appointmentInformation = new AppointmentInformation();
-
-        String uniqueUID = FirebaseDatabase.getInstance().getReference().push().getKey();
-
+        Common.appointmentID = FirebaseDatabase.getInstance().getReference().push().getKey();
         appointmentInformation.setDoctor(Common.currentDoctor);
         appointmentInformation.setService(Common.currentService.getName());
         appointmentInformation.setTime(Common.convertTimeSlotToString(Common.currentTimeSlot));
@@ -191,7 +189,7 @@ public class AddAppointmentStep3Fragment extends Fragment {
 
         databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Users");
-        databaseReference.child(uid).child("appointments").child(uniqueUID)
+        databaseReference.child(uid).child("appointments").child(Common.appointmentID)
                 .setValue(appointmentInformation)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
