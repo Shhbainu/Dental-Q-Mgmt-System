@@ -27,13 +27,18 @@ public class Common {
     public static Calendar appointmentDate = Calendar.getInstance();
     public static SimpleDateFormat simpleFormatDate = new SimpleDateFormat("MM_dd_yyyy");
     public static Date timeNow = Calendar.getInstance().getTime();
+    public static String dateNotDone;
+    public static String timeNotDone;
+    public static String doctorNotDone;
+    public static String slotNotDone;
+    public static String appointmentID;
 
     public static String convertTimeSlotToString(int slot) {
         switch (slot) {
             case 0:
-                return "8:00";
+                return "08:00";
             case 1:
-                return "9:00";
+                return "09:00";
             case 2:
                 return "10:00";
             case 3:

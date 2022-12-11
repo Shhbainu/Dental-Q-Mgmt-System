@@ -6,19 +6,17 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.dentalqmgmtsys.Common.Common;
@@ -41,7 +39,7 @@ public class QueueFragment extends Fragment {
     //Database
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     String uid = firebaseAuth.getUid();
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child(uid).child("appointments").child(Common.simpleFormatDate.format(Common.appointmentDate.getTime()));
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users" + "/" + uid + "/" + "appointments" + "/" + Common.appointmentID);
     //Notifications
     NotificationManager notificationManager;
     NotificationChannel notificationChannel;
@@ -50,138 +48,129 @@ public class QueueFragment extends Fragment {
     String description = "Test Notification";
     //Viewbinding
     private FragmentQueueBinding binding;
-    //Variables                                         //If there's an error when switching fragments(in app) and the timer resets just close the app
-     Long comTime;
-     Long remainTime;
-     Long timeLeft;
-     Long endTime;
-     String timeSlot;
+    //Variables
+    String userTime, TAG = "MainActivity";
+    long newTimeStamp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentQueueBinding.inflate(inflater, container, false);
-        binding.quizGameBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), QuizTitleActivity.class);
-                startActivity(intent);
-            }
-        });
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getTime();
-
-    }
-
-    private void getTime(){
-        //LocalTime to be read as 24hr format  //("HH:mm");
+        System.out.println(Common.appointmentID);
         Date clock = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         String parsedTime = formatter.format(clock);
-        //Database Calling
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    timeSlot = dataSnapshot.child("time").getValue().toString();
-                    System.out.println(timeSlot);
+                userTime = snapshot.child("time").getValue().toString();
+//                newTimeStamp = Long.parseLong(snapshot.child("newTimeStamp").getValue().toString());
+                long appointTime = timeConversion(userTime);
+                Log.i(TAG, "AppointTime: "  + appointTime);
+                long clockTime = timeConversion(parsedTime);
+                Log.i(TAG, "ClockTime: "  + clockTime);
+
+                if(clockTime >= appointTime){
+                    if(newTimeStamp != 0){
+                        long ans = ((appointTime + 86400000) + newTimeStamp) - clockTime;
+                        ans = Math.abs(ans);
+                        databaseReference.child("timeStamp").setValue(ans);
+                        if ((ans <= 1801000) && (ans >= 1800000)) Log.i(TAG, "30minsleft: Activate");
+                        updateCountdown(ans);
+                        Log.i(TAG, "newTimeStamp " + ans);
+                    }else {
+                        long ans = (appointTime + 86400000) - clockTime;
+                        databaseReference.child("timeStamp").setValue(ans);
+                        if ((ans <= 1801000) && (ans >= 1800000)){
+                        }
+                        updateCountdown(ans);
+                        Log.i(TAG, "plus24: " + ans);
+                    }
+                }else{
+                    if(newTimeStamp != 0){
+                        long ans = (appointTime + newTimeStamp) - clockTime;
+                        ans = Math.abs(ans);
+                        databaseReference.child("timeStamp").setValue(ans);
+                        updateCountdown(ans);
+                        Log.i(TAG, "newTimeStamp " + ans);
+                    }else {
+                        long ans = appointTime - clockTime;
+                        databaseReference.child("timeStamp").setValue(ans);
+                        updateCountdown(ans);
+                        Log.i(TAG, "same: " + ans);
+                    }
                 }
-                //Initialization of Time and Computation
-                //appointment
-                int appointTime = stringToInt(timeSlot); //Time on Database
-                //Clock
-                int clockTime = stringToInt(parsedTime); //parsedTime
-                Log.i("QueueFragment", "ClockTime: " + parsedTime);
-                Log.i("QueueFragment", "AppointmentTime: " + timeSlot);
-                //Computation of Time
-                comTime = timeConversion(String.valueOf(appointTime)) - timeConversion(String.valueOf(clockTime));
-                remainTime = comTime;
-                System.out.println(comTime);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("Not yet");
+
             }
         });
+
+        // Inflate the layout for this fragment
+        binding = FragmentQueueBinding.inflate(inflater, container, false);
+        binding.quizGameBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), QuizTitleActivity.class);
+            startActivity(intent);
+        });
+        return binding.getRoot();
     }
 
-    private Long timeConversion(String time) {
+    private long timeConversion(String time) {
         int answer = 0;
-        if (time.length() == 4){
+        String replacedTime = time.replace(":", "");
+        if (replacedTime.length() == 6){
+            int hours, minutes, seconds, hrsMilli, minMilli, secMilli;
+            hours = Integer.parseInt(replacedTime.substring(0,2));
+            minutes = Integer.parseInt(replacedTime.substring(2,4));
+            seconds = Integer.parseInt(replacedTime.substring(4));
+
+            hrsMilli = (((hours * 60) * 60) * 1000);
+            minMilli = ((minutes * 60) * 1000);
+            secMilli = (seconds * 1000);
+
+            answer = hrsMilli + minMilli + secMilli;
+        } else if (replacedTime.length() == 5){
+            int hours, minutes, seconds, hrsMilli, minMilli, secMilli;
+            hours = Integer.parseInt(replacedTime.substring(0,2));
+            minutes = Integer.parseInt(replacedTime.substring(2,4));
+            seconds = Integer.parseInt(replacedTime.substring(4));
+
+            hrsMilli = (((hours * 60) * 60) * 1000);
+            minMilli = ((minutes * 60) * 1000);
+            secMilli = (seconds * 1000);
+
+            answer = hrsMilli + minMilli + secMilli;
+        } else if (replacedTime.length() == 4){
             int hours, minutes, hrsMilli, minMilli;
-            hours = Integer.parseInt(time.substring(0,2));
-            minutes = Integer.parseInt(time.substring(2));
+            hours = Integer.parseInt(replacedTime.substring(0,2));
+            minutes = Integer.parseInt(replacedTime.substring(2));
 
             hrsMilli = (((hours * 60) * 60) * 1000);
             minMilli = ((minutes * 60) * 1000);
 
             answer = hrsMilli + minMilli;
-        }else if(time.length() == 3){
+        }else if(replacedTime.length() == 3){
             int hours, minutes, hrsMilli, minMilli;
-            hours = Integer.parseInt(time.substring(0,1));
-            minutes = Integer.parseInt(time.substring(1));
+            hours = Integer.parseInt(replacedTime.substring(0,1));
+            minutes = Integer.parseInt(replacedTime.substring(1));
 
             hrsMilli = (((hours * 60) * 60) * 1000);
             minMilli = ((minutes * 60) * 1000);
 
             answer = hrsMilli + minMilli;
-        }else if(time.length() <= 2){
-            int timeInt = Integer.parseInt(time);
+        }else if(replacedTime.length() <= 2){
+            int timeInt = Integer.parseInt(replacedTime);
             answer = (timeInt * 60) * 1000;
         }
 
-        return (long) answer;
+        return answer;
     }
 
-    private int stringToInt(String time){
-        String conTime = time.replace(":", "");
-        return Integer.parseInt(conTime);
-    }
-
-    private void startTimer(){                           //Concept: Activating the timer within 24hrs
-        CountDownTimer countDownTimer = new CountDownTimer(remainTime, 1000) {
-
-            @Override
-            public void onTick(long untilFinish) {
-                remainTime = untilFinish;
-                timeLeft = untilFinish;
-                updateCountdown();
-
-                //30mins
-                if ((untilFinish <= 1801000) && (untilFinish >= 1800000)) createNotification30();
-                //5mins
-                if ((untilFinish <= 301000) && (untilFinish >= 300000)) createNotification5();
-            }
-
-            @Override
-            public void onFinish() {
-                binding.queueTimeTV.setText("00:00:00");
-                createNotificationDone();
-                binding.imInBtn.setVisibility(View.VISIBLE);
-                showButton();
-                binding.imInBtn.setVisibility(View.VISIBLE);
-                showButton();
-                Toast.makeText(getActivity(), "Finished", Toast.LENGTH_SHORT).show();
-            }
-        }.start();
-    }
-
-    private void showButton() {
-
-    }
-
-    private void updateCountdown() {
-        Long seconds = (remainTime / 1000) % 60;
-        Long minutes = ((remainTime / (1000 * 60)) % 60);
-        Long hours = ((remainTime / (1000 * 60 * 60)) % 24);
-        String timeLeftFormatted = String.format(Locale.getDefault(),"%02d:%02d:%02d", hours, minutes, seconds);
+    private void updateCountdown(long timer){
+        Long minutes = ((timer / (1000 * 60)) % 60);
+        Long hours = ((timer / (1000 * 60 * 60)) % 24);
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d Hours:%02d mins remaining", hours, minutes);
         binding.queueTimeTV.setText(timeLeftFormatted);
     }
 
@@ -253,8 +242,6 @@ public class QueueFragment extends Fragment {
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent);
 
-            //Not working
-//           getParentFragmentManager().beginTransaction().replace(R.id.frame_layout, new QueueFragment()).commit();
         }else{
             builder = new Notification.Builder(getActivity())
                     .setContentTitle("Attention")
@@ -265,66 +252,5 @@ public class QueueFragment extends Fragment {
                     .setContentIntent(pendingIntent);
         }
         notificationManager.notify(1234, builder.build());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(isAdded()) {
-                    SharedPreferences prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putLong("milliLeft", timeLeft);
-                    editor.putLong("endTime", System.currentTimeMillis());
-                    editor.apply();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("Not yet");
-            }
-        });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (isAdded()) {
-                    SharedPreferences prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                    timeLeft = prefs.getLong("milliLeft", comTime);
-                    Log.e("E", "Error" + comTime);
-                    endTime = prefs.getLong("endTime", 0);
-                    if (endTime == 0L) {
-                        remainTime = timeLeft;
-                    } else {
-                        Long timeDiff = endTime - System.currentTimeMillis();
-                        timeDiff = Math.abs(timeDiff);
-                        Long timeDiffInSeconds = timeDiff / 1000 % 60;
-                        Long timeDiffInMilli = timeDiffInSeconds * 1000;
-                        remainTime = timeLeft - timeDiffInMilli;
-                        Long timeDiffInMilliPlusTimerRemaining = remainTime;
-                        if (timeDiffInMilliPlusTimerRemaining < 0) {
-                            timeDiffInMilliPlusTimerRemaining = Math.abs(timeDiffInMilliPlusTimerRemaining);
-                            remainTime = comTime - timeDiffInMilliPlusTimerRemaining;
-                        }
-                    }
-                    updateCountdown();
-                    startTimer();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
     }
 }

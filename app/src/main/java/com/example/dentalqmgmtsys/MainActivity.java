@@ -83,12 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new AppointmentFragment());
                     break;
                 case R.id.queue:
-                    if(!Objects.equals(key, parsedDate)){
-                        replaceFragment(new QueueFragmentEmpty());
-                        Toast.makeText(this, "Today is not yet your appointment date", Toast.LENGTH_SHORT).show();
-                    }else {
-                        replaceFragment(new QueueFragment());
-                    }
+                    replaceFragment(new QueueFragment());
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());
@@ -100,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         checkUser();
         loadUserInfo();
     }
+
 
     private void loadUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users");
