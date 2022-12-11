@@ -45,34 +45,34 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println(Common.appointmentID);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         //init firebase
         firebaseAuth = FirebaseAuth.getInstance();
 
         //Initial function call
         replaceFragment(new HomeFragment());
-        //Database
-        String uid = firebaseAuth.getUid();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child(uid).child("appointments").child(Common.simpleFormatDate.format(Common.appointmentDate.getTime()));
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    key = dataSnapshot.child("date").getValue().toString();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        //LocalDate
-        Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-        String parsedDate = formatter.format(today);
+//        //Database
+//        String uid = firebaseAuth.getUid();
+//        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child(uid).child("appointments").child(Common.simpleFormatDate.format(Common.appointmentDate.getTime()));
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                    key = dataSnapshot.child("date").getValue().toString();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        //LocalDate
+//        Date today = Calendar.getInstance().getTime();
+//        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+//        String parsedDate = formatter.format(today);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.queue:
                     replaceFragment(new QueueFragment());
+
+                        replaceFragment(new QueueFragment());
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());

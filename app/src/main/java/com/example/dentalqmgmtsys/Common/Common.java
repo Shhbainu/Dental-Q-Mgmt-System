@@ -31,6 +31,7 @@ public class Common {
     public static String timeNotDone;
     public static String doctorNotDone;
     public static String slotNotDone;
+
     public static String appointmentID;
 
     public static String convertTimeSlotToString(int slot) {
