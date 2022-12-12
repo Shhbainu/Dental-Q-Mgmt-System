@@ -49,8 +49,8 @@ public class QueueFragment extends Fragment {
     //Viewbinding
     private FragmentQueueBinding binding;
     //Variables
-    String userTime, TAG = "MainActivity";
-    long newTimeStamp;
+    String userTime, TAG = "QueueFragment";
+    long newTimeStamp, appointTime, clockTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,10 +64,11 @@ public class QueueFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userTime = snapshot.child("time").getValue().toString();
 //                newTimeStamp = Long.parseLong(snapshot.child("newTimeStamp").getValue().toString());
-                long appointTime = timeConversion(userTime);
+                appointTime = timeConversion(userTime);
                 Log.i(TAG, "AppointTime: "  + appointTime);
-                long clockTime = timeConversion(parsedTime);
+                clockTime = timeConversion(parsedTime);
                 Log.i(TAG, "ClockTime: "  + clockTime);
+
 
                 if(clockTime >= appointTime){
                     if(newTimeStamp != 0){
@@ -80,8 +81,6 @@ public class QueueFragment extends Fragment {
                     }else {
                         long ans = (appointTime + 86400000) - clockTime;
                         databaseReference.child("timeStamp").setValue(ans);
-                        if ((ans <= 1801000) && (ans >= 1800000)){
-                        }
                         updateCountdown(ans);
                         Log.i(TAG, "plus24: " + ans);
                     }
@@ -103,10 +102,8 @@ public class QueueFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
         // Inflate the layout for this fragment
         binding = FragmentQueueBinding.inflate(inflater, container, false);
         binding.quizGameBtn.setOnClickListener(view -> {
