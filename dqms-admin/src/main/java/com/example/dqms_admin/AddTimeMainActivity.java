@@ -26,7 +26,7 @@ public class AddTimeMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_time_activity_main);
+        setContentView(R.layout.activity_add_time_main);
         textView = findViewById(R.id.textView);
 
         databaseReference = FirebaseDatabase.getInstance("https://queuesystem-7e0c3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("dateTimer");

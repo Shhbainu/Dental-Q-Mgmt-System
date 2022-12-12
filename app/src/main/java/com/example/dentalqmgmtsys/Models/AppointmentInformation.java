@@ -4,14 +4,14 @@ import com.google.firebase.Timestamp;
 
 public class AppointmentInformation {
     private String patientName, patientPhone, time, doctor, service, date;
-    private Long slot;
+    private Long slot, timeStamp, newTimeStamp;
 
     public AppointmentInformation()
     {
 
     }
 
-    public AppointmentInformation(String patientName, String patientPhone, String time, String doctor, String service, String date, Long slot) {
+    public AppointmentInformation(Long timeStamp, Long newTimeStamp, String patientName, String patientPhone, String time, String doctor, String service, String date, Long slot) {
         this.patientName = patientName;
         this.patientPhone = patientPhone;
         this.time = time;
@@ -19,6 +19,24 @@ public class AppointmentInformation {
         this.service = service;
         this.slot = slot;
         this.date = date;
+        this.timeStamp = timeStamp;
+        this.newTimeStamp = newTimeStamp;
+    }
+
+    public Long getNewTimeStamp() {
+        return newTimeStamp;
+    }
+
+    public void setNewTimeStamp(Long newTimeStamp) {
+        this.newTimeStamp = newTimeStamp;
+    }
+
+    public Long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public String getPatientName() {
@@ -80,6 +98,7 @@ public class AppointmentInformation {
     public void setDone(boolean done) {
     }
 
-    public void seTimestamp(Timestamp timestamp) {
+    public void seTimestamp(long timestamp) {
     }
+
 }

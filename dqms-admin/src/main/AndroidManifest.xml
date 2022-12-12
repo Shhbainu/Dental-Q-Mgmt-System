@@ -13,6 +13,9 @@
             android:name=".ShowQuestionActivity"
             android:exported="false" />
         <activity
+            android:name=".AddTimeMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".UpdateQuizActivity"
             android:exported="false" />
         <activity

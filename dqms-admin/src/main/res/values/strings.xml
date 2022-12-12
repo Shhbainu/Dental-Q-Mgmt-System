@@ -23,4 +23,7 @@
     <string name="dental_procedure">Dental procedure:</string>
     <string name="cd_previous">Previous</string>
     <string name="cd_next">Next</string>
+    <string name="addTimeBtn">+30 Mins</string>
+    <string name="buttonAdd10">+10 Mins</string>
+    <string name="buttonAdd5">+5 Mins</string>
 </resources>

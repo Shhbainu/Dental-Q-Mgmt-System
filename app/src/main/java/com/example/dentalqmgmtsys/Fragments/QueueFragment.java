@@ -23,17 +23,27 @@ import com.example.dentalqmgmtsys.Common.Common;
 import com.example.dentalqmgmtsys.QuizTitleActivity;
 import com.example.dentalqmgmtsys.R;
 import com.example.dentalqmgmtsys.databinding.FragmentQueueBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class QueueFragment extends Fragment {
     //Database
@@ -46,11 +56,12 @@ public class QueueFragment extends Fragment {
     Notification.Builder builder;
     String channelID = "1234";
     String description = "Test Notification";
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     //Viewbinding
     private FragmentQueueBinding binding;
     //Variables
-    String userTime, TAG = "QueueFragment";
-    long newTimeStamp, appointTime, clockTime;
+    String userTime, TAG = "QueueFragment", doctor, patientName, date, underScoredDate, patientPhone, service;
+    long newTimeStamp, appointTime, clockTime, slot;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,23 +74,90 @@ public class QueueFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userTime = snapshot.child("time").getValue().toString();
-//                newTimeStamp = Long.parseLong(snapshot.child("newTimeStamp").getValue().toString());
+
+                ///AllDoctors/doctor/date/slot
+                date = snapshot.child("date").getValue().toString();
+                doctor = snapshot.child("doctor").getValue().toString();
+                patientName = snapshot.child("patientName").getValue().toString();
+                patientPhone = snapshot.child("patientPhone").getValue().toString();
+                service = snapshot.child("service").getValue().toString();
+                slot = Long.parseLong(snapshot.child("slot").getValue().toString());
+
+
+                underScoredDate = date.replace("/", "_");
+
+
+
+/*                newTimeStamp = Long.parseLong(snapshot.child("newTimeStamp").getValue().toString());*/
                 appointTime = timeConversion(userTime);
                 Log.i(TAG, "AppointTime: "  + appointTime);
                 clockTime = timeConversion(parsedTime);
                 Log.i(TAG, "ClockTime: "  + clockTime);
 
+                DocumentReference timeStampRef = firebaseFirestore.collection("AllDoctors")
+                        .document(doctor)
+                        .collection(underScoredDate)
+                        .document(String.valueOf(slot));
+
+                timeStampRef.get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    DocumentSnapshot documentSnapshot = task.getResult();
+                                    if(documentSnapshot.exists()){
+                                        newTimeStamp = Long.parseLong(documentSnapshot.get("newTimeStamp").toString());
+                                        Log.i(TAG, "onComplete: " + documentSnapshot.get("newTimeStamp"));
+                                    }
+                                }
+                            }
+                        });
+/**/
 
                 if(clockTime >= appointTime){
                     if(newTimeStamp != 0){
                         long ans = ((appointTime + 86400000) + newTimeStamp) - clockTime;
                         ans = Math.abs(ans);
+
+                        //Into Firestore
+                        Map<String, Object> answerTimeStamp = new HashMap<>();
+                        answerTimeStamp.put("date", date);
+                        answerTimeStamp.put("doctor", doctor);
+                        answerTimeStamp.put("patientName", patientName);
+                        answerTimeStamp.put("patientPhone", patientPhone);
+                        answerTimeStamp.put("service", service);
+                        answerTimeStamp.put("slot", slot);
+                        answerTimeStamp.put("time", userTime);
+                        answerTimeStamp.put("timeStamp", ans);
+                        answerTimeStamp.put("newTimeStamp", newTimeStamp);
+                        firebaseFirestore.collection("AllDoctors").document(doctor).collection(underScoredDate).document(String.valueOf(slot))
+                                .set(answerTimeStamp);
+
+                        //Into RTD
                         databaseReference.child("timeStamp").setValue(ans);
+                        databaseReference.child("newTimeStamp").setValue(newTimeStamp);
+
                         if ((ans <= 1801000) && (ans >= 1800000)) Log.i(TAG, "30minsleft: Activate");
                         updateCountdown(ans);
                         Log.i(TAG, "newTimeStamp " + ans);
+                        //another if for im in button
                     }else {
                         long ans = (appointTime + 86400000) - clockTime;
+
+                        //Into Firestore
+                        Map<String, Object> answerTimeStamp = new HashMap<>();
+                        answerTimeStamp.put("date", date);
+                        answerTimeStamp.put("doctor", doctor);
+                        answerTimeStamp.put("patientName", patientName);
+                        answerTimeStamp.put("patientPhone", patientPhone);
+                        answerTimeStamp.put("service", service);
+                        answerTimeStamp.put("slot", slot);
+                        answerTimeStamp.put("time", userTime);
+                        answerTimeStamp.put("timeStamp", ans);
+                        answerTimeStamp.put("newTimeStamp", 0L);
+                        firebaseFirestore.collection("AllDoctors").document(doctor).collection(underScoredDate).document(String.valueOf(slot))
+                                .set(answerTimeStamp);
+
                         databaseReference.child("timeStamp").setValue(ans);
                         updateCountdown(ans);
                         Log.i(TAG, "plus24: " + ans);
@@ -88,11 +166,42 @@ public class QueueFragment extends Fragment {
                     if(newTimeStamp != 0){
                         long ans = (appointTime + newTimeStamp) - clockTime;
                         ans = Math.abs(ans);
+
+                        //Into Firestore
+                        Map<String, Object> answerTimeStamp = new HashMap<>();
+                        answerTimeStamp.put("date", date);
+                        answerTimeStamp.put("doctor", doctor);
+                        answerTimeStamp.put("patientName", patientName);
+                        answerTimeStamp.put("patientPhone", patientPhone);
+                        answerTimeStamp.put("service", service);
+                        answerTimeStamp.put("slot", slot);
+                        answerTimeStamp.put("time", userTime);
+                        answerTimeStamp.put("timeStamp", ans);
+                        answerTimeStamp.put("newTimeStamp", newTimeStamp);
+                        firebaseFirestore.collection("AllDoctors").document(doctor).collection(underScoredDate).document(String.valueOf(slot))
+                                .set(answerTimeStamp);
+
                         databaseReference.child("timeStamp").setValue(ans);
+                        databaseReference.child("newTimeStamp").setValue(newTimeStamp);
                         updateCountdown(ans);
                         Log.i(TAG, "newTimeStamp " + ans);
                     }else {
                         long ans = appointTime - clockTime;
+
+                        //Into Firestore
+                        Map<String, Object> answerTimeStamp = new HashMap<>();
+                        answerTimeStamp.put("date", date);
+                        answerTimeStamp.put("doctor", doctor);
+                        answerTimeStamp.put("patientName", patientName);
+                        answerTimeStamp.put("patientPhone", patientPhone);
+                        answerTimeStamp.put("service", service);
+                        answerTimeStamp.put("slot", slot);
+                        answerTimeStamp.put("time", userTime);
+                        answerTimeStamp.put("timeStamp", ans);
+                        answerTimeStamp.put("newTimeStamp", 0L);
+                        firebaseFirestore.collection("AllDoctors").document(doctor).collection(underScoredDate).document(String.valueOf(slot))
+                                .set(answerTimeStamp);
+
                         databaseReference.child("timeStamp").setValue(ans);
                         updateCountdown(ans);
                         Log.i(TAG, "same: " + ans);

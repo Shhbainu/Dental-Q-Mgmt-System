@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -50,6 +52,9 @@ public class AddAppointmentStep3Fragment extends Fragment {
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     AlertDialog dialog;
+    long newTimeStamp;
+    long appointTime;
+    long clockTime;
 
     @BindView(R.id.confirmNameTV)
     TextView confirmNameTV;
@@ -68,10 +73,10 @@ public class AddAppointmentStep3Fragment extends Fragment {
 
         dialog.show();
 
-/*        //Process Timestamp
+        //Process Timestamp
         //Timestamp to filer all appointments if date is greater today
         //To only display all future appointments
-        String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
+/*        String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
         String [] startTimeConvert = startTime.split(":");
         int startHourInt = Integer.parseInt(startTimeConvert[0].trim()); // We will get 8
         int startMinInt = Integer.parseInt(startTimeConvert[1].trim()); // We will get 00
@@ -81,14 +86,50 @@ public class AddAppointmentStep3Fragment extends Fragment {
         appointmentDateWithHour.set(Calendar.HOUR_OF_DAY, startHourInt);
         appointmentDateWithHour.set(Calendar.MINUTE, startMinInt);
 
-        Timestamp timestamp = new Timestamp(appointmentDateWithHour.getTime());*/
 
+        Timestamp timestamp = new Timestamp(appointmentDateWithHour.getTime());*/
 
         //Creating appointment information
         AppointmentInformation appointmentInformation = new AppointmentInformation();
 
-/*        appointmentInformation.seTimestamp(timestamp);
-        appointmentInformation.setDone(false); //False to filter for display in user*/
+        //Setting up current clock into timeStamp
+        Date clock = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        String parsedTime = formatter.format(clock);
+
+        appointTime = timeConversion(Common.convertTimeSlotToString(Common.currentTimeSlot));
+        clockTime = timeConversion(parsedTime);
+
+        System.out.println(appointTime);
+        System.out.println(clockTime);
+
+        //Calculation of appointment time subtracted with the system time
+
+        if (clockTime >= appointTime){
+            if(newTimeStamp != 0){
+                long ans = ((appointTime + 86400000) + newTimeStamp) - clockTime;
+                ans = Math.abs(ans);
+                System.out.println(ans);
+                appointmentInformation.setTimeStamp(ans);
+            }else{
+                long ans = (appointTime + 86400000) - clockTime;
+                appointmentInformation.setTimeStamp(ans);
+            }
+        }else{
+            if(newTimeStamp != 0){
+                long ans = (appointTime + newTimeStamp) - clockTime;
+                System.out.println(ans);
+                appointmentInformation.setTimeStamp(ans);
+                } else{
+
+                long ans = appointTime - clockTime;
+                appointmentInformation.setTimeStamp(ans);
+            }
+            }
+
+
+
+        /*appointmentInformation.setDone(false);*/ //False to filter for display in user*/
         appointmentInformation.setDoctor(Common.currentDoctor);
         appointmentInformation.setService(Common.currentService.getName());
         appointmentInformation.setTime(Common.convertTimeSlotToString(Common.currentTimeSlot));
@@ -96,6 +137,7 @@ public class AddAppointmentStep3Fragment extends Fragment {
         appointmentInformation.setSlot((long) Common.currentTimeSlot);
         appointmentInformation.setPatientName(Common.currentUser);
         appointmentInformation.setPatientPhone(Common.currentPhone);
+        appointmentInformation.setNewTimeStamp(0L);
 
         //Submit Firestore
         DocumentReference appointmentDate = FirebaseFirestore.getInstance()
@@ -173,7 +215,56 @@ public class AddAppointmentStep3Fragment extends Fragment {
                 });
 
     }*/
+   private long timeConversion(String time) {
+       int answer = 0;
+       String replacedTime = time.replace(":", "");
+       if (replacedTime.length() == 6){
+           int hours, minutes, seconds, hrsMilli, minMilli, secMilli;
+           hours = Integer.parseInt(replacedTime.substring(0,2));
+           minutes = Integer.parseInt(replacedTime.substring(2,4));
+           seconds = Integer.parseInt(replacedTime.substring(4));
 
+           hrsMilli = (((hours * 60) * 60) * 1000);
+           minMilli = ((minutes * 60) * 1000);
+           secMilli = (seconds * 1000);
+
+           answer = hrsMilli + minMilli + secMilli;
+       } else if (replacedTime.length() == 5){
+           int hours, minutes, seconds, hrsMilli, minMilli, secMilli;
+           hours = Integer.parseInt(replacedTime.substring(0,2));
+           minutes = Integer.parseInt(replacedTime.substring(2,4));
+           seconds = Integer.parseInt(replacedTime.substring(4));
+
+           hrsMilli = (((hours * 60) * 60) * 1000);
+           minMilli = ((minutes * 60) * 1000);
+           secMilli = (seconds * 1000);
+
+           answer = hrsMilli + minMilli + secMilli;
+       } else if (replacedTime.length() == 4){
+           int hours, minutes, hrsMilli, minMilli;
+           hours = Integer.parseInt(replacedTime.substring(0,2));
+           minutes = Integer.parseInt(replacedTime.substring(2));
+
+           hrsMilli = (((hours * 60) * 60) * 1000);
+           minMilli = ((minutes * 60) * 1000);
+
+           answer = hrsMilli + minMilli;
+       }else if(replacedTime.length() == 3){
+           int hours, minutes, hrsMilli, minMilli;
+           hours = Integer.parseInt(replacedTime.substring(0,1));
+           minutes = Integer.parseInt(replacedTime.substring(1));
+
+           hrsMilli = (((hours * 60) * 60) * 1000);
+           minMilli = ((minutes * 60) * 1000);
+
+           answer = hrsMilli + minMilli;
+       }else if(replacedTime.length() <= 2){
+           int timeInt = Integer.parseInt(replacedTime);
+           answer = (timeInt * 60) * 1000;
+       }
+
+       return answer;
+   }
     private void saveToRTD() {
         firebaseAuth = FirebaseAuth.getInstance();
         String uid = firebaseAuth.getUid();
@@ -186,6 +277,7 @@ public class AddAppointmentStep3Fragment extends Fragment {
         appointmentInformation.setSlot((long) Common.currentTimeSlot);
         appointmentInformation.setPatientName(Common.currentUser);
         appointmentInformation.setPatientPhone(Common.currentPhone);
+        appointmentInformation.setNewTimeStamp(0L);
 
         databaseReference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Users");

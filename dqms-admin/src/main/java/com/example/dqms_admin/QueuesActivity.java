@@ -62,9 +62,8 @@ public class QueuesActivity extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM_dd_yyyy");
         Date dateNow = Calendar.getInstance().getTime();
         String dateToday = simpleDateFormat.format(dateNow);
-        Queues queues = new Queues();
 
-        CollectionReference doctorsRef = firebaseFirestore.collection("AllDoctors").document("Juan Dela Cruz").collection(dateToday);
+        CollectionReference doctorsRef = firebaseFirestore.collection("AllDoctors").document("Garou").collection(dateToday);
 
        doctorsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
            @SuppressLint("NotifyDataSetChanged")
