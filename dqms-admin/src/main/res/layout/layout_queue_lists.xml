@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="4sp"
+    android:layout_margin="10sp"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/patientNameTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Patient Name"/>
+
+    <TextView
+        android:id="@+id/patientSlotTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Slot"/>
+
+    <TextView
+        android:id="@+id/patientTimeTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Time"/>
+
+    <TextView
+        android:id="@+id/patientServiceTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Service"/>
+    <TextView
+        android:id="@+id/queuedDoctorTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Doctor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/tenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 Mins"
+            android:layout_marginEnd="30dp"
+            />
+
+        <Button
+            android:id="@+id/thirtyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30 Mins"
+            android:layout_marginEnd="30dp"
+            />
+
+        <Button
+            android:id="@+id/fortyFiveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45 Mins"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
