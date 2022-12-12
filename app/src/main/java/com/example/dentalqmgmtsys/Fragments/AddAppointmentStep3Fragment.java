@@ -92,42 +92,6 @@ public class AddAppointmentStep3Fragment extends Fragment {
         //Creating appointment information
         AppointmentInformation appointmentInformation = new AppointmentInformation();
 
-        //Setting up current clock into timeStamp
-        Date clock = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-        String parsedTime = formatter.format(clock);
-
-        appointTime = timeConversion(Common.convertTimeSlotToString(Common.currentTimeSlot));
-        clockTime = timeConversion(parsedTime);
-
-        System.out.println(appointTime);
-        System.out.println(clockTime);
-
-        //Calculation of appointment time subtracted with the system time
-
-        if (clockTime >= appointTime){
-            if(newTimeStamp != 0){
-                long ans = ((appointTime + 86400000) + newTimeStamp) - clockTime;
-                ans = Math.abs(ans);
-                System.out.println(ans);
-                appointmentInformation.setTimeStamp(ans);
-            }else{
-                long ans = (appointTime + 86400000) - clockTime;
-                appointmentInformation.setTimeStamp(ans);
-            }
-        }else{
-            if(newTimeStamp != 0){
-                long ans = (appointTime + newTimeStamp) - clockTime;
-                System.out.println(ans);
-                appointmentInformation.setTimeStamp(ans);
-                } else{
-
-                long ans = appointTime - clockTime;
-                appointmentInformation.setTimeStamp(ans);
-            }
-            }
-
-
 
         /*appointmentInformation.setDone(false);*/ //False to filter for display in user*/
         appointmentInformation.setDoctor(Common.currentDoctor);
