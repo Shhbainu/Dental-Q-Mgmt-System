@@ -113,6 +113,7 @@ public class QueueFragment extends Fragment {
         return binding.getRoot();
     }
 
+
     private long timeConversion(String time) {
         int answer = 0;
         String replacedTime = time.replace(":", "");
