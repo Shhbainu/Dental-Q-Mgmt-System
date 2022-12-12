@@ -5,16 +5,17 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class UserAppointmentModel {
-    private String doctor, date, time, service;
+    private String doctor, date, time, service, id;
 
     public UserAppointmentModel() {
     }
 
-    public UserAppointmentModel(String doctor, String date, String time, String service) {
+    public UserAppointmentModel(String doctor, String date, String time, String service, String id) {
         this.doctor = doctor;
         this.date = date;
         this.time = time;
         this.service = service;
+        this.id = id;
     }
 
     public void setDoctor(String doctor) {
@@ -47,5 +48,13 @@ public class UserAppointmentModel {
 
     public String getService() {
         return service;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

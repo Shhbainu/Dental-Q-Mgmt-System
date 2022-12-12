@@ -117,7 +117,7 @@
                 android:textAlignment="center"
                 android:text="00:00:00"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="80sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 android:layout_marginTop="70dp"/>
 

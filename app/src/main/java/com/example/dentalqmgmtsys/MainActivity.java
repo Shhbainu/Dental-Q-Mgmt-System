@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.queue:
                     replaceFragment(new QueueFragment());
-
-                        replaceFragment(new QueueFragment());
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,9 @@ import com.example.dentalqmgmtsys.Common.Common;
 import com.example.dentalqmgmtsys.Models.UserAppointmentModel;
 import com.example.dentalqmgmtsys.R;
 import com.example.dentalqmgmtsys.databinding.FragmentAppointmentBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +28,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirestoreRegistrar;
+import com.google.firebase.firestore.Query;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class AppointmentFragment extends Fragment {
@@ -36,11 +44,17 @@ public class AppointmentFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseDatabase database;
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    SimpleDateFormat simpleDateFormat;
 
     RecyclerView recyclerView;
     ArrayList<UserAppointmentModel> list;
     DatabaseReference reference, removeRef;
     MyUserAppointmentAdapter adapter;
+
+    String date;
+    String time;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,13 +87,51 @@ public class AppointmentFragment extends Fragment {
             public void onClick(View view) {
                 //supposedly delete firebase realtimedatabase
                 removeAppointmentFR();
+                removeAppointmentFS();
                 loadAppointment();
             }
         });
 
+
+/*        CollectionReference appointmentRef = firebaseFirestore.collection("AllDoctors");
+        Query query = appointmentRef.whereEqualTo("date", Common.dateNotDone);
+
+        Log.d("Query", ""+query);*/
+
+
         //Init function
         cancelAppointmentAvailability();
         loadAppointment();
+
+/*        SimpleDateFormat sdf = new SimpleDateFormat("MM_dd_yyyy");
+        Date parsedDate = sdf.parse(Common.dateNotDone);
+        SimpleDateFormat print = new SimpleDateFormat("MM_dd_yyyy");
+        System.out.println(print.format(parsedDate));*/
+
+
+
+
+/*        System.out.println(Common.timeNotDone);
+        System.out.println(Common.dateNotDone);
+        System.out.println(Common.doctorNotDone);
+        System.out.println(Common.slotNotDone);*/
+
+        //12/05/2022
+        //12_05_2022
+
+
+    }
+
+    private void removeAppointmentFS() {
+
+        String date = Common.dateNotDone;
+        String underscoreDate = date.replaceAll("/", "_");
+
+        firebaseFirestore.collection("AllDoctors")
+                .document(Common.doctorNotDone)
+                .collection(underscoreDate)
+                .document(Common.slotNotDone)
+                .delete();
     }
 
     private void removeAppointmentFR() {
@@ -134,7 +186,8 @@ public class AppointmentFragment extends Fragment {
                     //Log.i("Firebase", "Reading from.."+ dataSnapshot.getKey()+", value="+dataSnapshot.getValue()+"UserAppointmentModel "+dataSnapshot.getValue(UserAppointmentModel.class));
                     //Log.i("Firebase", "Test Read"+doctor+" "+date+" "+time+" "+service+"");
                     UserAppointmentModel user = dataSnapshot.getValue(UserAppointmentModel.class);
-                    Log.i("Firebase", "Reading from.."+ dataSnapshot.getValue());
+/*                    Log.i("Firebase", "Reading from.."+ dataSnapshot.child("time").getValue());
+                    Log.i("Firebase", "Reading from.."+ dataSnapshot.child("date").getValue());*/
 
                     list.add(user);
                 }
