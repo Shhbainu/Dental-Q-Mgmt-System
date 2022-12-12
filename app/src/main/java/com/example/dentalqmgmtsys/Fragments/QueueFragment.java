@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dentalqmgmtsys.Common.Common;
 import com.example.dentalqmgmtsys.QuizTitleActivity;
@@ -83,7 +84,6 @@ public class QueueFragment extends Fragment {
 
                 underScoredDate = date.replace("/", "_");
 
-/*              newTimeStamp = Long.parseLong(snapshot.child("newTimeStamp").getValue().toString());*/
                 appointTime = timeConversion(userTime);
                 Log.i(TAG, "AppointTime: "  + appointTime);
                 clockTime = timeConversion(parsedTime);
@@ -105,6 +105,7 @@ public class QueueFragment extends Fragment {
                                     if(clockTime >= appointTime){
                                         Log.i(TAG, "onDataChange: Something");
                                         if(newTimeStamp != 0){
+                                            createNotificationTimeAdded();
                                             long ans = ((appointTime + 86400000) + newTimeStamp) - clockTime;
                                             ans = Math.abs(ans);
 
@@ -147,6 +148,7 @@ public class QueueFragment extends Fragment {
                                         }
                                     }else{
                                         if(newTimeStamp != 0){
+                                            createNotificationTimeAdded();
                                             long ans = (appointTime + newTimeStamp) - clockTime;
                                             ans = Math.abs(ans);
 
@@ -364,6 +366,35 @@ public class QueueFragment extends Fragment {
         Long hours = ((timer / (1000 * 60 * 60)) % 24);
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d Hours:%02d mins remaining", hours, minutes);
         binding.queueTimeTV.setText(timeLeftFormatted);
+    }
+
+    private void createNotificationTimeAdded(){
+//        Fragment newFragment = new Fragment();
+//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//        transaction.replace(R.id.frame_layout, newFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+        notificationManager = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            notificationChannel = new NotificationChannel(channelID, description, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(notificationChannel);
+
+            builder = new Notification.Builder(getActivity(), channelID)
+                    .setContentTitle("Attention")
+                    .setContentText("Your current time has been changed")
+                    .setSmallIcon(R.drawable.toothlogo)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.toothlogo))
+                    .setAutoCancel(true);
+
+        }else{
+            builder = new Notification.Builder(getActivity())
+                    .setContentTitle("Attention")
+                    .setContentText("Your current time has been changed")
+                    .setSmallIcon(R.drawable.toothlogo)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.toothlogo))
+                    .setAutoCancel(true);
+        }
+        notificationManager.notify(1234, builder.build());
     }
 
     private void createNotification30(){
