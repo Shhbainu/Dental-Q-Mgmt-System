@@ -58,7 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private String lName = "";
     private String address = "";
     private String phone = "";
-    private String email = "";
+    //private String email = "";
 
     private TextView first_name, last_name, address_view, phone_view, email_view;
     private ImageView profile_image;
@@ -74,7 +74,7 @@ public class EditProfileActivity extends AppCompatActivity {
         last_name = findViewById(R.id.lNameET);
         address_view = findViewById(R.id.addressET);
         //phone_view = findViewById(R.id.phoneET);
-        email_view = findViewById(R.id.emailET);
+        //email_view = findViewById(R.id.emailET);
 
         //setup progress dialog
         progressDialog = new ProgressDialog(this);
@@ -93,7 +93,7 @@ public class EditProfileActivity extends AppCompatActivity {
         last_name.setText(lName_str);
         address_view.setText(address_str);
         //phone_view.setText(contactNum_str);
-        email_view.setText(email_str);
+        //email_view.setText(email_str);
         Glide.with(this)
                 .load(currentUser.getPhotoUrl())
                 .placeholder(R.drawable.ico_no_pic)
@@ -123,6 +123,17 @@ public class EditProfileActivity extends AppCompatActivity {
                 validateData();
             }
         });
+
+        //handle click update profile
+        binding.updateEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent intent = new Intent(EditProfileActivity.this, ChangeEmailActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void validateData(){
@@ -131,7 +142,7 @@ public class EditProfileActivity extends AppCompatActivity {
         lName = binding.lNameET.getText().toString().trim();
         address = binding.addressET.getText().toString().trim();
         //phone = binding.phoneET.getText().toString().trim();
-        email = binding.emailET.getText().toString().trim();
+        //email = binding.emailET.getText().toString().trim();
 
         //validate data
         if(TextUtils.isEmpty(fName)){
@@ -150,10 +161,10 @@ public class EditProfileActivity extends AppCompatActivity {
 //            //no name is entered
 //            Toast.makeText(this, "Enter phone number...", Toast.LENGTH_SHORT).show();
 //        }
-        else if(TextUtils.isEmpty(email)){
+/*        else if(TextUtils.isEmpty(email)){
             //no name is entered
             Toast.makeText(this, "Enter phone number...", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         else{
             //name is entered
             if(imageUri == null){
@@ -212,7 +223,7 @@ public class EditProfileActivity extends AppCompatActivity {
         hashMap.put("lName", ""+lName);
         hashMap.put("address", ""+address);
         //hashMap.put("phone", ""+phone);
-        hashMap.put("email", ""+email);
+        //hashMap.put("email", ""+email);
         if (imageUri != null){
             hashMap.put("profileImage", ""+imageUrl);
         }

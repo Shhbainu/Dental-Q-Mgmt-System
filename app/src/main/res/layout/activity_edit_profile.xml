@@ -168,6 +168,7 @@
 <!--            android:drawableStart="@drawable/ic_phone_gray"-->
 <!--            android:drawablePadding="5dp"/>-->
 
+<!--
         <EditText
             android:id="@+id/emailET"
             android:layout_width="match_parent"
@@ -182,8 +183,25 @@
             android:textSize="16sp"
             android:drawableStart="@drawable/ic_email_gray"
             android:drawablePadding="5dp"/>
+-->
 
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/updateEmail"
+        style="@android:style/Widget.Button"
+        android:layout_width="193dp"
+        android:layout_height="48dp"
+        android:background="@drawable/button_background"
+        android:text="UPDATE EMAIL"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.651" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/updateBtn"
