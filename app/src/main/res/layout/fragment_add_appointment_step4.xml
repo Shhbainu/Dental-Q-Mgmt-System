@@ -23,154 +23,228 @@
         android:gravity="center"/>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:gravity="center_horizontal"
+        android:background="@drawable/profilecard_background"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_medical_service"
-            android:layout_gravity="bottom"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name : "
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
-
-        <TextView
-            android:id="@+id/confirmNameTV"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="5dp"
+                android:src="@drawable/ic_medical_service" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_margin="2dp"
+                android:background="#AFE4DE">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_phone"
-            android:layout_gravity="bottom"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name : "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="5dp"
+                    />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone Number : "
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+                <TextView
+                    android:id="@+id/confirmNameTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="18dp"
+                    android:layout_marginStart="5dp"
+                    />
 
-        <TextView
-            android:id="@+id/confirmPhoneTV"
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Phone"
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_phone"
+                android:layout_gravity="center"
+                android:paddingRight="5dp"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_margin="2dp"
+                android:background="#AFE4DE">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone Number : "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="5dp"
+                    />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/confirmPhoneTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    android:textSize="18dp"
+                    android:layout_marginStart="5dp"
+                    />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_calendar"
-            android:layout_gravity="bottom"/>
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Appointment Date : "
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/confirmDateTimeTV"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Time and Date"
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar"
+                android:layout_gravity="center"
+                android:paddingRight="5dp"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_margin="2dp"
+                android:background="#AFE4DE">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_person_outline_24"
-            android:layout_gravity="bottom"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Appointment Date : "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="5dp"
+                    />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Doctor : "
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+                <TextView
+                    android:id="@+id/confirmDateTimeTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Time and Date"
+                    android:textSize="18dp"
+                    android:layout_marginStart="5dp"
+                    />
 
-        <TextView
-            android:id="@+id/confirmDoctorTV"
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Doctor"
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_person_outline_24"
+                android:layout_gravity="center"
+                android:paddingRight="5dp"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_margin="2dp"
+                android:background="#AFE4DE">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_medical_service"
-            android:layout_gravity="bottom"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Doctor : "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="5dp"
+                    />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Service : "
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+                <TextView
+                    android:id="@+id/confirmDoctorTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Doctor"
+                    android:textSize="18dp"
+                    android:layout_marginStart="5dp"
+                    />
 
-        <TextView
-            android:id="@+id/confirmServiceTV"
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Service"
-            android:textSize="18dp"
-            android:layout_marginStart="5dp"
-            />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_medical_service"
+                android:layout_gravity="center"
+                android:paddingRight="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_margin="2dp"
+                android:background="#AFE4DE">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Service : "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/confirmServiceTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Service"
+                    android:textSize="18dp"
+                    android:layout_marginStart="5dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -185,10 +259,5 @@
         android:paddingEnd="50dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"/>
-
-
-
-
-
 
 </LinearLayout>
