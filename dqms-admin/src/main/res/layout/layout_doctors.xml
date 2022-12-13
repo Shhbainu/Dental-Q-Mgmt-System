@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-    android:id="@+id/serviceCard">
+    android:id="@+id/doctorCard">
 
     <LinearLayout
         android:orientation="vertical"

@@ -8,36 +8,44 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center_horizontal"
         android:text="Services"
-        android:layout_centerHorizontal="true"
-        android:textSize="40dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp"
         />
 
 
-    <com.google.android.material.textfield.TextInputLayout
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/doctorSpinner"
         android:layout_below="@id/textView9"
-        style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:hint="Doctor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:id="@+id/tIL">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id = "@+id/filledExposed"
-            android:inputType="none"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_margin="20dp"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/serviceRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tIL"/>
+        android:layout_below="@id/doctorSpinner"
+        android:layout_marginTop="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addServiceBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        app:backgroundTint="@color/turquoise" />
 
 </RelativeLayout>
