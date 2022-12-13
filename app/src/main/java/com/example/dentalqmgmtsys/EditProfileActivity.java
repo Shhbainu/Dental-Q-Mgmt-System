@@ -145,6 +145,7 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.updateEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent intent = new Intent(EditProfileActivity.this, ChangeEmailActivity.class);
                 startActivity(intent);
                 finish();

@@ -59,7 +59,7 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
     implementation 'com.tbuonomo:dotsindicator:4.2'
 
-    //glide
+    //picasso
     implementation 'com.squareup.picasso:picasso:2.8'
 
     implementation 'com.google.firebase:firebase-firestore:24.4.0'
