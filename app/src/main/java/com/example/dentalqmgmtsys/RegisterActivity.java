@@ -1,15 +1,14 @@
 package com.example.dentalqmgmtsys;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dentalqmgmtsys.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -167,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
         hashMap.put("phone", phone);
         hashMap.put("userType", "user");
         hashMap.put("timestamp", timestamp);
-        hashMap.put("profileImage", ""); //add empty, in case needed
+        hashMap.put("profileImage", "https://firebasestorage.googleapis.com/v0/b/dental-qmgmt-system.appspot.com/o/ProfileImages%2Fno-profile.png?alt=media&token=353ccad9-5f1b-41c7-a272-9c64821362ab"); //add empty, in case needed
         hashMap.put("credits", 100);
         hashMap.put("referCode", referCode);
         hashMap.put("redeemed", false);

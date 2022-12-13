@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.example.dentalqmgmtsys.AboutUsActivity;
 import com.example.dentalqmgmtsys.ContactUsActivity;
 import com.example.dentalqmgmtsys.EditProfileActivity;
@@ -25,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
 
@@ -158,7 +158,7 @@ public class ProfileFragment extends Fragment {
                         binding.addressTV.setText(address);
                         //binding.phone.setText(phone);
                         //binding.age.setText(age);
-                        Glide.with(ProfileFragment.this)
+                        Picasso.get()
                                 .load(profileImage)
                                 .placeholder(R.drawable.ico_no_pic)
                                 .error(R.drawable.ico_no_pic)
@@ -186,10 +186,4 @@ public class ProfileFragment extends Fragment {
 //            getActivity().finish();
 //        }
 //    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
 }
