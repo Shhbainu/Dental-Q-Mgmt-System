@@ -1,222 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
     tools:context=".EditProfileActivity">
 
     <ImageView
         android:id="@+id/backToProfileBtn"
         android:layout_width="77dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ico_back" />
+        app:srcCompat="@drawable/back" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignParentRight="true"
         app:srcCompat="@drawable/ico_shape" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:text="Edit Your Profile"
         android:textColor="@android:color/black"
         android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.686" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        android:text="Please fill up the field you want to edit"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        android:layout_alignBottom="@id/imageView3"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="Please fill up the field you want to edit"
+        android:textSize="12sp" />
 
-        <ImageView
-            android:id="@+id/profileTV"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ico_no_pic"
-            android:layout_margin="2dp"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center"
-            android:background="@drawable/profilecard_background"/>
+    <ImageView
+        android:id="@+id/profileTV"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignBottom="@id/textView4"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="-161dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/profilecard_background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ico_no_pic" />
 
-    </LinearLayout>
+    <EditText
+        android:id="@+id/fNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/profileTV"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-73dp"
+        android:background="@drawable/textfield_background"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:drawableStart="@drawable/ic_person_gray"
+        android:padding="15dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4">
+    <EditText
+        android:id="@+id/lNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/fNameET"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-73dp"
+        android:background="@drawable/textfield_background"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        android:drawableStart="@drawable/ic_person_gray"
+        android:padding="15dp"/>
 
-        </LinearLayout>
+    <EditText
+        android:id="@+id/addressET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/lNameET"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-73dp"
+        android:background="@drawable/textfield_background"
+        android:drawableStart="@drawable/ic_address_gray"
+        android:ems="10"
+        android:hint="Address"
+        android:inputType="textPersonName"
+        android:padding="15dp" />
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="2dp"
-            android:orientation="horizontal">
 
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/phoneET"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="48dp"-->
+    <!--            android:layout_margin="5dp"-->
+    <!--            android:background="@drawable/textfield_background"-->
+    <!--            android:ems="10"-->
+    <!--            android:hint="Contact Number"-->
+    <!--            android:inputType="phone"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:textColor="#7E7E7E"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:drawableStart="@drawable/ic_phone_gray"-->
+    <!--            android:drawablePadding="5dp"/>-->
+
+    <!--
             <EditText
-                android:id="@+id/fNameET"
-                android:layout_width="wrap_content"
+                android:id="@+id/emailET"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/textfield_background"
                 android:ems="10"
-                android:hint="First Name"
+                android:hint="Email"
                 android:inputType="textPersonName"
                 android:padding="10dp"
                 android:textColor="#7E7E7E"
                 android:textSize="16sp"
-                android:drawableStart="@drawable/ic_person_gray"
+                android:drawableStart="@drawable/ic_email_gray"
                 android:drawablePadding="5dp"/>
+    -->
 
-            <EditText
-                android:id="@+id/lNameET"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/textfield_background"
-                android:ems="10"
-                android:hint="Last Name"
-                android:inputType="textPersonName"
-                android:padding="10dp"
-                android:textColor="#7E7E7E"
-                android:textSize="16sp"
-                android:drawableStart="@drawable/ic_person_gray"
-                android:drawablePadding="5dp"/>
-
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/addressET"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/textfield_background"
-            android:ems="10"
-            android:hint="Address"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="#7E7E7E"
-            android:textSize="16sp"
-            android:drawableStart="@drawable/ic_address_gray"
-            android:drawablePadding="5dp"/>
-
-<!--        <EditText-->
-<!--            android:id="@+id/phoneET"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:layout_margin="5dp"-->
-<!--            android:background="@drawable/textfield_background"-->
-<!--            android:ems="10"-->
-<!--            android:hint="Contact Number"-->
-<!--            android:inputType="phone"-->
-<!--            android:padding="10dp"-->
-<!--            android:textColor="#7E7E7E"-->
-<!--            android:textSize="16sp"-->
-<!--            android:drawableStart="@drawable/ic_phone_gray"-->
-<!--            android:drawablePadding="5dp"/>-->
-
-<!--
-        <EditText
-            android:id="@+id/emailET"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/textfield_background"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="#7E7E7E"
-            android:textSize="16sp"
-            android:drawableStart="@drawable/ic_email_gray"
-            android:drawablePadding="5dp"/>
--->
-
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/updateEmail"
-        style="@android:style/Widget.Button"
-        android:layout_width="193dp"
-        android:layout_height="48dp"
-        android:background="@drawable/button_background"
-        android:text="UPDATE EMAIL"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.651" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/updateBtn"
         style="@android:style/Widget.Button"
         android:layout_width="193dp"
         android:layout_height="48dp"
+        android:layout_alignBottom="@id/addressET"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="-60dp"
         android:background="@drawable/button_background"
-        android:text="UPDATE"
+        android:text="UPDATE PROFILE"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.234" />
+        android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/updateEmail"
+        style="@android:style/Widget.Button"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_alignBottom="@id/updateBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="-71dp"
+        android:background="@drawable/button_background"
+        android:text="UPDATE EMAIL"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/updatePassword"
+        style="@android:style/Widget.Button"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_alignBottom="@id/updateBtn"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="-69dp"
+        android:background="@drawable/button_background"
+        android:text="UPDATE PASSWORD"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

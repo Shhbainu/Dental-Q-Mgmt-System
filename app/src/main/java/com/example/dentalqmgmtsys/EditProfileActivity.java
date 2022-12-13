@@ -151,6 +151,17 @@ public class EditProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //handle click update profile
+        binding.updatePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent intent = new Intent(EditProfileActivity.this, ChangePasswordActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void validateData(){

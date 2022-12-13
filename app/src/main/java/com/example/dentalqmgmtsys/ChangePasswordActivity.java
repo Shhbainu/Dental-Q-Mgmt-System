@@ -11,35 +11,31 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.dentalqmgmtsys.databinding.ActivityChangeEmailBinding;
+import com.example.dentalqmgmtsys.databinding.ActivityChangePasswordBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-
-public class ChangeEmailActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    Button changeemail;
+    Button changePassword;
 
-    private ActivityChangeEmailBinding binding;
+    private ActivityChangePasswordBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityChangeEmailBinding.inflate(getLayoutInflater());
+        binding = ActivityChangePasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        changeemail = findViewById(R.id.changeemail);
+        changePassword = findViewById(R.id.changePassword);
 
         // click on this to change email
-        binding.changeemail.setOnClickListener(new View.OnClickListener() {
+        binding.changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateData();
@@ -53,12 +49,13 @@ public class ChangeEmailActivity extends AppCompatActivity {
             }
         });
 
-    }
 
+    }
     private void validateData() {
         String email = binding.email.getText().toString().trim();
         String password = binding.logpass.getText().toString().trim();
         String change = binding.change.getText().toString().trim();
+        String cPassword = binding.changeConfirm.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
             //no name is entered
@@ -71,45 +68,45 @@ public class ChangeEmailActivity extends AppCompatActivity {
         else if
         (TextUtils.isEmpty(change)){
             //no name is entered
-            Toast.makeText(this, "Enter your new email...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter your new password...", Toast.LENGTH_SHORT).show();
+        }
+        else if (change.length() < 6){ //password is less than 6 characters
+            Toast.makeText(this, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
+        }
+        else if (!change.equals(cPassword)){ //password and confirm password doesn't match
+            Toast.makeText(this, "Password doesn't match", Toast.LENGTH_SHORT).show();
         }
         else {
-            changeemail(email, password);
+            setChangePassword(email, password);
         }
     }
 
     EditText change;
 
-    private void changeemail(String email, final String password) {
+    private void setChangePassword(String email, final String password) {
 
         change = findViewById(R.id.change);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        // Get auth credentials from the user for re-authentication
         AuthCredential credential = EmailAuthProvider.getCredential(email, password); // Current Login Credentials
 
+        // Prompt the user to re-provide their sign-in credentials
         user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
                 Log.d("value", "User re-authenticated.");
 
-
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("email", ""+change.getText().toString());
-
-                //update to db
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                databaseReference.child(user.getUid())
-                        .updateChildren(hashMap);
                 //update to auth
-                user.updateEmail(change.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                user.updatePassword(change.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ChangeEmailActivity.this, "Email changed." + "Your current email is " + change.getText().toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ChangePasswordActivity.this, "Your password has changed.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
