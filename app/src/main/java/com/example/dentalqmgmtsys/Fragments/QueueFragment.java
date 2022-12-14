@@ -364,8 +364,19 @@ public class QueueFragment extends Fragment {
     private void updateCountdown(long timer){
         Long minutes = ((timer / (1000 * 60)) % 60);
         Long hours = ((timer / (1000 * 60 * 60)) % 24);
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d Hours:%02d mins remaining", hours, minutes);
-        binding.queueTimeTV.setText(timeLeftFormatted);
+        Long days = ((timer / (1000 * 60 * 60 * 24)) % 7);
+        Long weeks = (timer / (1000 * 60 * 60 * 24 * 7));
+
+        if(timer >= 604800000){
+            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d Weeks:%02d Days:%02d Hours:%02d mins remaining", weeks, days, hours, minutes);
+            binding.queueTimeTV.setText(timeLeftFormatted);
+        }else if(timer >= 86400000){
+            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d Days:%02d Hours:%02d mins remaining", days, hours, minutes);
+            binding.queueTimeTV.setText(timeLeftFormatted);
+        }else{
+            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d Hours:%02d mins remaining", hours, minutes);
+            binding.queueTimeTV.setText(timeLeftFormatted);
+        }
     }
 
     private void createNotificationTimeAdded(){
