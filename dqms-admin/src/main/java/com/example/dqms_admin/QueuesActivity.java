@@ -1,44 +1,54 @@
 package com.example.dqms_admin;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
-import com.example.dqms_admin.Adapter.MyQueuesAdapter;
-import com.example.dqms_admin.Model.Doctors;
+import com.example.dqms_admin.Adapter.MyQueues2Adapter;
+import com.example.dqms_admin.Interface.IAllDoctorsLoadListener;
+import com.example.dqms_admin.Interface.IQueuesLoadListener;
 import com.example.dqms_admin.Model.Queues;
-import com.example.dqms_admin.databinding.ActivityDoctorsBinding;
 import com.example.dqms_admin.databinding.ActivityQueuesBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-public class QueuesActivity extends AppCompatActivity {
+import dmax.dialog.SpotsDialog;
+
+public class QueuesActivity extends AppCompatActivity implements IAllDoctorsLoadListener, IQueuesLoadListener {
 
     private static final String TAG = "Queue Activity";
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
     ActivityQueuesBinding binding;
     RecyclerView recyclerView;
-    ArrayList<Queues> queuesArrayList;
-    MyQueuesAdapter myQueuesAdapter;
+    CollectionReference allDoctorsRef;
+
+    MaterialSpinner doctorSpinnerQueue;
+    String selectedDoctorName;
+
+    IAllDoctorsLoadListener iAllDoctorsLoadListener;
+    IQueuesLoadListener iQueuesLoadListener;
+
+    AlertDialog alertDialog;
 
 
     @Override
@@ -47,42 +57,140 @@ public class QueuesActivity extends AppCompatActivity {
         binding = ActivityQueuesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        recyclerView = binding.queueListRV;
+        allDoctorsRef = FirebaseFirestore.getInstance().collection("AllDoctors");
+        iAllDoctorsLoadListener = this;
+        iQueuesLoadListener = this;
+
+        doctorSpinnerQueue = findViewById(R.id.doctorSpinnerQueue);
+
+        recyclerView = binding.queuesRV;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        queuesArrayList = new ArrayList<Queues>();
+/*        queuesArrayList = new ArrayList<Queues>();
         myQueuesAdapter = new MyQueuesAdapter(QueuesActivity.this, queuesArrayList);
-        recyclerView.setAdapter(myQueuesAdapter);
+        recyclerView.setAdapter(myQueuesAdapter);*/
 
-        showData();
+        loadAllDoctors();
+
+        alertDialog = new SpotsDialog.Builder().setContext(QueuesActivity.this).build();
+
+
 }
 
-    private void showData() {
+    private void loadAllDoctors() {
+        allDoctorsRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            List<String> list = new ArrayList<>();
+                            list.add("Please choose doctor");
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult())
+                                list.add(documentSnapshot.getId());
+                            Log.i(TAG, "onComplete: "+list);
+                            iAllDoctorsLoadListener.onAllDoctorsLoadSuccess(list);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        iAllDoctorsLoadListener.onAllDoctorsLoadFailed(e.getMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void onAllDoctorsLoadSuccess(List<String> doctorNameList) {
+        doctorSpinnerQueue.setItems(doctorNameList);
+        doctorSpinnerQueue.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                if( position > 0)
+                {
+                    selectedDoctorName = item.toString();
+                    loadQueuesOfDoctor(selectedDoctorName);
+                }
+                else
+                {
+                    recyclerView.setVisibility(View.GONE);
+                }
+            }
+        });
+
+    }
+
+    private void loadQueuesOfDoctor(String doctorName) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM_dd_yyyy");
         Date dateNow = Calendar.getInstance().getTime();
         String dateToday = simpleDateFormat.format(dateNow);
 
-        CollectionReference doctorsRef = firebaseFirestore.collection("AllDoctors").document("Garou").collection(dateToday);
+        alertDialog.show();
 
-       doctorsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-           @SuppressLint("NotifyDataSetChanged")
-           @Override
-           public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-               if (error != null) {
-                   Log.e("Firestore error", error.getMessage());
-                   return;
-               }
-               for (DocumentChange documentChange : value.getDocumentChanges()) {
+        CollectionReference doctorsRef = firebaseFirestore.collection("AllDoctors").document(doctorName).collection(dateToday);
 
-                   if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                       queuesArrayList.add(documentChange.getDocument().toObject(Queues.class));
-                   }
+/*        doctorsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.e("Firestore error", error.getMessage());
+                    return;
+                }
+                assert value != null;
+                for (DocumentChange documentChange : value.getDocumentChanges()) {
 
-                   myQueuesAdapter.notifyDataSetChanged();
-               }
-           }
-       });
+                    if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                        queuesArrayList.add(documentChange.getDocument().toObject(Queues.class));
+                    }
 
+                    myQueuesAdapter.notifyDataSetChanged();
+                }
+            }
+        });*/
+        doctorsRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<Queues> list = new ArrayList<>();
+                        if (task.isSuccessful())
+                        {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult())
+                                list.add(documentSnapshot.toObject(Queues.class));
+                            iQueuesLoadListener.onQueuesLoadSuccess(list);
+
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        iQueuesLoadListener.onQueuesLoadFailed(e.getMessage());
+                    }
+                });
+
+    }
+
+    @Override
+    public void onAllDoctorsLoadFailed(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onQueuesLoadSuccess(List<Queues> queuesList) {
+        MyQueues2Adapter adapter = new MyQueues2Adapter(queuesList, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setVisibility(View.VISIBLE);
+
+        alertDialog.dismiss();
+
+
+    }
+
+    @Override
+    public void onQueuesLoadFailed(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        alertDialog.dismiss();
     }
 }
