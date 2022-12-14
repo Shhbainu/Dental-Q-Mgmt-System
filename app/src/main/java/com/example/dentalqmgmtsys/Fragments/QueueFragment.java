@@ -64,10 +64,14 @@ public class QueueFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         System.out.println(Common.appointmentID);
-
+        //time
         Date clock = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         String parsedTime = formatter.format(clock);
+        //date
+        Date localDate = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+        String parsedDate = dateFormat.format(localDate);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,6 +93,15 @@ public class QueueFragment extends Fragment {
                 clockTime = timeConversion(parsedTime);
                 Log.i(TAG, "ClockTime: "  + clockTime);
 
+                Log.i(TAG, "Date: " + dateConversion(date));
+                Log.i(TAG, "LocalDate: " + dateConversion(parsedDate));
+
+                Log.i(TAG, "Answer: " + (dateConversion(date) - dateConversion(parsedDate)));
+
+                long followingDay = (dateConversion(date) - dateConversion(parsedDate)) * 86400000L;
+
+                Log.i(TAG, "Following Day: " + followingDay);
+
                 timeStampRef = firebaseFirestore.collection("AllDoctors")
                         .document(doctor)
                         .collection(underScoredDate)
@@ -106,7 +119,7 @@ public class QueueFragment extends Fragment {
                                         Log.i(TAG, "onDataChange: Something");
                                         if(newTimeStamp != 0){
                                             createNotificationTimeAdded();
-                                            long ans = ((appointTime + 86400000) + newTimeStamp) - clockTime;
+                                            long ans = ((appointTime + followingDay) + newTimeStamp) - clockTime;
                                             ans = Math.abs(ans);
 
                                             //Into Firestore
@@ -126,7 +139,7 @@ public class QueueFragment extends Fragment {
                                             updateCountdown(ans);
                                             Log.i(TAG, "different day " + ans);
                                         }else{
-                                            long ans = (appointTime + 86400000) - clockTime;
+                                            long ans = (appointTime + followingDay) - clockTime;
                                             ans = Math.abs(ans);
 
                                             //Into Firestore
@@ -309,6 +322,10 @@ public class QueueFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private int dateConversion(String date){
+        String replacedDate = date.replace("/", "");
+        return Integer.parseInt(replacedDate.substring(2,4));
+    }
 
     private long timeConversion(String time) {
         int answer = 0;
