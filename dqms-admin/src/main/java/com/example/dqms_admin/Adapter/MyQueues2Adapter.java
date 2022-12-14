@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dqms_admin.Interface.IRecyclerItemSelectedListener;
 import com.example.dqms_admin.Model.Queues;
 import com.example.dqms_admin.QueuesActivity;
 import com.example.dqms_admin.R;
@@ -40,7 +41,7 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
    FirebaseFirestore firebaseFirestore;
 
    String date, time, doctor, underScoredDate, service, name;
-   long timeStamp, slot;
+   long timeStamp, slot, selectedSlot;
 
     public MyQueues2Adapter(List<Queues> queuesList, QueuesActivity activity) {
         this.queuesList = queuesList;
@@ -82,6 +83,21 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
         if(!cardViewList.contains(holder.queuesCard))
             cardViewList.add(holder.queuesCard);
 
+        holder.setiRecyclerItemSelectedListener(new IRecyclerItemSelectedListener() {
+            @Override
+            public void onItemSelectedListener(View view, int pos) {
+                for(CardView cardView:cardViewList)
+                    cardView.setCardBackgroundColor(activity.getResources()
+                            .getColor(R.color.white));
+
+                holder.queuesCard.setCardBackgroundColor(activity.getResources()
+                        .getColor(R.color.turquoise));
+
+                selectedSlot = queuesList.get(pos).getSlot();
+                Log.i("service adapter", "onItemSelectedListener: " + selectedSlot);
+            }
+        });
+
         //Inserting input time in the database
         holder.addTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +105,7 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
                 getTime(timeConversion(String.valueOf(holder.inputTime.getText())));
                 Log.d("THIS IS THE INPUT", ""+ timeConversion(String.valueOf(holder.inputTime.getText())));
 
-                Toast.makeText(activity, ""+(holder.inputTime.getText()) +" Minutes is added ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, ""+(holder.inputTime.getText()) +" Minutes is added in slot" +selectedSlot , Toast.LENGTH_SHORT).show();
                 holder.inputTime.getText().clear();
             }
         });
@@ -153,7 +169,7 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
         firebaseFirestore.collection("AllDoctors")
                 .document(doctor)
                 .collection(underScoredDate)
-                .document(String.valueOf(slot))
+                .document(String.valueOf(selectedSlot))
                 .set(newTimeStamp, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -174,12 +190,17 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
         return queuesList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView patientName, patientSlot, patientTime, patientService, queuedDoctor;
         CardView queuesCard;
         EditText inputTime;
         Button addTimeBtn;
+        IRecyclerItemSelectedListener iRecyclerItemSelectedListener;
+
+        public void setiRecyclerItemSelectedListener(IRecyclerItemSelectedListener iRecyclerItemSelectedListener){
+            this.iRecyclerItemSelectedListener = iRecyclerItemSelectedListener;
+        }
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -196,6 +217,13 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
             inputTime = (EditText) itemView.findViewById(R.id.inputTime2);
             addTimeBtn = (Button) itemView.findViewById(R.id.addTimeButton2);
 
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            iRecyclerItemSelectedListener.onItemSelectedListener(view, getAdapterPosition());
         }
     }
 }
