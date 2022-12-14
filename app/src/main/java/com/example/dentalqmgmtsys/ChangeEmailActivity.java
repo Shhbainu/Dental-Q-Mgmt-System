@@ -18,8 +18,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -52,6 +55,24 @@ public class ChangeEmailActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.child(user.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String email = ""+snapshot.child("email").getValue();
+
+                        //set data
+                        binding.email.setText(email);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
     }
 
@@ -100,16 +121,22 @@ public class ChangeEmailActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("email", ""+change.getText().toString());
 
-                //update to db
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                databaseReference.child(user.getUid())
-                        .updateChildren(hashMap);
                 //update to auth
                 user.updateEmail(change.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            //update to db
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                            databaseReference.child(user.getUid())
+                                    .updateChildren(hashMap);
                             Toast.makeText(ChangeEmailActivity.this, "Email changed." + "Your current email is " + change.getText().toString(), Toast.LENGTH_LONG).show();
+                            change.setText(null);
+                            binding.logpass.setText(null);
+                        }
+                        else {
+                            Log.d("TAG", "onComplete: " + task.getException());
+                            Toast.makeText(ChangeEmailActivity.this, "Wrong credentials. Please enter your password correctly.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
