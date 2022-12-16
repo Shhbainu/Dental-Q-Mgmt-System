@@ -24,7 +24,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LandingActivity.this, LoginActivity.class));
-                //finish();
+                finish();
             }
         });
 
@@ -34,7 +34,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LandingActivity.this, RegisterActivity.class));
-                //finish();
+                finish();
             }
         });
 

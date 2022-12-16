@@ -77,14 +77,14 @@
                 android:layout_height="48dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/textfield_background"
+                android:drawableStart="@drawable/ic_person_gray"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:hint="First Name"
                 android:inputType="textPersonName"
                 android:padding="10dp"
                 android:textColor="#7E7E7E"
-                android:textSize="16sp"
-                android:drawableStart="@drawable/ic_person_gray"
-                android:drawablePadding="5dp"/>
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/lNameET"

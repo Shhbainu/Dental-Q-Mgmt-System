@@ -148,8 +148,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else if (userType.equals("admin")){
                             // admin proceed to admin page?? nope, go to user homepage
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, LandingActivity.class));
                             finish();
+                            Toast.makeText(LoginActivity.this, "Wrong App! Admin Account Detected", Toast.LENGTH_SHORT).show();
                         }
                     }
 

@@ -35,7 +35,7 @@ import java.util.HashMap;
 
 public class ReferralActivity extends AppCompatActivity {
 
-    private ActivityReferralBinding binding;
+    ActivityReferralBinding binding;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;

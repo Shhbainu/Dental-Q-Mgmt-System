@@ -5,43 +5,46 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical"
+    android:backgroundTint="@color/light_turquoise"
     app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="220dp"
         android:layout_margin="4dp"
-        android:background="@drawable/base_background"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ico_correct_answer"/>
+<!--        <ImageView-->
+<!--            android:layout_width="180dp"-->
+<!--            android:layout_height="180dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:src="@drawable/ico_correct_answer"/>-->
 
         <EditText
             android:id="@+id/redeem_code"
-            android:layout_width="match_parent"
+            android:layout_width="217dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="10dp"
+            android:background="@drawable/textfield_background"
             android:gravity="center"
-            android:hint="Enter Redeem Code"
+            android:hint="Enter a Referral Code"
             android:inputType="textEmailAddress"
             android:textColor="@color/admin_gray"
             android:textColorHint="@color/light_admin_gray"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
 
@@ -72,6 +75,16 @@
                 android:textSize="18sp"/>
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text='Each user can only use a refer code once.'
+            android:textStyle="italic"
+            android:textSize="13dp"/>
 
     </LinearLayout>
 
