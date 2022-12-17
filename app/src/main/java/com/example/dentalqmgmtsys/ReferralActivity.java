@@ -61,6 +61,13 @@ public class ReferralActivity extends AppCompatActivity {
             }
         });
 
+        binding.infoDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
+
         //init
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -84,6 +91,11 @@ public class ReferralActivity extends AppCompatActivity {
         redeemAvailability();
         clickListener();
 
+    }
+
+    private void openDialog() {
+        ReferInfoDialog referInfoDialog = new ReferInfoDialog();
+        referInfoDialog.show(getSupportFragmentManager(), "refer info dialog");
     }
 
     private void clickListener() {
