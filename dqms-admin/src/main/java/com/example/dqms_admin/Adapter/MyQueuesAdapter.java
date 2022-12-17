@@ -66,7 +66,7 @@ public class MyQueuesAdapter extends RecyclerView.Adapter<MyQueuesAdapter.ViewHo
         slot = queues.getSlot();
         date = queues.getDate();
         underScoredDate = date.replace("/", "_");
-        timeStamp = queues.getTimeStamp();
+        timeStamp = queues.getNewTimeStamp();
 
         holder.addTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override

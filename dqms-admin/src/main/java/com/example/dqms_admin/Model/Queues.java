@@ -2,17 +2,17 @@ package com.example.dqms_admin.Model;
 
 public class Queues {
     String patientName, time, service, doctor, date;
-    long timeStamp, slot;
+    long newTimeStamp, slot;
 
     public Queues(){}
 
-    public Queues(String patientName, String date, long slot, long timeStamp, String time, String service, String doctor) {
+    public Queues(String patientName, String date, long slot, long newTimeStamp, String time, String service, String doctor) {
         this.patientName = patientName;
         this.slot = slot;
         this.time = time;
         this.service = service;
         this.doctor = doctor;
-        this.timeStamp = timeStamp;
+        this.newTimeStamp = newTimeStamp;
         this.date = date;
     }
 
@@ -24,12 +24,12 @@ public class Queues {
         this.date = date;
     }
 
-    public long getTimeStamp() {
-        return timeStamp;
+    public long getNewTimeStamp() {
+        return newTimeStamp;
     }
 
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setNewTimeStamp(long newTimeStamp) {
+        this.newTimeStamp = newTimeStamp;
     }
 
     public String getPatientName() {

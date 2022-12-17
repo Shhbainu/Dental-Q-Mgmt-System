@@ -20,6 +20,7 @@
 
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/doctorSpinnerQueue"
+        app:ms_arrow_tint="@color/turquoise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView3"

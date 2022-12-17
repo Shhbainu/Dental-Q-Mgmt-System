@@ -1,18 +1,15 @@
 package com.example.dqms_admin.Adapter;
 
-import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,9 +17,11 @@ import com.example.dqms_admin.Interface.IRecyclerItemSelectedListener;
 import com.example.dqms_admin.Model.Queues;
 import com.example.dqms_admin.QueuesActivity;
 import com.example.dqms_admin.R;
-import com.example.dqms_admin.ServicesActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -30,8 +29,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import dmax.dialog.SpotsDialog;
 
 public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyViewHolder> {
 
@@ -41,7 +38,7 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
    FirebaseFirestore firebaseFirestore;
 
    String date, time, doctor, underScoredDate, service, name;
-   long timeStamp, slot, selectedSlot;
+   long slot, selectedSlot, nextSlot;
 
     public MyQueues2Adapter(List<Queues> queuesList, QueuesActivity activity) {
         this.queuesList = queuesList;
@@ -70,7 +67,6 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
         doctor = queuesList.get(position).getDoctor();
         date = queuesList.get(position).getDate();
         underScoredDate = date.replace("/", "_");
-        timeStamp = queuesList.get(position).getTimeStamp();
 
 
         //setting data into holder
@@ -93,7 +89,11 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
                 holder.queuesCard.setCardBackgroundColor(activity.getResources()
                         .getColor(R.color.turquoise));
 
+                // Admin selected slot
                 selectedSlot = queuesList.get(pos).getSlot();
+
+                // Number of next slot to the admin selected slot
+                nextSlot = selectedSlot + 1;
                 Log.i("service adapter", "onItemSelectedListener: " + selectedSlot);
             }
         });
@@ -105,7 +105,7 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
                 getTime(timeConversion(String.valueOf(holder.inputTime.getText())));
                 Log.d("THIS IS THE INPUT", ""+ timeConversion(String.valueOf(holder.inputTime.getText())));
 
-                Toast.makeText(activity, ""+(holder.inputTime.getText()) +" Minutes is added in slot" +selectedSlot , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, ""+(holder.inputTime.getText()) +" Minutes is added in slot" +selectedSlot, Toast.LENGTH_SHORT).show();
                 holder.inputTime.getText().clear();
             }
         });
@@ -166,23 +166,70 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
     private void getTime(long time){
         Map<String, Object> newTimeStamp = new HashMap<>();
         newTimeStamp.put("newTimeStamp", time);
+
+        //Will check if there is a user next to the patient.
         firebaseFirestore.collection("AllDoctors")
                 .document(doctor)
                 .collection(underScoredDate)
-                .document(String.valueOf(selectedSlot))
-                .set(newTimeStamp, SetOptions.merge())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                .document(String.valueOf(nextSlot))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("SUCCESS", "DocumentSnapshot successfully written!");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("ERROR", "Error writing document", e);
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        //if next slot exist then add the data to the selected and next slot
+                        if(task.getResult().exists())
+                        {
+                            Toast.makeText(activity, "Time will also added to the next slot: " +nextSlot, Toast.LENGTH_SHORT).show();Toast.makeText(activity, "Data already exist", Toast.LENGTH_SHORT).show();
+
+                            //Data will insert to the selected slot
+                            firebaseFirestore.collection("AllDoctors")
+                                    .document(doctor)
+                                    .collection(underScoredDate)
+                                    .document(String.valueOf(selectedSlot))
+                                    .set(newTimeStamp, SetOptions.merge())
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("SUCCESS", "DocumentSnapshot successfully written!");
+
+                                            //Data will insert to the next slot
+                                            firebaseFirestore.collection("AllDoctors")
+                                                    .document(doctor)
+                                                    .collection(underScoredDate)
+                                                    .document(String.valueOf(nextSlot))
+                                                    .set(newTimeStamp, SetOptions. merge());
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w("ERROR", "Error writing document", e);
+                                        }
+                                    });
+                        }
+                        else //if not, will make toast that there is no next in line
+                        {
+                            Toast.makeText(activity, "There is no appointment next in line", Toast.LENGTH_SHORT).show();
+
+                            //Then data will only inserted to the selected slot
+                            firebaseFirestore.collection("AllDoctors")
+                                    .document(doctor)
+                                    .collection(underScoredDate)
+                                    .document(String.valueOf(selectedSlot))
+                                    .set(newTimeStamp, SetOptions.merge())
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("SUCCESS", "DocumentSnapshot successfully written!");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w("ERROR", "Error writing document", e);
+                                        }
+                                    });
+                        }
                     }
                 });
-
     }
 
     @Override
