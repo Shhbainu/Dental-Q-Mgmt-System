@@ -11,17 +11,18 @@ import androidx.fragment.app.Fragment;
 import com.example.dentalqmgmtsys.QueueFinishedDialog;
 import com.example.dentalqmgmtsys.QuizTitleActivity;
 import com.example.dentalqmgmtsys.databinding.FragmentQueueBinding;
+import com.example.dentalqmgmtsys.databinding.FragmentQueueEmptyBinding;
 
 public class QueueFragmentEmpty extends Fragment {
     //Viewbinding
-    private FragmentQueueBinding binding;
+    private FragmentQueueEmptyBinding binding;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentQueueBinding.inflate(inflater, container, false);
+        binding = FragmentQueueEmptyBinding.inflate(inflater, container, false);
         binding.quizGameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.QueueFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/turquoise">
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imageView11"-->
+        <!--            android:layout_width="413dp"-->
+        <!--            android:layout_height="255dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.6"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:srcCompat="@drawable/ico_upper_background" />-->
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/shapewhite" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="244dp"
+            android:layout_height="86dp"
+            android:text="Please wait \non the line..."
+            android:layout_gravity="start"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.168"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.38" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/quizGameBtn"
+            android:layout_width="170dp"
+            android:layout_height="51dp"
+            android:background="@drawable/textfield_background"
+            android:text="Play Quiz Game"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.131"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            app:layout_constraintVertical_bias="0.24" />
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="190dp"
+            android:layout_height="136dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="110dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.939"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ico_user_game" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="250dp">
+
+        <!-- CardView for queue time -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:cardBackgroundColor="@color/turquoise"
+            app:cardCornerRadius="25dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
+
+            <!-- Queue Time Description -->
+            <TextView
+                android:id="@+id/descriptionTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Your estimated waiting time is"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"/>
+
+            <!-- Estimated Queue Time -->
+            <TextView
+                android:id="@+id/queueTimeTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/descriptionTV"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_marginBottom="-73dp"
+                android:text="00 Hours:00 mins remaining"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="50sp"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"/>
+
+            <!-- Tip -->
+            <TextView
+                android:id="@+id/tipTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/queueTimeTV"
+                android:text="Tip: \nAlways check your phone for further updates. Thank you!"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="italic"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="220dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/imInBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Im in"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="340dp"
+            android:visibility="gone"
+            android:padding="10dp"
+            android:background="@drawable/shape_button02"
+            />
+
+    </FrameLayout>
+
+</RelativeLayout>
