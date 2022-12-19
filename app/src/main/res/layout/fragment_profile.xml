@@ -102,6 +102,8 @@
 
         </FrameLayout>
 
+
+
         <!--User Details Card-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -122,18 +124,18 @@
 
             </ImageView>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="20dp">
+                android:paddingRight="10dp">
 
                 <ImageView
                     android:id="@+id/profileTV"
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_outlined_person"
                     android:layout_margin="2dp"
                     android:scaleType="centerCrop"
@@ -142,7 +144,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="100dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:layout_margin="2dp"
@@ -158,16 +160,7 @@
                             android:id="@+id/first_nameTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="First Name"
-                            android:textSize="18sp"
-                            android:fontFamily="sans-serif-condensed"
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="_"
-                            android:visibility="invisible"
+                            android:text="FirstName"
                             android:textSize="18sp"
                             android:fontFamily="sans-serif-condensed"
                             android:textColor="@color/black"/>
@@ -177,7 +170,8 @@
                             android:id="@+id/last_nameTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Last Name"
+                            android:paddingLeft="4dp"
+                            android:text="LastName"
                             android:textSize="18sp"
                             android:fontFamily="sans-serif-condensed"
                             android:textColor="@color/black"/>
@@ -192,22 +186,21 @@
                         android:id="@+id/emailTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
                         android:text="email@example.com"
                         android:textColor="@color/black"
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="18sp"
                         android:textStyle="italic" />
 
-                    <TextView
-                        android:id="@+id/memberDateTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="**/**/**"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/memberDateTV"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="3dp"-->
+<!--                        android:text="**/**/**"-->
+<!--                        android:fontFamily="sans-serif-condensed"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:textColor="@color/black"/>-->
 
                     <!--Display phone-->
 
@@ -226,8 +219,8 @@
                         android:id="@+id/addressTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
                         android:text="House No., Street, City"
+                        android:textAlignment="center"
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="18sp"
                         android:textColor="@color/black"/>

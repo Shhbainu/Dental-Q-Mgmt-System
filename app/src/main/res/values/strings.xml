@@ -38,4 +38,8 @@
     </string>
     <string name="back">back</string>
     <string name="drInit">Dr.</string>
+    <string name="dentalProd1"><i>Dental fillings </i>treat cavities or tooth decay. Also, they can repair damaged teeth.</string>
+    <string name="dentalProd2"><i>Braces</i> are dental tools that help to correct problems with your teeth alignment.</string>
+    <string name="dentalProd3"><i>Oral prophylaxis</i> is a procedure used to clean teeth and prevent periodontal diseases.</string>
+    <string name="dentalProd4"><i>Tooth filling</i> is a type of dental restoration which repairs damage caused by tooth decay.</string>
 </resources>

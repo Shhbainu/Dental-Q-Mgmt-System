@@ -153,7 +153,7 @@ public class ProfileFragment extends Fragment {
                         binding.firstNameTV.setText(fName);
                         binding.lastNameTV.setText(lName);
                         binding.emailTV.setText(email);
-                        binding.memberDateTV.setText(formattedDate);
+                        //binding.memberDateTV.setText(formattedDate);
                         //binding.contactTV.setText(phone);
                         binding.addressTV.setText(address);
                         //binding.phone.setText(phone);

@@ -90,18 +90,30 @@
 
         </FrameLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="12dp"
+            android:text="Dental Procedures:"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
         <!--Procedure Details Card-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="95dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="center_horizontal"
             android:background="@drawable/ico_appointment_background"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -114,8 +126,9 @@
                     android:background="@drawable/dental_crown"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:padding="3dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:layout_margin="2dp"
@@ -126,9 +139,10 @@
                         android:padding="3dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dental fillings treat cavities or tooth decay. Also, they can repair damaged teeth."
+                        android:text="@string/dentalProd1"
                         android:textSize="18sp"
                         android:fontFamily="sans-serif-condensed"
+                        android:textAlignment="center"
                         android:textColor="@color/black"/>
 
                     <!--Display Details-->
@@ -141,16 +155,18 @@
 
         <!--Procedure Details Card-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="95dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="center_horizontal"
             android:background="@drawable/ico_appointment_background"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -163,8 +179,9 @@
                     android:background="@drawable/braces"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:padding="3dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:layout_margin="2dp"
@@ -175,10 +192,11 @@
                         android:padding="3dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Braces are dental tools that help correct problems with your teeth."
+                        android:text="@string/dentalProd2"
                         android:textSize="18sp"
                         android:fontFamily="sans-serif-condensed"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textAlignment="center"/>
 
                     <!--Display Details-->
 
@@ -190,16 +208,18 @@
 
         <!--Procedure Details Card-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="95dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="center_horizontal"
             android:background="@drawable/ico_appointment_background"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -212,8 +232,9 @@
                     android:background="@drawable/oral"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:padding="3dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:layout_margin="2dp"
@@ -224,10 +245,11 @@
                         android:padding="3dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Oral Prophylaxis is a procedure done for teeth cleaning."
+                        android:text="@string/dentalProd3"
                         android:textSize="18sp"
                         android:fontFamily="sans-serif-condensed"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textAlignment="center"/>
 
                     <!--Display Details-->
 
@@ -239,16 +261,18 @@
 
         <!--Procedure Details Card-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="95dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="center_horizontal"
             android:background="@drawable/ico_appointment_background"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -261,8 +285,9 @@
                     android:background="@drawable/filling"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:padding="3dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:layout_margin="2dp"
@@ -273,10 +298,11 @@
                         android:padding="3dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A tooth filling is a type of dental restoration which repairs damage caused by tooth decay."
+                        android:text="@string/dentalProd4"
                         android:textSize="18sp"
                         android:fontFamily="sans-serif-condensed"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textAlignment="center"/>
 
                     <!--Display Details-->
 
