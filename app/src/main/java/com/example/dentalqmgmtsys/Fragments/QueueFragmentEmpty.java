@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.dentalqmgmtsys.QueueFinishedDialog;
 import com.example.dentalqmgmtsys.QuizTitleActivity;
 import com.example.dentalqmgmtsys.databinding.FragmentQueueBinding;
 
@@ -28,6 +29,15 @@ public class QueueFragmentEmpty extends Fragment {
                 startActivity(intent);
             }
         });
+
+        binding.imInBtn.setOnClickListener(view -> {
+            openQueueDialog();
+        });
+
         return binding.getRoot();
+    }
+    private void openQueueDialog() {
+        QueueFinishedDialog queueFinishedDialog = new QueueFinishedDialog();
+        queueFinishedDialog.show(getParentFragmentManager(), "Queue Info Dialog");
     }
 }

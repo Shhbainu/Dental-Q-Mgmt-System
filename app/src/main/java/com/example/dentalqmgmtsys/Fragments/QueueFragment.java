@@ -13,14 +13,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dentalqmgmtsys.Common.Common;
+import com.example.dentalqmgmtsys.QueueFinishedDialog;
 import com.example.dentalqmgmtsys.QuizTitleActivity;
 import com.example.dentalqmgmtsys.R;
+import com.example.dentalqmgmtsys.ReferralActivity;
 import com.example.dentalqmgmtsys.databinding.FragmentQueueBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -315,11 +318,22 @@ public class QueueFragment extends Fragment {
 
         // Inflate the layout for this fragment
         binding = FragmentQueueBinding.inflate(inflater, container, false);
+
         binding.quizGameBtn.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), QuizTitleActivity.class);
             startActivity(intent);
         });
+
+//        binding.imInBtn.setOnClickListener(view -> {
+//            Intent intent = new Intent(getActivity(), QuizTitleActivity.class);
+//            startActivity(intent);
+//        });
         return binding.getRoot();
+    }
+
+    private void openQueueDialog() {
+        QueueFinishedDialog queueFinishedDialog = new QueueFinishedDialog();
+        queueFinishedDialog.show(getParentFragmentManager(), "Queue Info Dialog");
     }
 
     private int dateConversion(String date){

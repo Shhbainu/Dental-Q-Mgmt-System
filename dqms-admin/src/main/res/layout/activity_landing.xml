@@ -16,17 +16,19 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="-1dp"
-        app:srcCompat="@drawable/corner_shape_admin" />
+        app:srcCompat="@drawable/ico_shape_admin" />
+
+    <!--Book Appointment-->
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/ico_landingtwo" />
+        android:layout_marginTop="155dp"
+        android:src="@drawable/ico_doctors" />
 
-    <!--Book Appointment-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +67,7 @@
         android:background="@drawable/shape_button01"
         android:text="Login"
         android:textColor="@color/white"
-        app:backgroundTint="@color/light_admin_gray" />
+        app:backgroundTint="@color/mint" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registerNowBtn"
@@ -77,6 +79,6 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/shape_button02"
         android:text="Register Now"
-        android:textColor="@color/light_admin_gray" />
+        android:textColor="@color/mint" />
 
 </RelativeLayout>

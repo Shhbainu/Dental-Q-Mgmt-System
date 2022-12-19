@@ -12,7 +12,7 @@
         android:layout_height="198dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/corner_shape_admin" />
+        app:srcCompat="@drawable/ico_shape_admin" />
 
     <ImageView
         android:id="@+id/imageView20"
@@ -20,7 +20,7 @@
         android:layout_height="209dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/corner_shape_mirrored" />
+        app:srcCompat="@drawable/ico_shape_flip_admin" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.469"
-        app:srcCompat="@drawable/toothlogoadmin"/>
+        app:srcCompat="@drawable/ico_admin_green"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

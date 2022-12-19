@@ -12,7 +12,7 @@
         android:layout_height="189dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/corner_shape_admin" />
+        app:srcCompat="@drawable/ico_shape_admin" />
 
     <ImageView
         android:id="@+id/backBtn"
@@ -137,7 +137,7 @@
         android:layout_width="232dp"
         android:layout_height="52dp"
         android:layout_marginBottom="64dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/shape_button01"
         android:text="Sign In"
         android:textColor="#ffffff"
         android:textSize="18sp"

@@ -140,15 +140,16 @@
 
         </androidx.cardview.widget.CardView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/imInBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Im in"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="340dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:padding="10dp"
+            android:background="@drawable/shape_button02"
             />
 
     </FrameLayout>
