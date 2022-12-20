@@ -1,5 +1,6 @@
 package com.example.dentalqmgmtsys.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,9 @@ import android.widget.Toast;
 
 import com.example.dentalqmgmtsys.Adapter.MyUserAppointmentAdapter;
 import com.example.dentalqmgmtsys.Common.Common;
+import com.example.dentalqmgmtsys.LandingActivity;
+import com.example.dentalqmgmtsys.LoginActivity;
+import com.example.dentalqmgmtsys.MainActivity;
 import com.example.dentalqmgmtsys.Models.UserAppointmentModel;
 import com.example.dentalqmgmtsys.R;
 import com.example.dentalqmgmtsys.databinding.FragmentAppointmentBinding;
@@ -49,8 +54,9 @@ public class AppointmentFragment extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<UserAppointmentModel> list;
-    DatabaseReference reference, removeRef;
     MyUserAppointmentAdapter adapter;
+
+    DatabaseReference reference, removeRef, ref;
 
     String date;
     String time;
@@ -88,7 +94,9 @@ public class AppointmentFragment extends Fragment {
                 //supposedly delete firebase realtimedatabase
                 removeAppointmentFR();
                 removeAppointmentFS();
-                loadAppointment();
+                //loadAppointment();
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
             }
         });
 
@@ -166,32 +174,55 @@ public class AppointmentFragment extends Fragment {
     }
 
     private void loadAppointment() {
-        reference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/")
+        ref = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Users" + "/" + firebaseUser.getUid() + "/" + "appointments" + "/");
+
 
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new MyUserAppointmentAdapter(getActivity(), list);
         recyclerView.setAdapter(adapter);
 
+        reference = FirebaseDatabase.getInstance("https://dental-qmgmt-system-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("Users" + "/" + firebaseUser.getUid() + "/");
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren())
-                {
-                    //String doctor = dataSnapshot.child("doctor").getValue().toString();
-                    //String date = dataSnapshot.child("date").getValue().toString();
-                    //String time = dataSnapshot.child("time").getValue().toString();
-                    //String service = dataSnapshot.child("service").getValue().toString();
-                    //Log.i("Firebase", "Reading from.."+ dataSnapshot.getKey()+", value="+dataSnapshot.getValue()+"UserAppointmentModel "+dataSnapshot.getValue(UserAppointmentModel.class));
-                    //Log.i("Firebase", "Test Read"+doctor+" "+date+" "+time+" "+service+"");
-                    UserAppointmentModel user = dataSnapshot.getValue(UserAppointmentModel.class);
+                if (snapshot.exists() && snapshot.hasChild("appointments")){
+                    ref.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot: snapshot.getChildren())
+                            {
+                                //String doctor = dataSnapshot.child("doctor").getValue().toString();
+                                //String date = dataSnapshot.child("date").getValue().toString();
+                                //String time = dataSnapshot.child("time").getValue().toString();
+                                //String service = dataSnapshot.child("service").getValue().toString();
+                                //Log.i("Firebase", "Reading from.."+ dataSnapshot.getKey()+", value="+dataSnapshot.getValue()+"UserAppointmentModel "+dataSnapshot.getValue(UserAppointmentModel.class));
+                                //Log.i("Firebase", "Test Read"+doctor+" "+date+" "+time+" "+service+"");
+                                UserAppointmentModel user = dataSnapshot.getValue(UserAppointmentModel.class);
 /*                    Log.i("Firebase", "Reading from.."+ dataSnapshot.child("time").getValue());
                     Log.i("Firebase", "Reading from.."+ dataSnapshot.child("date").getValue());*/
 
-                    list.add(user);
+                                list.add(user);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
-                adapter.notifyDataSetChanged();
+                else
+                {
+                    Log.i("You Have No Appointment", "No appointment");
+                    //Toast.makeText(getActivity(), "You don't have an appointment", Toast.LENGTH_SHORT).show();
+                    //binding.cancelAppointmentBtn.setEnabled(false);
+                    //binding.bookButton.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -199,5 +230,8 @@ public class AppointmentFragment extends Fragment {
 
             }
         });
+
+
+
     }
 }
