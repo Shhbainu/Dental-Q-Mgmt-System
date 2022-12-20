@@ -32,12 +32,12 @@ public class MainActivity2 extends AppCompatActivity {
         checkUser();
 
 
-        binding.appointmentsTile.setOnClickListener(new View.OnClickListener() {
+/*        binding.appointmentsTile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity2.this, AppointmentsActivity.class));
             }
-        });
+        });*/
 
         binding.doctorsTile.setOnClickListener(new View.OnClickListener() {
             @Override

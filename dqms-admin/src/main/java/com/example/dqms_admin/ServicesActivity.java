@@ -30,13 +30,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
 
@@ -45,8 +48,9 @@ public class ServicesActivity extends AppCompatActivity implements IAllDoctorsLo
     private static final String TAG = "Service Activity";
     CollectionReference allDoctorsRef;
     CollectionReference serviceRef;
-    FirebaseFirestore firebaseFirestore;
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     ActivityServicesBinding binding;
+    DocumentReference addServiceRef;
 
     IAllDoctorsLoadListener iAllDoctorsLoadListener;
     IServicesLoadListener iServicesLoadListener;
@@ -77,13 +81,13 @@ public class ServicesActivity extends AppCompatActivity implements IAllDoctorsLo
 
         alertDialog = new SpotsDialog.Builder().setContext(ServicesActivity.this).build();
 
-/*        binding.addServiceBtn.setOnClickListener(new View.OnClickListener() {
+        binding.addServiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ViewDialogAdd viewDialogAdd = new ViewDialogAdd();
                 viewDialogAdd.showDialog(ServicesActivity.this);
             }
-        });*/
+        });
 
 
 
@@ -122,13 +126,18 @@ public class ServicesActivity extends AppCompatActivity implements IAllDoctorsLo
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 if( position > 0)
                 {
+                    binding.deleteServiceInfoBtn.setVisibility(View.VISIBLE);
                     selectedDoctorName = item.toString();
                     loadServicesOfDoctor(selectedDoctorName);
+
                 }
                 else
                 {
+                    binding.deleteServiceInfoBtn.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     floatingActionButton.setVisibility(View.GONE);
+
+
                 }
             }
         });
@@ -198,7 +207,7 @@ public class ServicesActivity extends AppCompatActivity implements IAllDoctorsLo
 
             EditText serviceName = dialog.findViewById(R.id.addNewServiceET);
 
-            Button addServiceBtn = dialog.findViewById(R.id.addServiceBtn);
+            Button addServiceBtn = dialog.findViewById(R.id.addServiceInfoBtn);
             Button cancelServiceBtn = dialog.findViewById(R.id.cancelServiceInfoBtn);
 
             cancelServiceBtn.setOnClickListener(new View.OnClickListener() {
@@ -213,18 +222,20 @@ public class ServicesActivity extends AppCompatActivity implements IAllDoctorsLo
                 public void onClick(View view) {
                     String newService = serviceName.getText().toString();
 
-/*                    if(newService.isEmpty()){
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("name", newService);
+
+                    if(newService.isEmpty()){
                         Toast.makeText(context, "Please enter a service", Toast.LENGTH_SHORT).show();
                     }else{
-
                         firebaseFirestore.collection("AllDoctors").document(selectedDoctorName).collection("Services")
-                                .add(new Services(newService));
+                                        .add(data);
 
-                        Toast.makeText(context, "Data added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Data added" +data.values(), Toast.LENGTH_SHORT).show();
+                        Log.i(TAG, "onClick: " +data.values());
                         dialog.dismiss();
 
-                    }*/
-                    Toast.makeText(context, "you selected" + newService, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
