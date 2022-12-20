@@ -134,8 +134,8 @@ public class ServicesActivity extends AppCompatActivity implements IAllDoctorsLo
                 else
                 {
 /*                    binding.deleteServiceInfoBtn.setVisibility(View.GONE);*/
-                    recyclerView.setVisibility(View.GONE);
-                    floatingActionButton.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);/*
+                    floatingActionButton.setVisibility(View.GONE);*/
 
 
                 }
