@@ -324,10 +324,10 @@ public class QueueFragment extends Fragment {
             startActivity(intent);
         });
 
-//        binding.imInBtn.setOnClickListener(view -> {
-//            Intent intent = new Intent(getActivity(), QuizTitleActivity.class);
-//            startActivity(intent);
-//        });
+        binding.imInBtn.setOnClickListener(view -> {
+            openQueueDialog();
+        });
+
         return binding.getRoot();
     }
 
