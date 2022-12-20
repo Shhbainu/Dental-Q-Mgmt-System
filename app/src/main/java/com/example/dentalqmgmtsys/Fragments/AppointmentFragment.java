@@ -1,6 +1,10 @@
 package com.example.dentalqmgmtsys.Fragments;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.dentalqmgmtsys.Adapter.MyUserAppointmentAdapter;
@@ -92,44 +98,51 @@ public class AppointmentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //supposedly delete firebase realtimedatabase
-                removeAppointmentFR();
-                removeAppointmentFS();
+                    ViewDialogCancelAppointment viewDialogCancelAppointment = new ViewDialogCancelAppointment();
+                    viewDialogCancelAppointment.showDialog(getContext());
+
                 //loadAppointment();
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                getActivity().finish();
             }
         });
-
-
-/*        CollectionReference appointmentRef = firebaseFirestore.collection("AllDoctors");
-        Query query = appointmentRef.whereEqualTo("date", Common.dateNotDone);
-
-        Log.d("Query", ""+query);*/
-
-
         //Init function
         cancelAppointmentAvailability();
         loadAppointment();
 
-/*        SimpleDateFormat sdf = new SimpleDateFormat("MM_dd_yyyy");
-        Date parsedDate = sdf.parse(Common.dateNotDone);
-        SimpleDateFormat print = new SimpleDateFormat("MM_dd_yyyy");
-        System.out.println(print.format(parsedDate));*/
-
-
-
-
-/*        System.out.println(Common.timeNotDone);
-        System.out.println(Common.dateNotDone);
-        System.out.println(Common.doctorNotDone);
-        System.out.println(Common.slotNotDone);*/
-
-        //12/05/2022
-        //12_05_2022
-
-
     }
+    public class ViewDialogCancelAppointment{
 
+        public void showDialog(Context context){
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.layout_dialog_confirm_cancel_appointment);
+
+            Button buttonDelete = dialog.findViewById(R.id.buttonDelete);
+            Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
+
+            buttonCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    removeAppointmentFR();
+                    removeAppointmentFS();
+                    dialog.dismiss();
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    getActivity().finish();
+
+                }
+            });
+
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }
+    }
     private void removeAppointmentFS() {
 
         String date = Common.dateNotDone;

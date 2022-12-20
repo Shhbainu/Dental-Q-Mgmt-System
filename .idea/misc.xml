@@ -12,8 +12,19 @@
         <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_add_appointment_step3.xml" value="0.3625" />
         <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_add_appointment_step4.xml" value="0.2965811965811966" />
         <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_queue.xml" value="0.1762917933130699" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/fragment_queue_empty.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/layout_dialog_confirm_cancel_appointment.xml" value="0.25" />
         <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/layout_services.xml" value="0.33" />
         <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/app/src/main/res/layout/layout_time_slot.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/dqms-admin/src/main/res/layout/activity_main2.xml" value="0.35833333333333334" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/dqms-admin/src/main/res/layout/activity_services.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/dqms-admin/src/main/res/layout/drop_down_list_doctors.xml" value="0.3625" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/dqms-admin/src/main/res/layout/fragment_services.xml" value="0.1734375" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/dqms-admin/src/main/res/layout/layout_dialog_add_service.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/dqms-admin/src/main/res/layout/layout_dialog_confirm_delete.xml" value="0.1734375" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/dqms-admin/src/main/res/layout/layout_doctor_lists.xml" value="0.1693840579710145" />
+        <entry key="..\:/Users/Admin/Desktop/Capstone/Dental-Q-Mgmt-System/dqms-admin/src/main/res/layout/layout_services.xml" value="0.33" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/drawable/appointment_editbox.xml" value="0.3675" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/drawable/dotted_border.xml" value="0.3255" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/drawable/profilecard_background.xml" value="0.3335" />
@@ -22,14 +33,13 @@
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_landing.xml" value="0.2726449275362319" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_main.xml" value="0.3087719298245614" />
-        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_quiz_title.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_referral.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_splash.xml" value="0.28125" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_terms_conditions.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/appointments_list.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_appointment.xml" value="0.33" />
-        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_home.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_queue.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/layout_redeem.xml" value="0.3078947368421053" />
