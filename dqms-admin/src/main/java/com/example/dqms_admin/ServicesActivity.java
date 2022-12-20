@@ -126,14 +126,14 @@ public class ServicesActivity extends AppCompatActivity implements IAllDoctorsLo
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 if( position > 0)
                 {
-                    binding.deleteServiceInfoBtn.setVisibility(View.VISIBLE);
+/*                    binding.deleteServiceInfoBtn.setVisibility(View.VISIBLE);*/
                     selectedDoctorName = item.toString();
                     loadServicesOfDoctor(selectedDoctorName);
 
                 }
                 else
                 {
-                    binding.deleteServiceInfoBtn.setVisibility(View.GONE);
+/*                    binding.deleteServiceInfoBtn.setVisibility(View.GONE);*/
                     recyclerView.setVisibility(View.GONE);
                     floatingActionButton.setVisibility(View.GONE);
 
