@@ -234,6 +234,7 @@ public class MyQueues2Adapter extends RecyclerView.Adapter<MyQueues2Adapter.MyVi
 
     @Override
     public int getItemCount() {
+
         return queuesList.size();
     }
 

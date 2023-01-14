@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -98,7 +99,8 @@ public class AddAppointmentStep1Fragment extends Fragment implements IAllDoctors
     }
 
     private void loadAllDoctors() {
-        allDoctorsRef.get()
+        allDoctorsRef.whereEqualTo("availability", true)
+                .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
