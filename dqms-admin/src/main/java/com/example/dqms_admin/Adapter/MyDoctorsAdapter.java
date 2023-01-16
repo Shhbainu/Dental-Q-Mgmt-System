@@ -41,28 +41,12 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
     Context context;
     ArrayList<Doctors> doctorsArrayList;
     FirebaseFirestore firebaseFirestore;
-    SharedPreferences sharedPreferences;
-
-/*    private static String MY_PREFS = "toggle_prefs";
-    private static String AVAILABILITY_STATUS = "toggle_on";
-    private static String TOGGLE_STATUS = "toggle_status";
-
-    boolean toggle_status;
-    boolean doctor_status;
-
-    SharedPreferences myPreferences;
-    SharedPreferences.Editor myEditor;*/
 
     public MyDoctorsAdapter(Context context, ArrayList<Doctors> doctorsArrayList) {
         this.context = context;
         this.doctorsArrayList = doctorsArrayList;
         firebaseFirestore = FirebaseFirestore.getInstance();
-/*        myPreferences = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
-        myEditor = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE).edit();
-
-        toggle_status = myPreferences.getBoolean(TOGGLE_STATUS, true);
-        doctor_status = myPreferences.getBoolean(AVAILABILITY_STATUS, true);*/
-        sharedPreferences = context.getSharedPreferences("save", Context.MODE_PRIVATE);
+/*        sharedPreferences = context.getSharedPreferences("save", Context.MODE_PRIVATE);*/
     }
 
     @NonNull
@@ -96,6 +80,60 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
             }
         });
 
+        if (doctors.isAvailability()){
+
+            holder.doctorAvailabilityTV.setText("Doc now is in");
+        }else {
+            holder.doctorAvailabilityTV.setText("Doc now is out");
+        }
+
+        holder.doctorAvailabilityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (doctors.isAvailability()){
+                    holder.doctorAvailabilityTV.setText("Doc now is in");
+                    Map<String, Object> doctorAvailability = new HashMap<>();
+                    doctorAvailability.put("availability", false);
+
+                    firebaseFirestore.collection("AllDoctors").document(doctors.getName())
+                            .set(doctorAvailability, SetOptions.merge())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(context, doctors.getName() + " is not in service", Toast.LENGTH_SHORT).show();
+                                    holder.doctorAvailabilityTV.setText("Doc now is out");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("ERROR", "Error writing document", e);
+                                }
+                            });
+
+                }else {
+                    holder.doctorAvailabilityTV.setText("Doc now is out");
+                    Map<String, Object> doctorAvailability = new HashMap<>();
+                    doctorAvailability.put("availability", true);
+
+                    firebaseFirestore.collection("AllDoctors").document(doctors.getName())
+                            .set(doctorAvailability, SetOptions.merge())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(context, doctors.getName() + " is now in service", Toast.LENGTH_SHORT).show();
+                                    holder.doctorAvailabilityTV.setText("Doc now is in");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("ERROR", "Error writing document", e);
+                                }
+                            });
+                }
+            }
+
+        });
+
 /*        holder.doctorAvailabilityTB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +142,10 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
             }
         });*/
 
-        holder.doctorAvailabilityTB.setOnClickListener(new View.OnClickListener() {
+/*        holder.doctorAvailabilityTB.setChecked(sharedPreferences.getBoolean("value", true));*/
+
+
+       /* holder.doctorAvailabilityTB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (holder.doctorAvailabilityTB.isChecked()){
@@ -122,6 +163,11 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(context, doctors.getName() + " is now in service", Toast.LENGTH_SHORT).show();
+
+                                    myEditor.putBoolean(TOGGLE_STATUS, true);
+                                    myEditor.putBoolean(AVAILABILITY_STATUS, true);
+                                    myEditor.apply();
+                                    holder.doctorAvailabilityTB.setChecked(true);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -130,10 +176,12 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
                                 }
                             });
 
-                    SharedPreferences.Editor editor = context.getSharedPreferences("save", Context.MODE_PRIVATE).edit();
+*//*                    SharedPreferences.Editor editor = context.getSharedPreferences("save", Context.MODE_PRIVATE).edit();
                     editor.putBoolean("value", true);
                     editor.apply();
-                    holder.doctorAvailabilityTB.setChecked(true);
+                    holder.doctorAvailabilityTB.setChecked(true);*//*
+
+
 
                 }
                 else{
@@ -150,6 +198,12 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(context, doctors.getName() + " is not in service", Toast.LENGTH_SHORT).show();
+
+                                    myEditor.putBoolean(TOGGLE_STATUS, false);
+                                    myEditor.putBoolean(AVAILABILITY_STATUS, false);
+                                    myEditor.apply();
+                                    holder.doctorAvailabilityTB.setChecked(false);
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -157,13 +211,13 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
                                     Log.w("ERROR", "Error writing document", e);
                                 }
                             });
-                    SharedPreferences.Editor editor = context.getSharedPreferences("save", Context.MODE_PRIVATE).edit();
+*//*                    SharedPreferences.Editor editor = context.getSharedPreferences("save", Context.MODE_PRIVATE).edit();
                     editor.putBoolean("value", false);
                     editor.apply();
-                    holder.doctorAvailabilityTB.setChecked(false);
+                    holder.doctorAvailabilityTB.setChecked(false);*//*
                 }
             }
-        });
+        });*/
 
     }
 
@@ -176,9 +230,9 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView doctorName;
+        TextView doctorName, doctorAvailabilityTV;
         Button updateBtn, deleteBtn;
-        SwitchCompat doctorAvailabilityTB;
+        Button doctorAvailabilityBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -186,7 +240,8 @@ public class MyDoctorsAdapter extends RecyclerView.Adapter<MyDoctorsAdapter.View
             doctorName = itemView.findViewById(R.id.doctorsNameTV);
             updateBtn = itemView.findViewById(R.id.updateDoctorBtn);
             deleteBtn = itemView.findViewById(R.id.deleteDoctorBtn);
-            doctorAvailabilityTB = itemView.findViewById(R.id.doctorsAvailabilityTB);
+            doctorAvailabilityBtn = itemView.findViewById(R.id.availabilityDoctorBtn);
+            doctorAvailabilityTV = itemView.findViewById(R.id.availabilityDoctorTV);
 
 
         }
