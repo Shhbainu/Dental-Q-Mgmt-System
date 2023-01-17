@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    tools:context=".LandingActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="268dp"
+        android:layout_height="295dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="-1dp"
+        app:srcCompat="@drawable/ico_shape_admin" />
+
+    <!--Book Appointment-->
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="298dp"
+        android:layout_height="296dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ico_doctors" />
+
+    <TextView
+        android:layout_width="448dp"
+        android:layout_height="83dp"
+        android:layout_below="@id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Dental Q-Mgmt System [Admin]"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="100dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:layout_marginEnd="100dp"-->
+    <!--        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.-->
+    <!--        Interdum dictum tempus, interdum at dignissim metus. Ultricies sed nunc."-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+    <!--        android:textSize="16sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginNowBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_above="@+id/registerNowBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="457dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="450dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/shape_button01"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:backgroundTint="@color/mint" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registerNowBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="461dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="456dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_button02"
+        android:text="Register Now"
+        android:textColor="@color/mint"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="318dp"
+        android:layout_height="342dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ico_shape_admin" />
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.914" />
+        app:layout_constraintVertical_bias="0.615" />
 
     <TextView
         android:id="@+id/textView4"
@@ -46,35 +46,44 @@
         android:text="For Authorized Personnel Only"
         android:textSize="16sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="253dp"
+        android:layout_height="290dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:srcCompat="@drawable/ico_register" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="376dp"
+        android:layout_width="623dp"
+        android:layout_height="308dp"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_marginBottom="2dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/fNameET"
-                android:layout_width="wrap_content"
+                android:layout_width="268dp"
                 android:layout_height="48dp"
-                android:layout_margin="5dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp"
                 android:background="@drawable/textfield_background"
                 android:drawableStart="@drawable/ic_person_gray"
                 android:drawablePadding="5dp"
@@ -87,9 +96,12 @@
 
             <EditText
                 android:id="@+id/lNameET"
-                android:layout_width="wrap_content"
+                android:layout_width="263dp"
                 android:layout_height="48dp"
-                android:layout_margin="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="4dp"
+                android:layout_toEndOf="@+id/fNameET"
                 android:background="@drawable/textfield_background"
                 android:drawableStart="@drawable/ic_person_gray"
                 android:drawablePadding="5dp"
@@ -100,7 +112,7 @@
                 android:textColor="#7E7E7E"
                 android:textSize="16sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <!--        <LinearLayout-->
         <!--            android:layout_width="wrap_content"-->
@@ -178,7 +190,9 @@
             android:id="@+id/emailET"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_margin="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/textfield_background"
             android:drawableStart="@drawable/ic_email_gray"
             android:drawablePadding="5dp"
@@ -204,7 +218,7 @@
                 android:id="@+id/passwordET"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/textfield_background"
                 android:drawableStart="@drawable/ic_lock_gray"
                 android:drawablePadding="5dp"
@@ -221,7 +235,7 @@
             android:id="@+id/password_til2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             app:boxStrokeWidth="0dp"
@@ -262,7 +276,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintVertical_bias="0.693" />
 
     <TextView
         android:id="@+id/hasAnAccountTV"
@@ -274,6 +288,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/registerBtn"
+        app:layout_constraintVertical_bias="0.149" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
