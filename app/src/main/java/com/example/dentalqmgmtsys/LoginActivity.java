@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -53,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                startActivity(new Intent(LoginActivity.this, LandingActivity.class));
+//                finish();
                 onBackPressed();
             }
         });
@@ -143,8 +146,13 @@ public class LoginActivity extends AppCompatActivity {
                         // Check user type
                         if (userType.equals("user")){
                             // users proceed to user home page
+//                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                            startActivity(intent);
+//                            finish();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
+                            LandingActivity.getInstance().finish();
                         }
                         else if (userType.equals("admin")){
                             // admin proceed to admin page?? nope, go to user homepage

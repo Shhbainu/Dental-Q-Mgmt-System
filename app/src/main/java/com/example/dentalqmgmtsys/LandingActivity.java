@@ -13,9 +13,15 @@ public class LandingActivity extends AppCompatActivity {
     //Viewbinding
     private ActivityLandingBinding binding;
 
+    static LandingActivity landingActivity;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        landingActivity = this;
+
         binding = ActivityLandingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -24,7 +30,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LandingActivity.this, LoginActivity.class));
-                finish();
+                //finish();
             }
         });
 
@@ -34,9 +40,13 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LandingActivity.this, RegisterActivity.class));
-                finish();
+                //finish();
             }
         });
 
+    }
+
+    public static LandingActivity getInstance(){
+        return landingActivity;
     }
 }

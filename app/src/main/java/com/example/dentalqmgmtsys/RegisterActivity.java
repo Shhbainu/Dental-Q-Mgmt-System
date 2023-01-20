@@ -82,6 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                startActivity(new Intent(RegisterActivity.this, LandingActivity.class));
+//                finish();
                 onBackPressed();
             }
         });
@@ -92,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 finish();
+                //onBackPressed();
             }
         });
 
@@ -226,6 +229,7 @@ public class RegisterActivity extends AppCompatActivity {
                         //will proceed to user homepage
                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                         finish();
+                        LandingActivity.getInstance().finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
