@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="272dp"
+        android:layout_height="292dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ico_shape_admin" />
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.914" />
+        app:layout_constraintVertical_bias="0.408" />
 
     <TextView
         android:id="@+id/textView4"
@@ -46,61 +46,23 @@
         android:text="For Authorized Personnel Only"
         android:textSize="16sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="376dp"
+        android:layout_width="580dp"
+        android:layout_height="262dp"
+        android:background="@drawable/dotted_border"
         android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="2dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/fNameET"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/textfield_background"
-                android:drawableStart="@drawable/ic_person_gray"
-                android:drawablePadding="5dp"
-                android:ems="10"
-                android:hint="First Name"
-                android:inputType="textPersonName"
-                android:padding="10dp"
-                android:textColor="#7E7E7E"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/lNameET"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/textfield_background"
-                android:drawableStart="@drawable/ic_person_gray"
-                android:drawablePadding="5dp"
-                android:ems="10"
-                android:hint="Last Name"
-                android:inputType="textPersonName"
-                android:padding="10dp"
-                android:textColor="#7E7E7E"
-                android:textSize="16sp" />
-
-        </LinearLayout>
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.365">
 
         <!--        <LinearLayout-->
         <!--            android:layout_width="wrap_content"-->
@@ -173,6 +135,48 @@
         <!--            android:textSize="16sp"-->
         <!--            android:drawableStart="@drawable/ic_phone_gray"-->
         <!--            android:drawablePadding="5dp"/>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/fNameET"
+                android:layout_width="268dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/textfield_background"
+                android:drawableStart="@drawable/ic_person_gray"
+                android:drawablePadding="5dp"
+                android:ems="10"
+                android:hint="First Name"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="#7E7E7E"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/lNameET"
+                android:layout_width="263dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="4dp"
+                android:layout_toEndOf="@+id/fNameET"
+                android:background="@drawable/textfield_background"
+                android:drawableStart="@drawable/ic_person_gray"
+                android:drawablePadding="5dp"
+                android:ems="10"
+                android:hint="Last Name"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="#7E7E7E"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/emailET"
@@ -253,6 +257,7 @@
         style="@android:style/Widget.Button"
         android:layout_width="193dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="72dp"
         android:background="@drawable/shape_button01"
         android:text="Register"
         android:textColor="#ffffff"
@@ -260,9 +265,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/hasAnAccountTV"
@@ -275,5 +278,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="241dp"
+        android:layout_height="383dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerBtn"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ico_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
