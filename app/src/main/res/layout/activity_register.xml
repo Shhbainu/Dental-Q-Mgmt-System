@@ -133,10 +133,6 @@
                 android:ems="10"
                 android:hint="Birthday"
 
-                android:editable="false"
-                android:focusable="false"
-                android:cursorVisible="false"
-
                 android:inputType="textPersonName"
                 android:padding="10dp"
                 android:textColor="#7E7E7E"

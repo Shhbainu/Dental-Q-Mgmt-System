@@ -1,11 +1,14 @@
 package com.example.dentalqmgmtsys;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -31,11 +35,40 @@ public class RegisterActivity extends AppCompatActivity {
     //Progress dialog
     private ProgressDialog progressDialog;
 
+    //EditText bday_ET;
+    DatePickerDialog.OnDateSetListener setListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //Necessary Birthday Field
+        //bday_ET = findViewById(R.id.bdayET);
+
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        binding.bdayET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month = month+1;
+                        String date = day+"/"+month+"/"+year;
+                        binding.bdayET.setText(date);
+                    }
+                },year,month,day);
+                datePickerDialog.show();
+            }
+        });
+
+
 
         //init firebase
         firebaseAuth = FirebaseAuth.getInstance();
@@ -69,10 +102,13 @@ public class RegisterActivity extends AppCompatActivity {
                 validateData();
             }
         });
+
+
+
     }
 
     //Declare Global Variables
-    private String fName = "", lName = "", age = "", address = "", phone = "", email = "", password = "";
+    private String fName = "", lName = "", age = "", address = "", phone = "", email = "", password = "", birthdate = "";
 
     private void validateData() {
         /*Validate data, before creating account*/
@@ -85,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
         phone = binding.phoneET.getText().toString().trim();
         email = binding.emailET.getText().toString().trim();
         password = binding.passwordET.getText().toString().trim();
+        birthdate = binding.bdayET.getText().toString().trim();
         String cPassword = binding.confirmPassET.getText().toString().trim();
 
         //validate input data
@@ -114,6 +151,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else if (TextUtils.isEmpty(phone)){ //phone is empty
             Toast.makeText(this, "Enter your phone", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(birthdate)){ //phone is empty
+            Toast.makeText(this, "Enter your Birth Date", Toast.LENGTH_SHORT).show();
         }
         else {
             createUserAccount();
@@ -164,6 +204,7 @@ public class RegisterActivity extends AppCompatActivity {
         hashMap.put("address", address);
         hashMap.put("email", email);
         hashMap.put("phone", phone);
+        hashMap.put("birthdate", birthdate);
         hashMap.put("userType", "user");
         hashMap.put("timestamp", timestamp);
         hashMap.put("profileImage", "https://firebasestorage.googleapis.com/v0/b/dental-qmgmt-system.appspot.com/o/ProfileImages%2Fno-profile.png?alt=media&token=353ccad9-5f1b-41c7-a272-9c64821362ab"); //add empty, in case needed
