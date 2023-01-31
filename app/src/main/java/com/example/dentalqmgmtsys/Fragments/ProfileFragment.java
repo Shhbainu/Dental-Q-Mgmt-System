@@ -141,7 +141,7 @@ public class ProfileFragment extends Fragment {
                         String uid = ""+snapshot.child("uid").getValue();
                         String userType = ""+snapshot.child("userType").getValue();
                         String address = ""+snapshot.child("address").getValue();
-                        //String phone = ""+snapshot.child("phone").getValue();
+                        String phone = ""+snapshot.child("phone").getValue();
                         String age = ""+snapshot.child("age").getValue();
                         String profileImage = ""+snapshot.child("profileImage").getValue();
 
