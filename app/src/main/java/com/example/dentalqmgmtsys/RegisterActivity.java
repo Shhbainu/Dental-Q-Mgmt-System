@@ -56,9 +56,9 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Hides OTP Authentication Layout
-        //binding.registerLayout.setVisibility(View.VISIBLE);
-        //binding.otpLayout.setVisibility(View.GONE);
+        // Hides OTP Authentication Layout - Shows Register Layout
+        binding.registerLayout.setVisibility(View.VISIBLE);
+        binding.otpLayout.setVisibility(View.GONE);
 
         //init firebase
         firebaseAuth = FirebaseAuth.getInstance();
@@ -116,15 +116,22 @@ public class RegisterActivity extends AppCompatActivity {
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Validate entered fields first before sending OTP
                 validateData();
             }
         });
 
         // Phone Authentication Block Starts
-
-
+        // *Verification of entered OTP
         binding.submitOtpBtn.setOnClickListener(view -> {
-            if (!binding.inputotp1.getText().toString().trim().isEmpty() && !binding.inputotp2.getText().toString().trim().isEmpty() && !binding.inputotp3.getText().toString().trim().isEmpty() && !binding.inputotp4.getText().toString().trim().isEmpty() && !binding.inputotp5.getText().toString().trim().isEmpty() && !binding.inputotp6.getText().toString().trim().isEmpty()) {
+            // Validate OTP input fields if empty
+            if (!binding.inputotp1.getText().toString().trim().isEmpty()
+                    && !binding.inputotp2.getText().toString().trim().isEmpty()
+                    && !binding.inputotp3.getText().toString().trim().isEmpty()
+                    && !binding.inputotp4.getText().toString().trim().isEmpty()
+                    && !binding.inputotp5.getText().toString().trim().isEmpty()
+                    && !binding.inputotp6.getText().toString().trim().isEmpty()) {
+                // Store to a variable the OTP in the input field
                 enteredOtp = binding.inputotp1.getText().toString() +
                         binding.inputotp2.getText().toString() +
                         binding.inputotp3.getText().toString() +
@@ -132,13 +139,16 @@ public class RegisterActivity extends AppCompatActivity {
                         binding.inputotp5.getText().toString() +
                         binding.inputotp6.getText().toString();
 
+                // If saved otp variable is not empty
                 if (getOtpBackend != null) {
                     binding.progressbarSubmitOtp.setVisibility(View.VISIBLE);
                     binding.submitOtpBtn.setVisibility(View.INVISIBLE);
 
+                    // Compare the auth OTP entered from saved otp variable
                     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(
                             getOtpBackend, enteredOtp
                     );
+                    // Link phone credentials to the created firebase user with its email, password
                     verifyAuthentication(phoneAuthCredential);
 //                    FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
 //                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -168,6 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        // Resend OTP after 60 mins
         binding.resendOtpTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,35 +211,14 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         inputOtpMove();
-
         // Phone Authentication Block Ends
 
+
     }
 
-    private void verifyAuthentication(PhoneAuthCredential phoneAuthCredential) {
-        // Inform user
-        progressDialog.setMessage("Creating account...");
-        progressDialog.show();
-
-        firebaseAuth.getCurrentUser().linkWithCredential(phoneAuthCredential)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(RegisterActivity.this, "Account linked", Toast.LENGTH_SHORT).show();
-                        // Send to MainActivity
-                        updateUserInfo();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegisterActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-
+    //===== Functions + Methods =======
     private void validateData() {
-        /*Validate data, before creating account*/
+        /*Validate data, before sending OTP | create an account*/
 
         //Get input data
         fName = binding.fNameET.getText().toString().trim();
@@ -262,25 +252,26 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter your phone", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(birthdate)) { //phone is empty
             Toast.makeText(this, "Enter your Birth Date", Toast.LENGTH_SHORT).show();
-        } else if (!(phone.length() == 10)) { //phone is empty
+        } else if (!(phone.length() == 10)) { //phone must be 10 length long
             Toast.makeText(this, "Enter a valid number", Toast.LENGTH_SHORT).show();
         } else {
-            continueToOtp();
-
-//            binding.registerLayout.setVisibility(View.GONE);
-//            binding.otpLayout.setVisibility(View.VISIBLE);
-//
+            // Display entered number onto OTP auth layout
             displayOtpNum = binding.phoneET.getText().toString().trim();
             binding.dispNumTV.setText("+63" + displayOtpNum);
 
+            // Sending OTP after continue button
+            continueToSendOtp();
+
+            // Create user with email, password
             createUserAccount();
         }
     }
 
-    private void continueToOtp() {
+    private void continueToSendOtp() {
         binding.progressbarSendingOtp.setVisibility(View.VISIBLE);
         binding.registerBtn.setVisibility(View.INVISIBLE);
 
+        // Send OTP code to the entered phone number
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+63" + binding.phoneET.getText().toString(),
                 60, TimeUnit.SECONDS,
@@ -305,14 +296,12 @@ public class RegisterActivity extends AppCompatActivity {
                         binding.progressbarSendingOtp.setVisibility(View.GONE);
                         binding.registerBtn.setVisibility(View.VISIBLE);
 
+                        // Saved OTP sent to a variable
                         getOtpBackend = otpBackEnd;
 
-                        //supposedly start another activity (startActivity(Intent))
-                        // *intent.putExtra (mobile),(String s)
+                        // Hide Register layout - Show OTP Auth layout / Shows OTP submit button
                         binding.registerLayout.setVisibility(View.GONE);
                         binding.otpLayout.setVisibility(View.VISIBLE);
-
-
                     }
                 }
         );
@@ -401,6 +390,30 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    private void verifyAuthentication(PhoneAuthCredential phoneAuthCredential) {
+        // Inform user
+        progressDialog.setMessage("Creating account...");
+        progressDialog.show();
+
+        firebaseAuth.getCurrentUser().linkWithCredential(phoneAuthCredential)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        // Account linked with verified phone
+                        // Insert details in Realtime Database
+                        updateUserInfo();
+
+                        // Inform account link success
+                        Toast.makeText(RegisterActivity.this, "Account linked", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Inform account link failed
+                        Toast.makeText(RegisterActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     private void createUserAccount() {
         //show progress
@@ -412,8 +425,8 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        //account create success, now add in firebase realtime database
-                        //updateUserInfo();
+                        // Account create success
+                        // x-updateUserInfo();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -464,11 +477,14 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         //data added to db
                         progressDialog.dismiss();
-                        //Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+
                         //will proceed to user homepage
                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                         finish();
                         LandingActivity.getInstance().finish();
+
+                        // Inform user credentials saved
+                        Toast.makeText(RegisterActivity.this, "Credentials Saved", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
