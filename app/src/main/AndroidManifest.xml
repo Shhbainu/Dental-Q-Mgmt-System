@@ -23,13 +23,13 @@
         android:theme="@style/Theme.DentalQMgmtSys"
         tools:targetApi="31">
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ChangePasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <!-- <activity -->
-        <!-- android:name=".activity_change_password" -->
-        <!-- android:exported="false" -->
-        <!-- android:screenOrientation="portrait"/> -->
         <activity
             android:name=".ChangeEmailActivity"
             android:exported="false"
@@ -82,7 +82,7 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />  <!--here-->
+            android:screenOrientation="portrait" /> <!-- here -->
         <activity
             android:name=".LoginActivity"
             android:exported="false"

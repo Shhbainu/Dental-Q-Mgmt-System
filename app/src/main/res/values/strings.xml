@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">DentalQMgmtSys</string>
     <string name="create_account">Don\'t have an Account? <b>Sign Up</b> </string>
+    <string name="login_account">Already have an account? <b>Sign In</b> </string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="generate_referral"><b>>  </b>Generate Referral Code</string>
     <string name="terms_condition"><b>>  </b>Terms and Conditions</string>

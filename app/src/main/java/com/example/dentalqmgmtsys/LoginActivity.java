@@ -36,11 +36,17 @@ public class LoginActivity extends AppCompatActivity {
     //Progress dialog
     private ProgressDialog progressDialog;
 
+    //Prevents Overlapping Activity
+    static LoginActivity loginActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //login overlapping activity remover
+        loginActivity = this;
 
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -74,6 +80,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 validateData();
+            }
+        });
+
+        //handle forgot password click
+        binding.forgotPassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
 
@@ -167,5 +181,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    public static LoginActivity getInstance(){
+        return loginActivity;
     }
 }
