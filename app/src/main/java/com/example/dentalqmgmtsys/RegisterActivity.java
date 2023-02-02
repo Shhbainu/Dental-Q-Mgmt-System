@@ -148,27 +148,23 @@ public class RegisterActivity extends AppCompatActivity {
                     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(
                             getOtpBackend, enteredOtp
                     );
-                    // Link phone credentials to the created firebase user with its email, password
-                    verifyAuthentication(phoneAuthCredential);
-//                    FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
-//                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<AuthResult> task) {
-//                                    binding.progressbarSubmitOtp.setVisibility(View.GONE);
-//                                    binding.submitOtpBtn.setVisibility(View.VISIBLE);
-//
-//                                    if (task.isSuccessful()) {
-//
-//                                        createUserAccount();
-//
-//                                        //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                                        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                        //startActivity(intent);
-//                                    } else {
-//                                        Toast.makeText(RegisterActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
+                    // Create user with email and phone = createUserAccount();
+                    firebaseAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    // Account create success // xx-updateUserInfo();
+                                    // Link phone credentials to the firebase created user with email, password
+                                    verifyAuthentication(phoneAuthCredential);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(Exception e) {
+                                    //account create failed
+                                    Toast.makeText(RegisterActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 } else {
                     Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
                 }
@@ -263,7 +259,7 @@ public class RegisterActivity extends AppCompatActivity {
             continueToSendOtp();
 
             // Create user with email, password
-            createUserAccount();
+            //createUserAccount();
         }
     }
 

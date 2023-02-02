@@ -78,7 +78,7 @@
             android:padding="3.5dp"
             android:layout_marginRight="5dp"
             android:text="Enter Valid Credentials Only"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
