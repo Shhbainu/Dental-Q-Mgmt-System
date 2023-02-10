@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:layoutDirection="ltr"
     android:padding="10dp"
-    tools:context=".DoctorsActivity">
+    tools:context=".DoctorsActivity"
+    android:background="#FF018786">
 
     <TextView
         android:id="@+id/textView"

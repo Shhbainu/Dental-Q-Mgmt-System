@@ -5,37 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FF018786"
-    tools:context=".QueuesActivity">
+    tools:context=".DisplayServiceActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:gravity="center_horizontal"
-        android:text="Queues"
+        android:text="Displayed Services"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
-        android:id="@+id/doctorSpinnerQueue"
-        app:ms_arrow_tint="@color/turquoise"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addDisplayServicesBtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView3"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        app:backgroundTint="@color/turquoise" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/queuesRV"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/doctorSpinnerQueue"
-        app:layout_constraintVertical_bias="0.006"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_below="@+id/textView9"
+        android:layout_margin="10dp" />
+
+
 
 </RelativeLayout>

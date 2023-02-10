@@ -14,4 +14,5 @@
     <color name="light_admin_gray">#808080</color>
     <color name="turquoise">#50C2C9</color>
     <color name="figmaGray">#EEEEEE</color>
+    <color name="transparent">#00EEEEEE</color>
 </resources>

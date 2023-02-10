@@ -52,6 +52,7 @@
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_terms_conditions.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/activity_verification_reg.xml" value="0.33" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/appointments_list.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_add_appointment_step4.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_appointment.xml" value="0.33" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_home.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
@@ -62,6 +63,7 @@
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/appointment_editbox.xml" value="0.196" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/button_background.xml" value="0.324" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/dotted_border.xml" value="0.324" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/edit_background.xml" value="0.126" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/ic_baseline_dashboard_24.xml" value="0.324" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/shape_button01.xml" value="0.332" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/drawable/shape_button02.xml" value="0.324" />
@@ -73,8 +75,11 @@
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout-sw720dp/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout-sw720dp/activity_main2.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout-sw720dp/activity_register.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_add_time_main.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_appointments.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_display_service.xml" value="0.32247284878863824" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_doctors.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_input_displayed_services.xml" value="0.31683375104427736" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_landing.xml" value="0.2969298245614035" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_login.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_main.xml" value="0.3087719298245614" />
@@ -82,12 +87,16 @@
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_queues.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_register.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_services.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_show_question.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_splash.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/activity_update_quiz.xml" value="0.32247284878863824" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/fragment_appointment.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/fragment_dashboard.xml" value="0.2969298245614035" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/fragment_doctors.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/fragment_queue.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/fragment_services.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/quiz_item.xml" value="0.32247284878863824" />
+        <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/layout/service_item.xml" value="0.32247284878863824" />
         <entry key="..\:/Users/zhiel/AndroidStudioProjects/DentalQMgmtSys/dqms-admin/src/main/res/menu/bottom_nav_menu.xml" value="0.3087719298245614" />
       </map>
     </option>

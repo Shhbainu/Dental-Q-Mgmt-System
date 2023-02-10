@@ -234,6 +234,43 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/addDisplayServicesTile"
+                    android:layout_width="120dp"
+                    android:layout_height="140dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="18dp"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:backgroundTint="@color/mint"
+                            android:background="@drawable/ic_display_services"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Display Services"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textAlignment="center"
+                            android:textColor="@color/mint"
+                            android:textSize="20sp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
                     android:id="@+id/exitTile"
                     android:layout_width="120dp"
                     android:layout_height="140dp"

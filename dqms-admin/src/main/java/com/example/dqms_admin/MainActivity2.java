@@ -75,6 +75,13 @@ public class MainActivity2 extends AppCompatActivity {
                 finish();
             }
         });
+
+        binding.addDisplayServicesTile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity2.this, DisplayServiceActivity.class));
+            }
+        });
     }
 
     private void checkUser() {

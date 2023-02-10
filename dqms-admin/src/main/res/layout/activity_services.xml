@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF018786"
     tools:context=".ServicesActivity">
 
     <TextView
@@ -12,12 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:gravity="center_horizontal"
-        android:text="Services"
+        android:text="Doctor Services"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        />
+        tools:layout_editor_absoluteX="0dp" />
 
 
     <com.jaredrummler.materialspinner.MaterialSpinner
