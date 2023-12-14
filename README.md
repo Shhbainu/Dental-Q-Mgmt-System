@@ -31,13 +31,13 @@ This repository contains the source code and resources for a school capstone pro
 
 ### Video Demonstration
 Watch the application in action:
-![Dental Clinic Mobile App](https://youtu.be/NuCAzSex2qs?si=VzD7d7pF1ZdXBPvB)
+[![Dental Clinic Mobile App](https://img.youtube.com/vi/NuCAzSex2qs/0.jpg)](https://www.youtube.com/watch?v=NuCAzSex2qs)
 
 ## Contributors
-- # Alagao, Lorenzo Ricci S.
-- # Arpilleda, Bryan H.
-- # Javier, John Carl C.
-- # Pacuan, Eduardo H.
+### - Alagao, Lorenzo Ricci S.
+### -  Arpilleda, Bryan H.
+### -  Javier, John Carl C.
+### -  Pacuan, Eduardo H.
 
 ## User Manual
-For detailed information and guidance on using the application, please refer to our ![User Manual](docs/USER MANUAL.pdf).
+For detailed information and guidance on using the application, please refer to our [User Manual](docs/USER%20MANUAL.pdf).
