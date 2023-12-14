@@ -31,7 +31,7 @@ This repository contains the source code and resources for a school capstone pro
 
 ### Video Demonstration
 Watch the application in action:
-![Dental Clinic Mobile App](https://youtu.be/NuCAzSex2qs?si=_jgpywWz96o62eer)
+![Dental Clinic Mobile App](https://youtu.be/NuCAzSex2qs?si=VzD7d7pF1ZdXBPvB)
 
 ## Contributors
 - # Alagao, Lorenzo Ricci S.
@@ -40,4 +40,4 @@ Watch the application in action:
 - # Pacuan, Eduardo H.
 
 ## User Manual
-For detailed information and guidance on using the application, please refer to our [User Manual](docs/USER MANUAL.pdf).
+For detailed information and guidance on using the application, please refer to our ![User Manual](docs/USER MANUAL.pdf).
