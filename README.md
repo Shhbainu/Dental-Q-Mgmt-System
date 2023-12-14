@@ -31,6 +31,7 @@ This repository contains the source code and resources for a school capstone pro
 
 ### Video Demonstration
 Watch the application in action:
+
 [![Dental Clinic Mobile App](https://img.youtube.com/vi/NuCAzSex2qs/0.jpg)](https://www.youtube.com/watch?v=NuCAzSex2qs)
 
 ## Contributors
